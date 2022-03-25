@@ -199,15 +199,16 @@ CREATE TABLE `users` (
   `email` varchar(30) NOT NULL,
   `pass` text NOT NULL,
   `activation` text NOT NULL,
-  `state` tinyint(1) DEFAULT 0
+  `state` tinyint(1) DEFAULT 0,
+  `admin` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- datos para la tabla `users`
 -- data for table `users`
 
-INSERT INTO `users` (`idUser`, `firstname`, `lastname`, `email`, `pass`, `activation`, `state`) VALUES
-(1, 'admin', 'admin', 'admin@admin.com', '$2y$10$zYH5CY5M17DYsC0zPCABu.acQphxUEZFBkss/RjUhOu4j8EFlIRV.', '0d3ccb5cb418d3d648bfbc768fabd1b1', 1);
+INSERT INTO `users` (`idUser`, `firstname`, `lastname`, `email`, `pass`, `activation`, `state`,`admin`) VALUES
+(1, 'admin', 'admin', 'admin@admin.com', '$2y$10$zYH5CY5M17DYsC0zPCABu.acQphxUEZFBkss/RjUhOu4j8EFlIRV.', '0d3ccb5cb418d3d648bfbc768fabd1b1', 1, 1);
 
 --
 

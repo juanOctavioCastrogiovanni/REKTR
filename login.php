@@ -1,5 +1,5 @@
 <?php
-include "./header.php";
+include "./components/header.php";
 ?>
 <div id="mainBody">
 	<div class="container">
@@ -9,7 +9,7 @@ include "./header.php";
 ?>
 	<div class="span9">
     <ul class="breadcrumb">
-		<li><a href="index.php">Home</a> <span class="divider">/</span></li>
+		<li><a href="index">Home</a> <span class="divider">/</span></li>
 		<li class="active">Login</li>
     </ul>
 	<h3> Login</h3>	
@@ -20,7 +20,7 @@ include "./header.php";
 			<div class="well">
 			<h5>CREATE YOUR ACCOUNT</h5><br/>
 			Enter your e-mail address to create an account.<br/><br/><br/>
-			<form action="register.php">
+			<form action="register">
 			  <div class="control-group">
 				<label class="control-label" for="inputEmail0">E-mail address</label>
 				<div class="controls">
@@ -52,7 +52,7 @@ include "./header.php";
 			  </div>
 			  <div class="control-group">
 				<div class="controls">
-				  <button type="submit" class="btn">Sign in</button> <a href="forgetpass.php">Forget password?</a>
+				  <button type="submit" class="btn">Sign in</button> <a href="forgetpass">Forget password?</a>
 				</div>
 			  </div>
 			</form>
@@ -65,5 +65,5 @@ include "./header.php";
 </div>
 <!-- MainBody End ============================= -->
 <?php
-include "./footer.php";
+include "./components/footer.php";
 ?>

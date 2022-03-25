@@ -1,5 +1,5 @@
 <?php
-	include "./header.php";
+	include "./components/header.php";
 ?>
 <div id="mainBody">
 	<div class="container">
@@ -9,7 +9,7 @@
 ?>
 	<div class="span9">
     <ul class="breadcrumb">
-		<li><a href="index.php">Home</a> <span class="divider">/</span></li>
+		<li><a href="index">Home</a> <span class="divider">/</span></li>
 		<li class="active">Special offers</li>
     </ul>
 	<h4> 20% Discount Special offer<small class="pull-right"> 40 products are available </small></h4>	
@@ -43,7 +43,7 @@
 				<p>
 				Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s ...
 				</p>
-				<a class="btn btn-small pull-right" href="product_details.php">View Details</a>
+				<a class="btn btn-small pull-right" href="product_details">View Details</a>
 				<br class="clr"/>
 			</div>
 			<div class="span3 alignR">
@@ -52,8 +52,8 @@
 			<label class="checkbox">
 				<input type="checkbox">  Adds product to compair
 			</label><br/>
-			  <a href="product_details.php" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-			  <a href="product_details.php" class="btn btn-large"><i class="icon-zoom-in"></i></a>
+			  <a href="product_details" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
+			  <a href="product_details" class="btn btn-large"><i class="icon-zoom-in"></i></a>
 				</form>
 			</div>
 	</div>
@@ -69,7 +69,7 @@
 				<p>
 				Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s ...
 				</p>
-				<a class="btn btn-small pull-right" href="product_details.php">View Details</a>
+				<a class="btn btn-small pull-right" href="product_details">View Details</a>
 				<br class="clr"/>
 			</div>
 			<div class="span3 alignR">
@@ -78,8 +78,8 @@
 				<label class="checkbox">
 				<input type="checkbox">  Adds product to compair
 				</label><br/>
-				<a href="product_details.php" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-				<a href="product_details.php" class="btn btn-large"><i class="icon-zoom-in"></i></a>
+				<a href="product_details" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
+				<a href="product_details" class="btn btn-large"><i class="icon-zoom-in"></i></a>
 			</form>
 			</div>
 	</div>
@@ -95,7 +95,7 @@
 				<p>
 				Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s ...
 				</p>
-				<a class="btn btn-small pull-right" href="product_details.php">View Details</a>
+				<a class="btn btn-small pull-right" href="product_details">View Details</a>
 				<br class="clr"/>
 			</div>
 			<div class="span3 alignR">
@@ -104,8 +104,8 @@
 			<label class="checkbox">
 			<input type="checkbox">  Adds product to compair
 			</label><br/>
-			  <a href="product_details.php" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-			  <a href="product_details.php" class="btn btn-large"><i class="icon-zoom-in"></i></a>
+			  <a href="product_details" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
+			  <a href="product_details" class="btn btn-large"><i class="icon-zoom-in"></i></a>
 			</form>
 			</div>
 	</div>
@@ -121,7 +121,7 @@
 				<p>
 				Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s ...
 				</p>
-				<a class="btn btn-small pull-right" href="product_details.php">View Details</a>
+				<a class="btn btn-small pull-right" href="product_details">View Details</a>
 				<br class="clr"/>
 			</div>
 			<div class="span3 alignR">
@@ -130,8 +130,8 @@
 				<label class="checkbox">
 				<input type="checkbox">  Adds product to compair
 				</label><br/>
-				<a href="product_details.php" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-				<a href="product_details.php" class="btn btn-large"><i class="icon-zoom-in"></i></a>
+				<a href="product_details" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
+				<a href="product_details" class="btn btn-large"><i class="icon-zoom-in"></i></a>
 				</form>
 			</div>
 	</div>
@@ -148,7 +148,7 @@
 				<p>
 				Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s ...
 				</p>
-				<a class="btn btn-small pull-right" href="product_details.php">View Details</a>
+				<a class="btn btn-small pull-right" href="product_details">View Details</a>
 				<br class="clr"/>
 			</div>
 			<div class="span3 alignR">
@@ -157,8 +157,8 @@
 				<label class="checkbox">
 				<input type="checkbox">  Adds product to compair
 				</label><br/>
-				<a href="product_details.php" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-				<a href="product_details.php" class="btn btn-large"><i class="icon-zoom-in"></i></a>
+				<a href="product_details" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
+				<a href="product_details" class="btn btn-large"><i class="icon-zoom-in"></i></a>
 				</form>
 			</div>
 	</div>
@@ -175,7 +175,7 @@
 				
 				Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s ...
 				</p>
-				<a class="btn btn-small pull-right" href="product_details.php">View Details</a>
+				<a class="btn btn-small pull-right" href="product_details">View Details</a>
 				<br class="clr"/>
 			</div>
 			<div class="span3 alignR">
@@ -184,8 +184,8 @@
 				<label class="checkbox">
 				<input type="checkbox">  Adds product to compair
 				</label><br/>
-				<a href="product_details.php" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-				<a href="product_details.php" class="btn btn-large"><i class="icon-zoom-in"></i></a>
+				<a href="product_details" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
+				<a href="product_details" class="btn btn-large"><i class="icon-zoom-in"></i></a>
 				</form>
 			</div>
 		</div>
@@ -196,109 +196,109 @@
 		<ul class="thumbnails">
 			<li class="span3">
 			  <div class="thumbnail">
-				<a href="product_details.php"><img src="themes/images/products/b1.jpg" alt=""/></a>
+				<a href="product_details"><img src="themes/images/products/b1.jpg" alt=""/></a>
 				<div class="caption">
 				  <h5>Manicure &amp; Pedicure</h5>
 				  <p> 
 					Lorem Ipsum is simply dummy text. 
 				  </p>
-				  <h4 style="text-align:center"><a class="btn" href="product_details.php"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;110.00</a></h4>
+				  <h4 style="text-align:center"><a class="btn" href="product_details"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;110.00</a></h4>
 				</div>
 			  </div>
 			</li>
 			<li class="span3">
 			  <div class="thumbnail">
-				<a href="product_details.php"><img src="themes/images/products/b2.jpg" alt=""/></a>
+				<a href="product_details"><img src="themes/images/products/b2.jpg" alt=""/></a>
 				<div class="caption">
 				  <h5>Manicure &amp; Pedicure</h5>
 				  <p> 
 					Lorem Ipsum is simply dummy text. 
 				  </p>
-				  <h4 style="text-align:center"><a class="btn" href="product_details.php"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;110.00</a></h4>
+				  <h4 style="text-align:center"><a class="btn" href="product_details"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;110.00</a></h4>
 				</div>
 			  </div>
 			</li>
 			<li class="span3">
 			  <div class="thumbnail">
-				<a href="product_details.php"><img src="themes/images/products/b3.jpg" alt=""/></a>
+				<a href="product_details"><img src="themes/images/products/b3.jpg" alt=""/></a>
 				<div class="caption">
 				  <h5>Manicure &amp; Pedicure</h5>
 				  <p> 
 					Lorem Ipsum is simply dummy text. 
 				  </p>
-				   <h4 style="text-align:center"><a class="btn" href="product_details.php"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;110.00</a></h4>
+				   <h4 style="text-align:center"><a class="btn" href="product_details"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;110.00</a></h4>
 				</div>
 			  </div>
 			</li>
 			<li class="span3">
 			  <div class="thumbnail">
-				<a href="product_details.php"><img src="themes/images/products/b4.jpg" alt=""/></a>
+				<a href="product_details"><img src="themes/images/products/b4.jpg" alt=""/></a>
 				<div class="caption">
 				  <h5>Manicure &amp; Pedicure</h5>
 				  <p> 
 					Lorem Ipsum is simply dummy text. 
 				  </p>
-				   <h4 style="text-align:center"><a class="btn" href="product_details.php"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;110.00</a></h4>
+				   <h4 style="text-align:center"><a class="btn" href="product_details"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;110.00</a></h4>
 				</div>
 			  </div>
 			</li>
 			<li class="span3">
 			  <div class="thumbnail">
-				<a href="product_details.php"><img src="themes/images/products/9.jpg" alt=""/></a>
+				<a href="product_details"><img src="themes/images/products/9.jpg" alt=""/></a>
 				<div class="caption">
 				  <h5>Manicure &amp; Pedicure</h5>
 				  <p> 
 					Lorem Ipsum is simply dummy text. 
 				  </p>
-				   <h4 style="text-align:center"><a class="btn" href="product_details.php"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;222.00</a></h4>
+				   <h4 style="text-align:center"><a class="btn" href="product_details"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;222.00</a></h4>
 				</div>
 			  </div>
 			</li>
 			<li class="span3">
 			  <div class="thumbnail">
-				<a href="product_details.php"><img src="themes/images/products/4.jpg" alt=""/></a>
+				<a href="product_details"><img src="themes/images/products/4.jpg" alt=""/></a>
 				<div class="caption">
 				  <h5>Manicure &amp; Pedicure</h5>
 				  <p> 
 					Lorem Ipsum is simply dummy text. 
 				  </p>
-				   <h4 style="text-align:center"><a class="btn" href="product_details.php"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;222.00</a></h4>
+				   <h4 style="text-align:center"><a class="btn" href="product_details"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;222.00</a></h4>
 				</div>
 			  </div>
 			</li>
 			<li class="span3">
 			  <div class="thumbnail">
-				<a href="product_details.php"><img src="themes/images/products/6.jpg" alt=""/></a>
+				<a href="product_details"><img src="themes/images/products/6.jpg" alt=""/></a>
 				<div class="caption">
 				  <h5>Manicure &amp; Pedicure</h5>
 				  <p> 
 					Lorem Ipsum is simply dummy text. 
 				  </p>
-				   <h4 style="text-align:center"><a class="btn" href="product_details.php"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;222.00</a></h4>
+				   <h4 style="text-align:center"><a class="btn" href="product_details"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;222.00</a></h4>
 				</div>
 			  </div>
 			</li>
 			<li class="span3">
 			  <div class="thumbnail">
-				<a href="product_details.php"><img src="themes/images/products/7.jpg" alt=""/></a>
+				<a href="product_details"><img src="themes/images/products/7.jpg" alt=""/></a>
 				<div class="caption">
 				  <h5>Manicure &amp; Pedicure</h5>
 				  <p> 
 					Lorem Ipsum is simply dummy text. 
 				  </p>
-				   <h4 style="text-align:center"><a class="btn" href="product_details.php"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;222.00</a></h4>
+				   <h4 style="text-align:center"><a class="btn" href="product_details"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;222.00</a></h4>
 				</div>
 			  </div>
 			</li>
 			<li class="span3">
 			  <div class="thumbnail">
-				<a href="product_details.php"><img src="themes/images/products/8.jpg" alt=""/></a>
+				<a href="product_details"><img src="themes/images/products/8.jpg" alt=""/></a>
 				<div class="caption">
 				  <h5>Manicure &amp; Pedicure</h5>
 				  <p> 
 					Lorem Ipsum is simply dummy text. 
 				  </p>
-				   <h4 style="text-align:center"><a class="btn" href="product_details.php"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;222.00</a></h4>
+				   <h4 style="text-align:center"><a class="btn" href="product_details"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;222.00</a></h4>
 				</div>
 			  </div>
 			</li>
@@ -308,7 +308,7 @@
 	<hr class="soft"/>
 	</div>
 </div>
-<a href="compair.php" class="btn btn-large pull-right">Compair Product</a>
+<a href="compair" class="btn btn-large pull-right">Compair Product</a>
 	<div class="pagination">
 		<ul>
 		<li><a href="#">&lsaquo;</a></li>
@@ -326,5 +326,5 @@
 </div>
 <!-- MainBody End ============================= -->
 <?php
-	include "./header.php";
+	include "./components/footer.php";
 ?>

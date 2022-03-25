@@ -1,5 +1,5 @@
 <?php
-	include "./header.php";
+	include "./components/header.php";
 ?>
 <div id="mainBody">
 	<div class="container">
@@ -9,10 +9,10 @@
 ?>
 	<div class="span9">
     <ul class="breadcrumb">
-		<li><a href="index.php">Home</a> <span class="divider">/</span></li>
+		<li><a href="index">Home</a> <span class="divider">/</span></li>
 		<li class="active"> SHOPPING CART</li>
     </ul>
-	<h3>  SHOPPING CART [ <small>3 Item(s) </small>]<a href="products.php" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Continue Shopping </a></h3>	
+	<h3>  SHOPPING CART [ <small>3 Item(s) </small>]<a href="products" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Continue Shopping </a></h3>	
 	<hr class="soft"/>
 	<table class="table table-bordered">
 		<tr><th> I AM ALREADY REGISTERED  </th></tr>
@@ -33,12 +33,12 @@
 				</div>
 				<div class="control-group">
 				  <div class="controls">
-					<button type="submit" class="btn">Sign in</button> OR <a href="register.php" class="btn">Register Now!</a>
+					<button type="submit" class="btn">Sign in</button> OR <a href="register" class="btn">Register Now!</a>
 				  </div>
 				</div>
 				<div class="control-group">
 					<div class="controls">
-					  <a href="forgetpass.php" style="text-decoration:underline">Forgot password ?</a>
+					  <a href="forgetpass" style="text-decoration:underline">Forgot password ?</a>
 					</div>
 				</div>
 			</form>
@@ -133,13 +133,13 @@
 			</table> -->
 			
 			
-	<a href="products.php" class="btn btn-large"><i class="icon-arrow-left"></i> Continue Shopping </a>
-	<a href="login.php" class="btn btn-large pull-right">Next <i class="icon-arrow-right"></i></a>
+	<a href="products" class="btn btn-large"><i class="icon-arrow-left"></i> Continue Shopping </a>
+	<a href="login" class="btn btn-large pull-right">Next <i class="icon-arrow-right"></i></a>
 	
 </div>
 </div></div>
 </div>
 <!-- MainBody End ============================= -->
 <?php
-	include "./footer.php";
+	include "./components/footer.php";
 ?>

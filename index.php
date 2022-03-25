@@ -1,5 +1,5 @@
 ﻿<?php
-include "./header.php";
+include "./components/header.php";
 ?>
 
 <div id="carouselBlk">
@@ -7,7 +7,7 @@ include "./header.php";
 		<div class="carousel-inner">
 		  <div class="item active">
 		  <div class="container">
-			<a href="register.php"><img style="width:100%" src="themes/images/carousel/1.png" alt="special offers"/></a>
+			<a href="register"><img style="width:100%" src="themes/images/carousel/1.png" alt="special offers"/></a>
 			<div class="carousel-caption">
 				  <h4>Second Thumbnail label</h4>
 				  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
@@ -16,7 +16,7 @@ include "./header.php";
 		  </div>
 		  <div class="item">
 		  <div class="container">
-			<a href="register.php"><img style="width:100%" src="themes/images/carousel/2.png" alt=""/></a>
+			<a href="register"><img style="width:100%" src="themes/images/carousel/2.png" alt=""/></a>
 				<div class="carousel-caption">
 				  <h4>Second Thumbnail label</h4>
 				  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
@@ -25,7 +25,7 @@ include "./header.php";
 		  </div>
 		  <div class="item">
 		  <div class="container">
-			<a href="register.php"><img src="themes/images/carousel/3.png" alt=""/></a>
+			<a href="register"><img src="themes/images/carousel/3.png" alt=""/></a>
 			<div class="carousel-caption">
 				  <h4>Second Thumbnail label</h4>
 				  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
@@ -35,7 +35,7 @@ include "./header.php";
 		  </div>
 		   <div class="item">
 		   <div class="container">
-			<a href="register.php"><img src="themes/images/carousel/4.png" alt=""/></a>
+			<a href="register"><img src="themes/images/carousel/4.png" alt=""/></a>
 			<div class="carousel-caption">
 				  <h4>Second Thumbnail label</h4>
 				  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
@@ -45,7 +45,7 @@ include "./header.php";
 		  </div>
 		   <div class="item">
 		   <div class="container">
-			<a href="register.php"><img src="themes/images/carousel/5.png" alt=""/></a>
+			<a href="register"><img src="themes/images/carousel/5.png" alt=""/></a>
 			<div class="carousel-caption">
 				  <h4>Second Thumbnail label</h4>
 				  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
@@ -54,7 +54,7 @@ include "./header.php";
 		  </div>
 		   <div class="item">
 		   <div class="container">
-			<a href="register.php"><img src="themes/images/carousel/6.png" alt=""/></a>
+			<a href="register"><img src="themes/images/carousel/6.png" alt=""/></a>
 			<div class="carousel-caption">
 				  <h4>Second Thumbnail label</h4>
 				  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
@@ -85,40 +85,40 @@ include "./header.php";
 				<li class="span3">
 				  <div class="thumbnail">
 				  <i class="tag"></i>
-					<a href="product_details.php"><img src="themes/images/products/b1.jpg" alt=""></a>
+					<a href="product_details"><img src="themes/images/products/b1.jpg" alt=""></a>
 					<div class="caption">
 					  <h5>Product name</h5>
-					  <h4><a class="btn" href="product_details.php">VIEW</a> <span class="pull-right">$222.00</span></h4>
+					  <h4><a class="btn" href="product_details">VIEW</a> <span class="pull-right">$222.00</span></h4>
 					</div>
 				  </div>
 				</li>
 				<li class="span3">
 				  <div class="thumbnail">
 				  <i class="tag"></i>
-					<a href="product_details.php"><img src="themes/images/products/b2.jpg" alt=""></a>
+					<a href="product_details"><img src="themes/images/products/b2.jpg" alt=""></a>
 					<div class="caption">
 					  <h5>Product name</h5>
-					  <h4><a class="btn" href="product_details.php">VIEW</a> <span class="pull-right">$222.00</span></h4>
+					  <h4><a class="btn" href="product_details">VIEW</a> <span class="pull-right">$222.00</span></h4>
 					</div>
 				  </div>
 				</li>
 				<li class="span3">
 				  <div class="thumbnail">
 				  <i class="tag"></i>
-					<a href="product_details.php"><img src="themes/images/products/b3.jpg" alt=""></a>
+					<a href="product_details"><img src="themes/images/products/b3.jpg" alt=""></a>
 					<div class="caption">
 					  <h5>Product name</h5>
-					   <h4><a class="btn" href="product_details.php">VIEW</a> <span class="pull-right">$222.00</span></h4>
+					   <h4><a class="btn" href="product_details">VIEW</a> <span class="pull-right">$222.00</span></h4>
 					</div>
 				  </div>
 				</li>
 				<li class="span3">
 				  <div class="thumbnail">
 				  <i class="tag"></i>
-					<a href="product_details.php"><img src="themes/images/products/b4.jpg" alt=""></a>
+					<a href="product_details"><img src="themes/images/products/b4.jpg" alt=""></a>
 					<div class="caption">
 					  <h5>Product name</h5>
-					   <h4><a class="btn" href="product_details.php">VIEW</a> <span class="pull-right">$222.00</span></h4>
+					   <h4><a class="btn" href="product_details">VIEW</a> <span class="pull-right">$222.00</span></h4>
 					</div>
 				  </div>
 				</li>
@@ -129,78 +129,38 @@ include "./header.php";
 				<li class="span3">
 				  <div class="thumbnail">
 				  <i class="tag"></i>
-					<a href="product_details.php"><img src="themes/images/products/5.jpg" alt=""></a>
+					<a href="product_details"><img src="themes/images/products/5.jpg" alt=""></a>
 					<div class="caption">
 					  <h5>Product name</h5>
-					  <h4><a class="btn" href="product_details.php">VIEW</a> <span class="pull-right">$222.00</span></h4>
+					  <h4><a class="btn" href="product_details">VIEW</a> <span class="pull-right">$222.00</span></h4>
 					</div>
 				  </div>
 				</li>
 				<li class="span3">
 				  <div class="thumbnail">
 				  <i class="tag"></i>
-					<a href="product_details.php"><img src="themes/images/products/6.jpg" alt=""></a>
+					<a href="product_details"><img src="themes/images/products/6.jpg" alt=""></a>
 					<div class="caption">
 					  <h5>Product name</h5>
-					  <h4><a class="btn" href="product_details.php">VIEW</a> <span class="pull-right">$222.00</span></h4>
+					  <h4><a class="btn" href="product_details">VIEW</a> <span class="pull-right">$222.00</span></h4>
 					</div>
 				  </div>
 				</li>
 				<li class="span3">
 				  <div class="thumbnail">
-					<a href="product_details.php"><img src="themes/images/products/7.jpg" alt=""></a>
+					<a href="product_details"><img src="themes/images/products/7.jpg" alt=""></a>
 					<div class="caption">
 					  <h5>Product name</h5>
-					   <h4><a class="btn" href="product_details.php">VIEW</a> <span class="pull-right">$222.00</span></h4>
+					   <h4><a class="btn" href="product_details">VIEW</a> <span class="pull-right">$222.00</span></h4>
 					</div>
 				  </div>
 				</li>
 				<li class="span3">
 				  <div class="thumbnail">
-					<a href="product_details.php"><img src="themes/images/products/8.jpg" alt=""></a>
+					<a href="product_details"><img src="themes/images/products/8.jpg" alt=""></a>
 					<div class="caption">
 					  <h5>Product name</h5>
-					   <h4><a class="btn" href="product_details.php">VIEW</a> <span class="pull-right">$222.00</span></h4>
-					</div>
-				  </div>
-				</li>
-			  </ul>
-			  </div>
-			   <div class="item">
-			  <ul class="thumbnails">
-				<li class="span3">
-				  <div class="thumbnail">
-					<a href="product_details.php"><img src="themes/images/products/9.jpg" alt=""></a>
-					<div class="caption">
-					  <h5>Product name</h5>
-					  <h4><a class="btn" href="product_details.php">VIEW</a> <span class="pull-right">$222.00</span></h4>
-					</div>
-				  </div>
-				</li>
-				<li class="span3">
-				  <div class="thumbnail">
-					<a href="product_details.php"><img src="themes/images/products/10.jpg" alt=""></a>
-					<div class="caption">
-					  <h5>Product name</h5>
-					  <h4><a class="btn" href="product_details.php">VIEW</a> <span class="pull-right">$222.00</span></h4>
-					</div>
-				  </div>
-				</li>
-				<li class="span3">
-				  <div class="thumbnail">
-					<a href="product_details.php"><img src="themes/images/products/11.jpg" alt=""></a>
-					<div class="caption">
-					  <h5>Product name</h5>
-					   <h4><a class="btn" href="product_details.php">VIEW</a> <span class="pull-right">$222.00</span></h4>
-					</div>
-				  </div>
-				</li>
-				<li class="span3">
-				  <div class="thumbnail">
-					<a href="product_details.php"><img src="themes/images/products/1.jpg" alt=""></a>
-					<div class="caption">
-					  <h5>Product name</h5>
-					   <h4><a class="btn" href="product_details.php">VIEW</a> <span class="pull-right">$222.00</span></h4>
+					   <h4><a class="btn" href="product_details">VIEW</a> <span class="pull-right">$222.00</span></h4>
 					</div>
 				  </div>
 				</li>
@@ -210,37 +170,77 @@ include "./header.php";
 			  <ul class="thumbnails">
 				<li class="span3">
 				  <div class="thumbnail">
-					<a href="product_details.php"><img src="themes/images/products/2.jpg" alt=""></a>
+					<a href="product_details"><img src="themes/images/products/9.jpg" alt=""></a>
 					<div class="caption">
 					  <h5>Product name</h5>
-					  <h4><a class="btn" href="product_details.php">VIEW</a> <span class="pull-right">$222.00</span></h4>
+					  <h4><a class="btn" href="product_details">VIEW</a> <span class="pull-right">$222.00</span></h4>
 					</div>
 				  </div>
 				</li>
 				<li class="span3">
 				  <div class="thumbnail">
-					<a href="product_details.php"><img src="themes/images/products/3.jpg" alt=""></a>
+					<a href="product_details"><img src="themes/images/products/10.jpg" alt=""></a>
 					<div class="caption">
 					  <h5>Product name</h5>
-					  <h4><a class="btn" href="product_details.php">VIEW</a> <span class="pull-right">$222.00</span></h4>
+					  <h4><a class="btn" href="product_details">VIEW</a> <span class="pull-right">$222.00</span></h4>
 					</div>
 				  </div>
 				</li>
 				<li class="span3">
 				  <div class="thumbnail">
-					<a href="product_details.php"><img src="themes/images/products/4.jpg" alt=""></a>
+					<a href="product_details"><img src="themes/images/products/11.jpg" alt=""></a>
 					<div class="caption">
 					  <h5>Product name</h5>
-					   <h4><a class="btn" href="product_details.php">VIEW</a> <span class="pull-right">$222.00</span></h4>
+					   <h4><a class="btn" href="product_details">VIEW</a> <span class="pull-right">$222.00</span></h4>
 					</div>
 				  </div>
 				</li>
 				<li class="span3">
 				  <div class="thumbnail">
-					<a href="product_details.php"><img src="themes/images/products/5.jpg" alt=""></a>
+					<a href="product_details"><img src="themes/images/products/1.jpg" alt=""></a>
 					<div class="caption">
 					  <h5>Product name</h5>
-					   <h4><a class="btn" href="product_details.php">VIEW</a> <span class="pull-right">$222.00</span></h4>
+					   <h4><a class="btn" href="product_details">VIEW</a> <span class="pull-right">$222.00</span></h4>
+					</div>
+				  </div>
+				</li>
+			  </ul>
+			  </div>
+			   <div class="item">
+			  <ul class="thumbnails">
+				<li class="span3">
+				  <div class="thumbnail">
+					<a href="product_details"><img src="themes/images/products/2.jpg" alt=""></a>
+					<div class="caption">
+					  <h5>Product name</h5>
+					  <h4><a class="btn" href="product_details">VIEW</a> <span class="pull-right">$222.00</span></h4>
+					</div>
+				  </div>
+				</li>
+				<li class="span3">
+				  <div class="thumbnail">
+					<a href="product_details"><img src="themes/images/products/3.jpg" alt=""></a>
+					<div class="caption">
+					  <h5>Product name</h5>
+					  <h4><a class="btn" href="product_details">VIEW</a> <span class="pull-right">$222.00</span></h4>
+					</div>
+				  </div>
+				</li>
+				<li class="span3">
+				  <div class="thumbnail">
+					<a href="product_details"><img src="themes/images/products/4.jpg" alt=""></a>
+					<div class="caption">
+					  <h5>Product name</h5>
+					   <h4><a class="btn" href="product_details">VIEW</a> <span class="pull-right">$222.00</span></h4>
+					</div>
+				  </div>
+				</li>
+				<li class="span3">
+				  <div class="thumbnail">
+					<a href="product_details"><img src="themes/images/products/5.jpg" alt=""></a>
+					<div class="caption">
+					  <h5>Product name</h5>
+					   <h4><a class="btn" href="product_details">VIEW</a> <span class="pull-right">$222.00</span></h4>
 					</div>
 				  </div>
 				</li>
@@ -256,74 +256,74 @@ include "./header.php";
 			  <ul class="thumbnails">
 				<li class="span3">
 				  <div class="thumbnail">
-					<a  href="product_details.php"><img src="themes/images/products/6.jpg" alt=""/></a>
+					<a  href="product_details"><img src="themes/images/products/6.jpg" alt=""/></a>
 					<div class="caption">
 					  <h5>Product name</h5>
 					  <p> 
 						Lorem Ipsum is simply dummy text. 
 					  </p>
 					 
-					  <h4 style="text-align:center"><a class="btn" href="product_details.php"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
+					  <h4 style="text-align:center"><a class="btn" href="product_details"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
 					</div>
 				  </div>
 				</li>
 				<li class="span3">
 				  <div class="thumbnail">
-					<a  href="product_details.php"><img src="themes/images/products/7.jpg" alt=""/></a>
+					<a  href="product_details"><img src="themes/images/products/7.jpg" alt=""/></a>
 					<div class="caption">
 					  <h5>Product name</h5>
 					  <p> 
 						Lorem Ipsum is simply dummy text. 
 					  </p>
-					 <h4 style="text-align:center"><a class="btn" href="product_details.php"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
+					 <h4 style="text-align:center"><a class="btn" href="product_details"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
 					</div>
 				  </div>
 				</li>
 				<li class="span3">
 				  <div class="thumbnail">
-					<a  href="product_details.php"><img src="themes/images/products/8.jpg" alt=""/></a>
+					<a  href="product_details"><img src="themes/images/products/8.jpg" alt=""/></a>
 					<div class="caption">
 					  <h5>Product name</h5>
 					  <p> 
 						Lorem Ipsum is simply dummy text. 
 					  </p>
-					   <h4 style="text-align:center"><a class="btn" href="product_details.php"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
+					   <h4 style="text-align:center"><a class="btn" href="product_details"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
 					</div>
 				  </div>
 				</li>
 				<li class="span3">
 				  <div class="thumbnail">
-					<a  href="product_details.php"><img src="themes/images/products/9.jpg" alt=""/></a>
+					<a  href="product_details"><img src="themes/images/products/9.jpg" alt=""/></a>
 					<div class="caption">
 					  <h5>Product name</h5>
 					  <p> 
 						Lorem Ipsum is simply dummy text. 
 					  </p>
-					  <h4 style="text-align:center"><a class="btn" href="product_details.php"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
+					  <h4 style="text-align:center"><a class="btn" href="product_details"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
 					</div>
 				  </div>
 				</li>
 				<li class="span3">
 				  <div class="thumbnail">
-					<a  href="product_details.php"><img src="themes/images/products/10.jpg" alt=""/></a>
+					<a  href="product_details"><img src="themes/images/products/10.jpg" alt=""/></a>
 					<div class="caption">
 					  <h5>Product name</h5>
 					  <p> 
 						Lorem Ipsum is simply dummy text. 
 					  </p>
-					  <h4 style="text-align:center"><a class="btn" href="product_details.php"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
+					  <h4 style="text-align:center"><a class="btn" href="product_details"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
 					</div>
 				  </div>
 				</li>
 				<li class="span3">
 				  <div class="thumbnail">
-					<a  href="product_details.php"><img src="themes/images/products/11.jpg" alt=""/></a>
+					<a  href="product_details"><img src="themes/images/products/11.jpg" alt=""/></a>
 					<div class="caption">
 					  <h5>Product name</h5>
 					  <p> 
 						Lorem Ipsum is simply dummy text. 
 					  </p>
-					   <h4 style="text-align:center"><a class="btn" href="product_details.php"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
+					   <h4 style="text-align:center"><a class="btn" href="product_details"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
 					</div>
 				  </div>
 				</li>
@@ -334,5 +334,5 @@ include "./header.php";
 	</div>
 </div>
 <?php
-include "./footer.php";
+include "./components/footer.php";
 ?>
