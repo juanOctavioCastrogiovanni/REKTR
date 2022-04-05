@@ -48,7 +48,8 @@
 				<?php
 				 	$conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
 					$conect = $conect->conect();
-					$sth = $conect->query('SELECT * FROM products');
+					$query = $conect->prepare('SELECT * FROM products');
+					$sth = $query->execute();
 					var_dump($sth);
 				?>
 				<div class="span6">
