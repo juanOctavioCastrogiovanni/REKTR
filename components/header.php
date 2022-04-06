@@ -1,6 +1,4 @@
-<?php
-	include "./Class/Conect.class.php";
-?>
+
 <!-- Todos las paginas llamaran con un include a header -->
 <!-- All the pages will call with an include header -->
 <!DOCTYPE html>
@@ -44,13 +42,9 @@
 	<div id="header">
 		<div class="container">
 			<div id="welcomeLine" class="row">
-				<!-- <div class="span6">Welcome!<strong> User</strong></div> -->
+				 <div class="span6">Welcome!<strong> User</strong></div> 
 				<?php
-				 	$conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
-					$conect = $conect->conect();
-					$query = $conect->prepare('SELECT * FROM products');
-					$sth = $query->execute();
-					var_dump($sth);
+				 	
 				?>
 				<div class="span6">
 					<div class="pull-right">

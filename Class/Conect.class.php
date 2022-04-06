@@ -2,7 +2,7 @@
     class Conect extends PDO{
 
         private $host;
-        private $usuario;
+        private $user;
         private $password;
         private $db;
 
@@ -24,5 +24,13 @@
             return $con;
         }
         
+        
     }
+    //$conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
+    // $conect = $conect->conect();
+    // $stmt = $conect->prepare('SELECT * FROM products');
+    // $stmt->execute();
+    // foreach($stmt->fetchAll(PDO::FETCH_ASSOC) as $ind){
+    // var_dump($ind);
+    // }
 ?>
