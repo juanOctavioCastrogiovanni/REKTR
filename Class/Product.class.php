@@ -40,7 +40,7 @@
         }
 
         public function showCard(){
-           echo "<li class='span3 height290'>
+           echo "<li class='span2 height290'>
                     <div class='thumbnail'>
                         <a  href='product_details'><img src='themes/images/products/upload/{$this->image1}' width='200px' height='200px' alt=''/></a>
                         <div class='captqaion'>";
@@ -59,11 +59,10 @@
         public function showCardCarrousel(){
            echo "<li class='span3'>
                 <div class='thumbnail'>
-                <i class='tag'></i>
-                  <a href='product_details'><img src='themes/images/products/b1.jpg' alt=''></a>
+                  <a href='product_details'><img src='themes/images/products/upload/{$this->image1}' alt=''></a>
                   <div class='caption'>
-                    <h5>Product name</h5>
-                    <h4><a class='btn' href='product_details'>VIEW</a> <span class='pull-right'>$222.00</span></h4>
+                    <h5>{$this->name}</h5>
+                    <h4><a class='btn' href='product_details'>VIEW</a> <span class='pull-right'>$".$this->price."</span></h4>
                   </div>
                 </div>
               </li>";

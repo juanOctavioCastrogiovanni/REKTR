@@ -110,7 +110,7 @@ INSERT INTO `products` (`idProduct`, `name`, `price`, `brand`, `category`, `stoc
      of FE-series lenses that take advantage of the larger sensor. The A7's use the new Sony Bionz 
      X processor, which produces images with better detail, less noise, and reduced diffraction. 
      Other features include a 3-inch, tilting LCD, XGA OLED electronic viewfinder, Multi-interface
-      (hot) shoe, Wi-Fi with NFC, and 1080/60p video recording." ,'a7-front', 'a7-up', NULL, 1),
+      (hot) shoe, Wi-Fi with NFC, and 1080/60p video recording." ,'a7-front.jpeg', 'a7-up.webp', NULL, 1),
 
 (2, 'D90', 599.99, 1, 1, 50,"The Nikon D90 is a 12.3 megapixel digital single-lens reflex camera (DSLR) 
 model announced by Nikon on August 27, 2008. It is a prosumer model that replaces the Nikon D80, fitting
@@ -126,13 +126,13 @@ model announced by Nikon on August 27, 2008. It is a prosumer model that replace
    improves autoexposure functions. Some of its accessories, such as the MB-D80 battery grip and ML-L3
    wireless remote, are also compatible with its predecessor the D80. It supports Global Positioning 
    System integration for automatic location tagging of photographs, using a GPS receiver sold
-    separately.", 'D90_front', 'D90_back', 'D90_left', 0),
+    separately.", 'D90_front.webp', 'D90_back.webp', 'D90_left.webp', 0),
 
 (3, 'D610', 1299.99, 1, 1, 50,"The Nikon D610 is a minor upgrade to the company's full-frame (FX-format)
  D600. New features include slightly faster burst shooting, new 'quiet continuous' mode, and improved
   auto white balance.","The rest of the features are unchanged. They include a full-frame 24 megapixel 
   CMOS sensor, 39-point AF system, 3.2-inch LCD, large optical viewfinder, dual memory card slots, 
-  and high-end video recording features.", 'D610-front', 'D610-left', 'D610-side', 1),
+  and high-end video recording features.", 'D610-front.webp', 'D610-left.webp', 'D610-side.webp', 1),
 
 (4, 'D7000', 699.99, 1, 1, 50,"Amazing photography isn’t only about what you shoot and how 
 you shoot it, it’s also about what you shoot it with.","The high resolution, multi-featured 
@@ -145,11 +145,11 @@ Nikon D7000 gives you 16.2 megapixels of vividly detailed images, a more sensiti
    sensor with 16.2 effective megapixels, optimally engineered to gather more quality light 
    through sharp NIKKOR lenses. Coupled with 14-bit A/D conversion (12-bit selectable), 
    the D7000 produces stunning images that are richer in tone and detail than previously 
-   possible in DX format. The D7000 is equipped to help you creat", 'D7000_front', 
-   'D7000_left', 'D7000_side', 0),
+   possible in DX format. The D7000 is equipped to help you creat", 'D7000_front.webp', 
+   'D7000_left.webp', 'D7000_side.webp', 0),
 
-(5, 'Model S', 19.99, 4, 3, 300 , NULL, NULL, 'jahovans', NULL, NULL, 0),
-(6, 'Model T', 14.99, 5, 3, 249, NULL , NULL, 'smartq', NULL, NULL, 0),
+(5, 'Model S', 19.99, 4, 3, 300 , NULL, NULL, 'jahovans.jpg', NULL, NULL, 0),
+(6, 'Model T', 14.99, 5, 3, 249, NULL , NULL, 'smartq.jpg', NULL, NULL, 0),
 (7, '32gb', 9.99, 3, 2, 125,"microSD is a type of removable flash memory card 
 used for storing information. SD is an abbreviation of Secure Digital, and microSD
  cards are sometimes referred to as µSD or uSD. The cards are used in mobile phones 
@@ -163,7 +163,7 @@ used for storing information. SD is an abbreviation of Secure Digital, and micro
      are the same (they can be used in place of each other), but microSD has support
       for SDIO mode. This lets microSD slots support non-memory jobs like Bluetooth, 
       GPS, and Near Field Communication by attaching a device in place of a memory card.",
-       'sandisk-32gb', NULL, NULL, 0),
+       'sandisk-32gb.jpg', NULL, NULL, 0),
 
 (8, '64gb', 19.99, 3, 2, 200,"microSD is a type of removable 
 flash memory card used for storing information. SD is an abbreviation of Secure Digital, 
@@ -177,14 +177,14 @@ and microSD cards are sometimes referred to as µSD or uSD.[1] The cards are use
   not microSD cards. TransFlash and microSD cards are the same (they can be used in place
    of each other), but microSD has support for SDIO mode. This lets microSD slots support
     non-memory jobs like Bluetooth, GPS, and Near Field Communication by attaching a device
-     in place of a memory card.", 'sandisk-64gb', NULL, NULL, 1),
+     in place of a memory card.", 'sandisk-64gb.jpg', NULL, NULL, 1),
 
 (9, '128gb', 99.99, 3, 2, 164,"The SD card debuted in 1999 and is the successor to the 
 now-obsolete MultiMediaCard (MMC). ","The SD card debuted in 1999 and is the successor 
 to the now-obsolete MultiMediaCard (MMC). It was one of a number of competing memory card
  formats in use by consumer electronics, such as Sony's defunct Memory Stick and the 
  CompactFlash card, which, while still in use, is much less common than it was in decades past. 
- ", 'sandisk-128gb', NULL, NULL, 1);
+ ", 'sandisk-128gb.webp', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
