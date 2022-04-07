@@ -85,7 +85,7 @@ include "./Class/Product.class.php";
 			  		<?php
 						$conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
 						$conect = $conect->conect();
-						$query = "SELECT name,price,image1 as image FROM products WHERE new=0";
+						$query = "SELECT name,price,image1 as image,new FROM products";
 						$products = $conect->prepare($query);
 						$products->execute();
 						$count = $products->rowcount();
@@ -94,15 +94,15 @@ include "./Class/Product.class.php";
 						for ($i = 0;$i<$count;$i++){
 							//If is the first time
 							if($i==0){
-								echo "<div class='item active'>";
-								echo "<ul class='thumbnails'>";
+								echo "<div class='item active'>
+								<ul class='thumbnails'>";
 								//every four and is not the first time
 							} else if($i%4==0){
-								echo "<div class='item'>";
-								echo "<ul class='thumbnails'>";
+								echo "<div class='item'>
+								<ul class='thumbnails'>";
 							}
 							
-							$element = new Product(NULL,$products[$i]['name'],$products[$i]['price'],NULL,NULL,NULL,NULL,NULL,$products[$i]['image'],NULL,NULL,NULL);						
+							$element = new Product(NULL,$products[$i]['name'],$products[$i]['price'],NULL,NULL,NULL,NULL,NULL,$products[$i]['image'],NULL,NULL,$products[$i]['new']);						
 							$element->showCardCarrousel();
 							
 							//every three iteratios and is not the first time
