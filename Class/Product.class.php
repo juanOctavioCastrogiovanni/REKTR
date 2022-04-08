@@ -43,7 +43,7 @@
            echo "<li class='span2 height290'>
                     <div class='thumbnail'>
                         <a  href='product_details'><img src='themes/images/products/upload/{$this->image1}' width='200px' height='200px' alt=''/></a>
-                        <div class='captqaion'>";
+                        <div class='caption'>";
                         if($this->new){
                            echo "<i class='tag'></i>";
                         }
@@ -60,8 +60,11 @@
            echo "<li class='span3'>
                 <div class='thumbnail'>
                   <a href='product_details'><img src='themes/images/products/upload/{$this->image1}' alt=''></a>
-                  <div class='caption'>
-                    <h5>{$this->name}</h5>
+                  <div class='caption'>";
+                  if($this->new){
+                    echo "<i class='tag'></i>";
+                 }
+                  echo "<h5>{$this->name}</h5>
                     <h4><a class='btn' href='product_details'>VIEW</a> <span class='pull-right'>$".$this->price."</span></h4>
                   </div>
                 </div>

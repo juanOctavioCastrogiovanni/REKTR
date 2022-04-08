@@ -99,11 +99,11 @@ include "./Class/Product.class.php";
 								echo "<div class='item active'>";
 								echo "<ul class='thumbnails'>";
 							} else if($i%4==0){
-								echo "<div class='item'>";
-								echo "<ul class='thumbnails'>";
+								echo "<div class='item'>
+								<ul class='thumbnails'>";
 							}
 							
-							$element = new Product(NULL,$products[$i]['name'],$products[$i]['price'],NULL,NULL,NULL,NULL,NULL,$products[$i]['image'],NULL,NULL,NULL);						
+							$element = new Product(NULL,$products[$i]['name'],$products[$i]['price'],NULL,NULL,NULL,NULL,NULL,$products[$i]['image'],NULL,NULL,$products[$i]['new']);						
 							$element->showCardCarrousel();
 							
 							//every three iteratios and is not the first time
