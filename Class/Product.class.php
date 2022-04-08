@@ -53,7 +53,7 @@
                         Add to <i class='icon-shopping-cart'></i></a> <a class='btn btn-primary' href='#'>$".$this->price."</a></h4>
                         </div>
                     </div>
-                    </li>";
+                 </li>";
         }
 
         public function showCardCarrousel(){
@@ -66,6 +66,49 @@
                   </div>
                 </div>
               </li>";
+        }
+
+        public function showProductList(){
+         echo "<div class='row'>	  
+              <div class='span2'>
+                <img src='themes/images/products/upload/{$this->image1}' alt=''/>
+              </div>
+              <div class='span4'>
+                <h3>{$this->name}</h3>				
+                <hr class='soft'/>
+                <h5>{$this->name}</h5>
+                <p>
+                  {$this->short_description}
+                </p>
+                <a class='btn btn-small pull-right' href='product_details'>View Details</a>
+                <br class='clr'/>
+              </div>
+              <div class='span3 alignR'>
+                <form class='form-horizontal qtyFrm'>
+                  <h3> {$this->price}</h3>
+             
+                <a href='product_details' class='btn btn-large btn-primary'> Add to <i class=' icon-shopping-cart'></i></a>
+                <a href='product_details' class='btn btn-large'><i class='icon-zoom-in'></i></a>
+              
+                </form>
+              </div>
+         </div>
+        <hr class='soft'/>";
+        }
+
+        public function showProduct(){
+         echo "<li class='span3'>
+            <div class='thumbnail'>
+            <a href='product_details'><img src='themes/images/products/upload/{$this->image1}' alt=''/></a>
+            <div class='caption'>
+              <h5>{$this->name}</h5>
+              <p> 
+              Click here 
+              </p>
+              <h4 style='text-align:center'><a class='btn' href='product_details'> <i class='icon-zoom-in'></i></a> <a class='btn' href='#'>Add to <i class='icon-shopping-cart'></i></a> <a class='btn btn-primary' href='#'>$".$this->name."</a></h4>
+            </div>
+            </div>
+			    </li>";
         }
     }
 

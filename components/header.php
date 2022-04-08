@@ -1,4 +1,7 @@
+<?php
+	include "./Class/Conect.class.php";
 
+?>
 <!-- Todos las paginas llamaran con un include a header -->
 <!-- All the pages will call with an include header -->
 <!DOCTYPE html>
@@ -70,7 +73,7 @@
 						<button type="submit" id="submitButton" class="btn btn-primary">Go</button>
 					</form>
 					<ul id="topMenu" class="nav pull-right">
-						<li class=""><a href="special_offer">Specials Offer</a></li>
+						<li class=""><a href="products">Products</a></li>
 						<li class=""><a href="contact">Contact</a></li>
 						<li class="">
 							<a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span

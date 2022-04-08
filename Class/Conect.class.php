@@ -7,7 +7,21 @@
         private $db;
 
         public function __construct($array){
-            
+            if(!$array['host']){
+                throw new Exception("Error: array['host'] is invalid");
+            }
+
+            if(!$array['user']){
+                throw new Exception("Error: array['user'] is invalid");
+            }
+
+            if(!isset($array['password'])){
+                throw new Exception("Error: array['password'] is invalid");
+            }
+
+            if(!$array['db']){
+                throw new Exception("Error: array['db'] is invalid");
+            }
    
             $this->host = $array['host'];
             $this->user = $array['user'];
@@ -18,10 +32,15 @@
         }
 
         public function conect(){
-            $con = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db, $this->user, $this->password);
-	        $con->exec("SET CHARACTER SET utf8");
+            try {
+                $con = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db, $this->user, $this->password);
+                $con->exec("SET CHARACTER SET utf8");
 
-            return $con;
+                return $con;
+            }catch (Exception $e){
+                echo "<p>".$e->getMessage()."</p>";
+            }
+
         }
         
         
