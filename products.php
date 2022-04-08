@@ -11,9 +11,13 @@
 	<div class="span9">
     <ul class="breadcrumb">
 		<li><a href="index">Home</a> <span class="divider">/</span></li>
-		<li class="active">Products Name</li>
+		<li class="active">Products</li>
     </ul>
-	<h3> Products Name <small class="pull-right"> 40 products are available </small></h3>	
+	<h3> Products <small class="pull-right"> 
+	<?php 
+		
+		echo $count
+	?> products are available </small></h3>	
 	<hr class="soft"/>
 	<p>
 	Browse our shop and filter by category to see the variety of our products.	</p>
@@ -39,11 +43,13 @@
 	<div class="tab-pane" id="listView">
 	<?php
 				try{
+					session_start();
 					$conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
 					$conect = $conect->conect();
 					$query = "SELECT idProduct,products.name,price,brands.name as brand,categories.name as category,stock,short_description,description,image1,image2,image3,new FROM products INNER JOIN brands ON products.brand=brands.idBrand INNER JOIN categories ON products.category=categories.idCategory WHERE new=1";
 					$products = $conect->prepare($query);
 					$products->execute();
+					$_SESSION['count'] = $products->rowcount();
 					foreach($products->fetchAll(PDO::FETCH_ASSOC) as $product){
 						$element = new Product($product['idProduct'],$product['name'],$product['price'],$product['brand'],$product['category'],$product['stock'],$product['short_description'],$product['description'],$product['image1'],$product['image2'],$product['image3'],$product['new']);
 						$element->showProductList();
