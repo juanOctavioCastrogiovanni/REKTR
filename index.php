@@ -1,6 +1,22 @@
 ﻿<?php
 include "./components/header.php";
 include "./Class/Product.class.php";
+	try{
+		$conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
+		$conect = $conect->conect();
+	}catch(Exception $e){
+		echo "<p>".$e->getMessage()."</p>";
+	}
+	try{
+		$query = "SELECT name,price,image1 as image, new FROM products";
+		$products = $conect->prepare($query);
+		$products->execute();
+		$count = $products->rowcount();
+		$products = $products->fetchAll(PDO::FETCH_ASSOC);
+	}catch(Exception $e){
+		echo "<p>".$e->getMessage()."</p>";
+	}
+
 ?>
 
 <div id="carouselBlk">
@@ -83,17 +99,6 @@ include "./Class/Product.class.php";
 				<div class="carousel-inner">
 			  		<?php
 					  try {
-						$conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
-						$conect = $conect->conect();
-						$query = "SELECT name,price,image1 as image FROM products";
-						$products = $conect->prepare($query);
-						$products->execute();
-						$count = $products->rowcount();
-						$products = $products->fetchAll(PDO::FETCH_ASSOC);
-						// $a = 8%4==0;
-						// var_dump($a);
-						// die();
-						//I show in the carousel 4 products at a time
 						for ($i = 0;$i<$count;$i++){
 							if($i==0){
 								echo "<div class='item active'>";
@@ -112,12 +117,6 @@ include "./Class/Product.class.php";
 									</div>";
 								}
 							}
-
-							
-							// foreach($products->fetchAll(PDO::FETCH_ASSOC) as $product){
-							// 	$element = new Product(NULL,$product['name'],$product['price'],NULL,NULL,NULL,NULL,NULL,$product['image'],NULL,NULL,NULL);						
-							// 	$element->showCardCarrousel();
-							// }
 						}catch(Exception $e){
 							echo "<p>".$e->getMessage()."</p>";
 						}
@@ -134,12 +133,10 @@ include "./Class/Product.class.php";
 			  <ul class="thumbnails">
 				<?php
 				try{
-					$conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
-					$conect = $conect->conect();
 					$query = "SELECT idProduct,products.name,price,brands.name as brand,categories.name as category,stock,short_description,description,image1,image2,image3,new FROM products INNER JOIN brands ON products.brand=brands.idBrand INNER JOIN categories ON products.category=categories.idCategory WHERE new=1";
-					$products = $conect->prepare($query);
-					$products->execute();
-					foreach($products->fetchAll(PDO::FETCH_ASSOC) as $product){
+					$products_list = $conect->prepare($query);
+					$products_list->execute();
+					foreach($products_list->fetchAll(PDO::FETCH_ASSOC) as $product){
 						$element = new Product($product['idProduct'],$product['name'],$product['price'],$product['brand'],$product['category'],$product['stock'],$product['short_description'],$product['description'],$product['image1'],$product['image2'],$product['image3'],$product['new']);
 						$element->showCard();
 					}

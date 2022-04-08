@@ -102,14 +102,11 @@
         public function showProduct(){
          echo "<li class='span3'>
             <div class='thumbnail'>
-            <a href='product_details'><img src='themes/images/products/upload/{$this->image1}' alt=''/></a>
-            <div class='caption'>
-              <h5>{$this->name}</h5>
-              <p> 
-              Click here 
-              </p>
-              <h4 style='text-align:center'><a class='btn' href='product_details'> <i class='icon-zoom-in'></i></a> <a class='btn' href='#'>Add to <i class='icon-shopping-cart'></i></a> <a class='btn btn-primary' href='#'>$".$this->name."</a></h4>
-            </div>
+              <a href='product_details'><img src='themes/images/products/upload/{$this->image1}' alt=''/></a>
+              <div class='caption'>
+                <h5>{$this->name} {$this->name}</h5>
+                <h4 style='text-align:center'><a class='btn' href='product_details'> <i class='icon-zoom-in'></i></a> <a class='btn' href='#'>Add to <i class='icon-shopping-cart'></i></a> <a class='btn btn-primary' href='#'>$".$this->name."</a></h4>
+              </div>
             </div>
 			    </li>";
         }
