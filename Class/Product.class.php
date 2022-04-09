@@ -79,7 +79,7 @@
               <div class='span4'>
                 <h3>{$this->name}</h3>				
                 <hr class='soft'/>
-                <h5>{$this->name}</h5>
+                <h5>{$this->brand}</h5>
                 <p>
                   {$this->short_description}
                 </p>
