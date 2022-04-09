@@ -88,7 +88,7 @@
               </div>
               <div class='span3 alignR'>
                 <form class='form-horizontal qtyFrm'>
-                  <h3> {$this->price}</h3>
+                  <h3>$".$this->price."</h3>
              
                 <a href='product_details' class='btn btn-large btn-primary'> Add to <i class=' icon-shopping-cart'></i></a>
                 <a href='product_details' class='btn btn-large'><i class='icon-zoom-in'></i></a>
@@ -104,8 +104,8 @@
             <div class='thumbnail'>
               <a href='product_details'><img src='themes/images/products/upload/{$this->image1}' alt=''/></a>
               <div class='caption'>
-                <h5>{$this->name} {$this->name}</h5>
-                <h4 style='text-align:center'><a class='btn' href='product_details'> <i class='icon-zoom-in'></i></a> <a class='btn' href='#'>Add to <i class='icon-shopping-cart'></i></a> <a class='btn btn-primary' href='#'>$".$this->name."</a></h4>
+                <h5>{$this->name} {$this->brand}</h5>
+                <h4 style='text-align:center'><a class='btn' href='product_details'> <i class='icon-zoom-in'></i></a> <a class='btn' href='#'>Add to <i class='icon-shopping-cart'></i></a> <a class='btn btn-primary' href='#'>$".$this->price."</a></h4>
               </div>
             </div>
 			    </li>";

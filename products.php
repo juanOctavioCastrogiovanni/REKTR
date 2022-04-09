@@ -3,12 +3,50 @@
 	include "./Class/Product.class.php";
 	include "./admin/functions.php";
 
-	$categ = isset($_GET['category']) ? $_GET['category'] : "";
-
-	isset($_GET['page'])?
 	
+	$categ = isset($_GET['category']) ? $_GET['category'] : "";	
+	$page = isset($_GET['page']) ? $_GET['page'] : 0;	
+	$min = isset($_GET['min']) ? $_GET['min'] : NULL;	
+	$max = isset($_GET['max']) ? $_GET['max'] : NULL;	
+	$sort = isset($_GET['sort']) ? $_GET['sort'] : NULL;	
 
+
+
+	if($categ!=""){
+		$query = filterQuery($page,TRUE,$min,$max,$sort,TRUE);
+		$total = filterQuery($page,TRUE,$min,$max,$sort,FALSE);
+		
+		$q="products?category=$categ";
+	} else {
+		$query = filterQuery($page,FALSE,$min,$max,$sort,TRUE);
+		$total = filterQuery($page,FALSE,$min,$max,$sort,FALSE);
+		$q="products?";
+	}
+
+
+	try{
+		$conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
+		$conect = $conect->conect();
+	}catch(Exception $e){
+		echo "<p>".$e->getMessage()."</p>";
+	}
 	
+	try{
+		$products = $conect->prepare($query);
+		$count = $conect->prepare($total);
+		$products->bindParam(':category',$categ, PDO::PARAM_INT);
+		$count->bindParam(':category',$categ, PDO::PARAM_INT);
+		$products->execute();
+		$count->execute();
+		$count = $count->rowcount();
+		$array = array();
+		foreach($products->fetchAll(PDO::FETCH_ASSOC) as $product){
+			array_push($array,new Product($product['idProduct'],$product['name'],$product['price'],$product['brand'],$product['category'],$product['stock'],$product['short_description'],$product['description'],$product['image1'],$product['image2'],$product['image3'],$product['new']));
+		}
+	}catch(Exception $e){
+		echo "<p>".$e->getMessage()."</p>";
+	}
+
 ?>
 <div id="mainBody">
 	<div class="container">
@@ -61,13 +99,13 @@
 	<hr class="soft"/>
 	</div>
 </div>
-
+<!-- modificar el paginador para que arrastre la categoria y los filtros asociados -->
 	<div class="pagination">
 			<ul>
 			<?php echo "<li><a href='".$q."&page=0'>1</a></li>"; ?>
 		<?php
 			$qty = roundDown($count,6);
-			if(($count/6)>=1){
+			if(($count/6)>1){
 				for ($i = 0; $i<=$qty; $i++){
 					echo "<li><a href='".$q."&page=".($i+1)."'>".($i+2)."</a></li>";
 				}
