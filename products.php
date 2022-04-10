@@ -3,19 +3,26 @@
 	include "./Class/Product.class.php";
 	include "./admin/functions.php";
 
-	
+	//verify query of url, if exist...
 	$categ = isset($_GET['category']) ? $_GET['category'] : "";	
 	$page = isset($_GET['page']) ? $_GET['page'] : 0;	
 	$min = isset($_GET['min']) ? $_GET['min'] : NULL;	
 	$max = isset($_GET['max']) ? $_GET['max'] : NULL;	
 	$sort = isset($_GET['sort']) ? $_GET['sort'] : NULL;	
 
+	
 
 
+	//build url pagination
+	$q = filterUrl();
+
+	var_dump($q);
+	die();
+	
+//if exist category param
 	if($categ!=""){
 		$query = filterQuery($page,TRUE,$min,$max,$sort,TRUE);
 		$total = filterQuery($page,TRUE,$min,$max,$sort,FALSE);
-		
 		$q="products?category=$categ";
 	} else {
 		$query = filterQuery($page,FALSE,$min,$max,$sort,TRUE);
@@ -24,7 +31,7 @@
 	}
 
 
-	try{
+	try{ 
 		$conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
 		$conect = $conect->conect();
 	}catch(Exception $e){
