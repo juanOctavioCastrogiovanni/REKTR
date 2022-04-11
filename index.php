@@ -8,7 +8,7 @@ include "./Class/Product.class.php";
 		echo "<p>".$e->getMessage()."</p>";
 	}
 	try{
-		$query = "SELECT name,price,image1 as image, new FROM products";
+		$query = "SELECT idProduct,name,price,image1 as image, new FROM products";
 		$products = $conect->prepare($query);
 		$products->execute();
 		$count = $products->rowcount();
@@ -108,7 +108,7 @@ include "./Class/Product.class.php";
 								<ul class='thumbnails'>";
 							}
 							
-							$element = new Product(NULL,$products[$i]['name'],$products[$i]['price'],NULL,NULL,NULL,NULL,NULL,$products[$i]['image'],NULL,NULL,$products[$i]['new']);						
+							$element = new Product($products[$i]['idProduct'],$products[$i]['name'],$products[$i]['price'],NULL,NULL,NULL,NULL,NULL,$products[$i]['image'],NULL,NULL,$products[$i]['new']);						
 							$element->showCardCarrousel();
 							
 							//every three iteratios and is not the first time
