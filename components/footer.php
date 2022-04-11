@@ -48,6 +48,7 @@
 <div id="secectionBox">
 <link rel="stylesheet" href="themes/switch/themeswitch.css" type="text/css" media="screen" />
 <script src="themes/switch/theamswitcher.js" type="text/javascript" charset="utf-8"></script>
+<!-- <script src="themes/js/priceFilter.js" type="text/javascript" charset="utf-8"></script> -->
 </div>
 </body>
 </html>

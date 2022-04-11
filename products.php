@@ -9,25 +9,18 @@
 	$min = isset($_GET['min']) ? $_GET['min'] : NULL;	
 	$max = isset($_GET['max']) ? $_GET['max'] : NULL;	
 	$sort = isset($_GET['sort']) ? $_GET['sort'] : NULL;	
-
-	
-
+	$isProducts=TRUE;
 
 	//build url pagination
-	$q = filterUrl();
+	$q = filterUrl($categ,$min,$max,$sort);
 
-	var_dump($q);
-	die();
-	
 //if exist category param
 	if($categ!=""){
 		$query = filterQuery($page,TRUE,$min,$max,$sort,TRUE);
 		$total = filterQuery($page,TRUE,$min,$max,$sort,FALSE);
-		$q="products?category=$categ";
 	} else {
 		$query = filterQuery($page,FALSE,$min,$max,$sort,TRUE);
 		$total = filterQuery($page,FALSE,$min,$max,$sort,FALSE);
-		$q="products?";
 	}
 
 
@@ -61,6 +54,7 @@
 <?php
 	include "./components/sidebar.php";
 ?>
+	
 	<div class="span9">
     <ul class="breadcrumb">
 		<li><a href="index">Home</a> <span class="divider">/</span></li>
