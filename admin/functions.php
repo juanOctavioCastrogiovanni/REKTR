@@ -93,4 +93,17 @@
         return "products?".implode('&',$array);
     }
 
+    // $errors=array();
+    // if ( $email == "" || filter_var($email, FILTER_VALIDATE_EMAIL) === false ) {
+    //     //email validation;
+    //     array_push($errors,'email invalid, please check your mail');
+    //     header("location: ./user/login");
+    // }
+    
+    // if ( $pass == "" || count($pass) < 8 ) {
+    //     //pass validation;
+    //     array_push($errors,'password invalid, you not use less 8 chars');
+    //     header("location: ./user/login");
+    // }
+
 ?>

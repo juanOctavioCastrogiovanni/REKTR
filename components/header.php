@@ -87,21 +87,22 @@
 									<h3>Login</h3>
 								</div>
 								<div class="modal-body">
-									<form class="form-horizontal loginFrm">
+									<form class="form-horizontal loginFrm" action="./admin/user.php" method="POST">
 										<div class="control-group">
-											<input type="text" id="inputEmail" placeholder="Email">
+											<input type="text" id="inputEmail" placeholder="Email" name="email">
+											<input type="hidden" name="type" value="login">
 										</div>
 										<div class="control-group">
-											<input type="password" id="inputPassword" placeholder="Password">
+											<input type="password" id="inputPassword" placeholder="Password" name="password">
 										</div>
 										<div class="control-group">
 											<label class="checkbox">
 												<input type="checkbox"> Remember me
 											</label>
 										</div>
+										<button type="submit" class="btn btn-success">Sign in</button>
+										<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
 									</form>
-									<button type="submit" class="btn btn-success">Sign in</button>
-									<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
 								</div>
 							</div>
 						</li>
