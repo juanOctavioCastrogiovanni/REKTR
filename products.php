@@ -10,6 +10,9 @@
 	$max = isset($_GET['max']) ? $_GET['max'] : NULL;	
 	$sort = isset($_GET['sort']) ? $_GET['sort'] : NULL;	
 	$isProducts=TRUE;
+	$asc = $sort==='asc'?'selected':'';
+	$desc = $sort==='desc'?'selected':'';
+
 
 	//build url pagination
 	$q = filterUrl($categ,$min,$max,$sort);
@@ -105,8 +108,8 @@
 			<ul>
 			<?php echo "<li><a href='".$q."&page=0'>1</a></li>"; ?>
 		<?php
-			$qty = roundDown($count,6);
-			if(($count/6)>1){
+			$qty = roundDown($count,8);
+			if(($count/8)>1){
 				for ($i = 0; $i<=$qty; $i++){
 					echo "<li><a href='".$q."&page=".($i+1)."'>".($i+2)."</a></li>";
 				}

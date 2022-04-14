@@ -100,7 +100,7 @@
         }
 
         public function showProduct(){
-         echo "<li class='span3'>
+         echo "<li class='span2'>
             <div class='thumbnail'>
               <a href='product_details?id={$this->idProduct}'><img src='themes/images/products/upload/{$this->image1}' alt=''/></a>
               <div class='caption'>

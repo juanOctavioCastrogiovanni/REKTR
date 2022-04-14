@@ -9,9 +9,9 @@
     function filterQuery($page,$category,$min,$max,$sort,$limit){
         if($limit){
             if($category){    
-                return preQuery($page,"WHERE categories.idCategory=:category",$min,$max,$sort,"LIMIT 6 OFFSET ". 6*$page);
+                return preQuery($page,"WHERE categories.idCategory=:category",$min,$max,$sort,"LIMIT 8 OFFSET ". 8*$page);
             } else {
-                return preQuery($page," ",$min,$max,$sort, "LIMIT 6 OFFSET ". 6*$page);
+                return preQuery($page," ",$min,$max,$sort, "LIMIT 8 OFFSET ". 8*$page);
             }
         } else {
             if($category){    

@@ -44,8 +44,8 @@
         echo "
         <form action='' method='GET' style='margin-top:30px;'>
             <select class='form-select' aria-label='Default select example' name='sort'>
-                <option value='asc' selected>Price min</option>
-                <option value='desc'>Price max</option>
+                <option value='asc' $asc>Price min</option>
+                <option value='desc' $desc>Price max</option>
             </select>";
             if($categ!=''){
                 echo "<input type='hidden' name='category' value='$categ'>";
