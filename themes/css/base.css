@@ -109,3 +109,10 @@
     height: 290px;
 }
 
+.div1{
+    display: inline-block; border-right: 0.5px solid;
+}
+
+.div2{
+    float: right; margin-right: 95px; margin-top: 30px;
+}

@@ -105,5 +105,112 @@
     //     array_push($errors,'password invalid, you not use less 8 chars');
     //     header("location: ./user/login");
     // }
+    
+		function MostrarMensaje($cod){
+
+            switch ($cod) {
+                case '0x001':
+                    $mensaje = "El nombre ingresado no es válido";
+                break;
+                
+                case '0x002':
+                    $mensaje = "El e-mail ingresado no es válido";
+                break;
+    
+                case '0x003':
+                    $mensaje = "El mensaje ingresado no es válido";
+                break;
+    
+                case '0x004':
+                    $mensaje = "Su consulta ha sido enviada... muchas gracias!";
+                break;
+    
+                case '0x005':
+                    $mensaje = "Ocurrio un error, intente de nuevo";
+                break;
+    
+                case '0x006':
+                    $mensaje = "Se creo un nuevo producto satisfactoriamente";
+                break;
+    
+                case '0x007':
+                    $mensaje = "Error al crear un producto";
+                break;
+    
+                case '0x008':
+                    $mensaje = "Se actualizo el producto satisfactoriamente";
+                break;
+    
+                case '0x009':
+                    $mensaje = "Error al actualizar el producto";
+                break;
+    
+                case '0x010':
+                    $mensaje = "Se elimino el producto satisfactoriamente";
+                break;
+    
+                case '0x011':
+                    $mensaje = "Error al eliminar el producto";
+                break;
+    
+                case '0x012':
+                    $mensaje = "Error al subir la imagen.";
+                break;
+    
+                case '0x013':
+                    $mensaje = "Usuario ya registrado";
+                break;
+    
+                case '0x014':
+                    $mensaje = "Registro correcto! Revise su email para activar su cuenta.";
+                break;
+    
+                case '0x015':
+                    $mensaje = "Error en la registración, intente de nuevo";
+                break;
+    
+                case '0x016':
+                case '0x017':
+                    $mensaje = "Error de activación, intente de nuevo";
+                break;
+    
+                case '0x018':
+                    $mensaje = "Su cuenta se ha activado correctamente!";
+                break;
+    
+                case '0x019':
+                    $mensaje = "Usuario o contraseña incorrecta";
+                break;
+    
+                case '0x020':
+                    $mensaje = "Ingreso exitoso!";
+                break;
+    
+                case '0x021':
+                    $mensaje = "Sesión finalizada!";
+                break;
+    
+                case '0x022':
+                    $mensaje = "Revise su casilla de e-mail para recuperar su cuenta";
+                break;
+    
+                case '0x023':
+                    $mensaje = "Error, e-mail no valido o inexistente";
+                break;
+    
+                case '0x024':
+                    $mensaje = "Clave actualizada satisfactoriamente!";
+                break;
+    
+                case '0x025':
+                    $mensaje = "Error, contraseña invalida!";
+                break;
+    
+                case '0x026':
+                    $mensaje = "Error, no se pudo actualizar su contraseña";
+                break;
+            }
+            return "<p class='rta rta-".$cod."'>".$mensaje."</p>";
+        }
 
 ?>

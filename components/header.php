@@ -34,11 +34,12 @@
 	<!-- fav and touch icons -->
 	<link rel="shortcut icon" href="themes/images/ico/favicon.ico">
 	<link rel="apple-touch-icon-precomposed" sizes="144x144"
-		href="themes/images/ico/apple-touch-icon-144-precomposed.png">
+	href="themes/images/ico/apple-touch-icon-144-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" sizes="114x114"
-		href="themes/images/ico/apple-touch-icon-114-precomposed.png">
+	href="themes/images/ico/apple-touch-icon-114-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="themes/images/ico/apple-touch-icon-72-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple-touch-icon-57-precomposed.png">
+	<link href="themes/css/styles.css" rel="stylesheet" type="text/css"> 
 	<style type="text/css" id="enject"></style>
 </head>
 
@@ -87,22 +88,27 @@
 									<h3>Login</h3>
 								</div>
 								<div class="modal-body">
-									<form class="form-horizontal loginFrm" action="./admin/user.php" method="POST">
-										<div class="control-group">
-											<input type="text" id="inputEmail" placeholder="Email" name="email">
-											<input type="hidden" name="type" value="login">
-										</div>
-										<div class="control-group">
-											<input type="password" id="inputPassword" placeholder="Password" name="password">
-										</div>
-										<div class="control-group">
-											<label class="checkbox">
-												<input type="checkbox"> Remember me
-											</label>
-										</div>
-										<button type="submit" class="btn btn-success">Sign in</button>
-										<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-									</form>
+									<div class="div1">
+										<form class="form-horizontal loginFrm" action="./admin/user.php" method="POST">
+											<div class="control-group">
+												<input type="text" id="inputEmail" placeholder="Email" name="email">
+												<input type="hidden" name="type" value="login">
+											</div>
+											<div class="control-group">
+												<input type="password" id="inputPassword" placeholder="Password" name="password">
+											</div>
+											<div class="control-group" >
+												<label class="checkbox" style="display: inline-block;">
+													<input type="checkbox"> Remember me
+												</label>
+											</div>
+											<button type="submit" class="btn btn-success">Sign in</button>
+											<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+										</form>
+									</div>
+									<div class="div2">
+										<a href="register" class="btn-info btn">Register</a>
+									</div>
 								</div>
 							</div>
 						</li>
