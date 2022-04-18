@@ -106,7 +106,7 @@
     //     header("location: ./user/login");
     // }
     
-		function MostrarMensaje($cod){
+		function showMenssage($cod){
 
             switch ($cod) {
                 case '0x001':
@@ -227,9 +227,7 @@
             
             if ( $user->execute() && $user->rowCount() > 0 ) {
                 $user = $user->fetch();
-                
-                var_dump($user["pass"]);
-                die();
+                // el if de abajo lo tiene que ejecutar el metodo de login del objeto usuario
                 if (password_verify($pass, $user["pass"])) {
                         session_start();
                         $_SESSION["user"] = array(
@@ -238,10 +236,10 @@
                             "email" => $user["email"]
                         );
                         $rta = "0x020";
-                        
+                        header("location: ../admin/panel?rta=" . $rta);
                     }
                 }
-                header("location: ../login.php?rta=" . $rta);
+                header("location: ../login?rta=" . $rta);
         }
 
 ?>

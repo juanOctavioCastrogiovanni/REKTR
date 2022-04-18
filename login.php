@@ -1,5 +1,7 @@
 <?php
 include "./components/header.php";
+include "./admin/functions.php";
+
 ?>
 <div id="mainBody">
 	<div class="container">
@@ -37,6 +39,9 @@ include "./components/header.php";
 		<div class="span4">
 			<div class="well">
 			<h5>ALREADY REGISTERED ?</h5>
+			<?php if (isset( $_GET["rta"]) ) {
+				echo showMenssage( $_GET["rta"] );
+			} ?>
 			<form>
 			  <div class="control-group">
 				<label class="control-label" for="inputEmail1">Email</label>

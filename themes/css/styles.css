@@ -22,3 +22,45 @@
         text-align: center;
     }
 }
+
+.rta-0x001,
+.rta-0x002,
+.rta-0x003,
+.rta-0x005,
+.rta-0x007,
+.rta-0x009,
+.rta-0x011,
+.rta-0x013,
+.rta-0x012,
+.rta-0x015,
+.rta-0x016,
+.rta-0x017,
+.rta-0x019,
+.rta-0x023,
+.rta-0x025,
+.rta-0x026 {
+	background: #FF5722;
+    border-color: #F00;
+    color: #FFF;
+}
+.rta-0x004,
+.rta-0x006,
+.rta-0x008,
+.rta-0x010,
+.rta-0x014,
+.rta-0x018,
+.rta-0x020,
+.rta-0x021,
+.rta-0x024 {
+	background: rgb(214, 243, 180);
+    border-color: #2E7D32;
+    color: #2e7d32;
+}
+
+.rta {
+	border: solid 1px;
+    padding: 10px;
+    margin: 0;
+    font-weight: bold;
+    margin: 2em 0;
+}
