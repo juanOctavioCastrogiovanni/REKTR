@@ -23,7 +23,7 @@
     
             case 'loginUser':
                 $email = $_POST["email"];
-                $pass = $_POST["pass"];
+                $pass = $_POST["password"];
                 login($email, $pass);
             break;
     

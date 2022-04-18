@@ -222,15 +222,15 @@
                 echo "<p>".$e->getMessage()."</p>";
             }
             
-            $user = $conect->prepare("SELECT * FROM users WHERE email = :email AND :parameter = 1");
+            $user = $conect->prepare("SELECT * FROM users WHERE email = :email AND state = 1");
             $user->bindParam(":email", $email, PDO::PARAM_STR);
             
             if ( $user->execute() && $user->rowCount() > 0 ) {
-                    var_dump("correcto1");
-                    die();
-                    $user = $user->fetch();
-                    
-                    if (password_verify($pass, $user["Pass"])) {
+                $user = $user->fetch();
+                
+                var_dump($user["pass"]);
+                die();
+                if (password_verify($pass, $user["pass"])) {
                         session_start();
                         $_SESSION["user"] = array(
                             "firstname" => $user["firstname"],
