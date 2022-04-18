@@ -89,7 +89,7 @@
 								</div>
 								<div class="modal-body">
 									<div class="div1">
-										<form class="form-horizontal loginFrm" action="./admin/user.php" method="POST">
+										<form class="form-horizontal loginFrm" action="./admin/user.php?action=loginUser" method="POST">
 											<div class="control-group">
 												<input type="text" id="inputEmail" placeholder="Email" name="email">
 												<input type="hidden" name="type" value="login">
@@ -107,6 +107,7 @@
 										</form>
 									</div>
 									<div class="div2">
+										<p>you are not registered?</p>
 										<a href="register" class="btn-info btn">Register</a>
 									</div>
 								</div>

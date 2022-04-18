@@ -1,6 +1,7 @@
 <?php
     if( isset( $_GET["action"] ) ){
         include("functions.php");
+        include("../Class/conect.class.php");
 
         $action = $_GET["action"];
     
@@ -23,7 +24,7 @@
             case 'loginUser':
                 $email = $_POST["email"];
                 $pass = $_POST["pass"];
-                iniciarSesion($email, $pass);
+                login($email, $pass);
             break;
     
             case 'logoutUser':

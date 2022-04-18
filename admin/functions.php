@@ -179,11 +179,11 @@
                 break;
     
                 case '0x019':
-                    $mensaje = "Usuario o contraseña incorrecta";
+                    $mensaje = "your certificates are invalid, please check your email or password";
                 break;
     
                 case '0x020':
-                    $mensaje = "Ingreso exitoso!";
+                    $mensaje = "Successful login";
                 break;
     
                 case '0x021':
@@ -211,6 +211,37 @@
                 break;
             }
             return "<p class='rta rta-".$cod."'>".$mensaje."</p>";
+        }
+
+        function login($email, $pass){
+            $rta = "0x019";         
+            try{ 
+                $conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
+                $conect = $conect->conect();
+            }catch(Exception $e){
+                echo "<p>".$e->getMessage()."</p>";
+            }
+            
+            $user = $conect->prepare("SELECT * FROM users WHERE email = :email AND :parameter = 1");
+            $user->bindParam(":email", $email, PDO::PARAM_STR);
+            
+            if ( $user->execute() && $user->rowCount() > 0 ) {
+                    var_dump("correcto1");
+                    die();
+                    $user = $user->fetch();
+                    
+                    if (password_verify($pass, $user["Pass"])) {
+                        session_start();
+                        $_SESSION["user"] = array(
+                            "firstname" => $user["firstname"],
+                            "lastName" => $user["lastName"],
+                            "email" => $user["email"]
+                        );
+                        $rta = "0x020";
+                        
+                    }
+                }
+                header("location: ../login.php?rta=" . $rta);
         }
 
 ?>
