@@ -12,10 +12,10 @@
 		private $admin=NULL;
 		private $usuarios=NULL;
 		
-		function __construct( $nombre = '', $pass = '' )
+		function __construct( $email = '', $pass = '' )
 		{
-			$this->_nombre = $nombre;
-			$this->_pass = $pass;
+			$this->email = $email;
+			$this->pass = $pass;
 		}
 
 		public function setId( $id ){	$this->_id = $id; }
@@ -76,6 +76,8 @@
 
 			return $this->pass;
 		}
+
+		
 
 	}
 ?>

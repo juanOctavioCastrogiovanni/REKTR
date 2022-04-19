@@ -7,18 +7,21 @@
     
         switch ($action) {
             case 'addUser':
-                $nombre = $_POST["nombre"];
-                $apellido = $_POST["apellido"];
+                $firstname = $_POST["firstname"];
+                $lastname = $_POST["lastname"];
                 $email = $_POST["email"];
-                $pass = $_POST["pass"];
-    
-                registrarUsuario($nombre, $apellido, $email, $pass);
+                $pass = $_POST["password"];
+                if($pass==$_POST["rePassword"]){
+                    addUser($firstname, $lastname, $email, $pass);
+                } else {
+                    header("location: ../register?rta=0x027");
+                }
             break;
     
             case 'activeUser':
                 $email = $_GET["u"];
                 $clave = $_GET["k"];
-                activarUsuario($email, $clave);
+                activeUser($email, $clave);
             break;
     
             case 'loginUser':
@@ -28,12 +31,12 @@
             break;
     
             case 'logoutUser':
-                cerrarSesion();
+                logoutUser();
             break;
     
             case 'recoveryUser':
                 $email = $_POST["email"];
-                recuperarClave( $email );
+                recoveryUser( $email );
             break;
     
             case 'savePass':

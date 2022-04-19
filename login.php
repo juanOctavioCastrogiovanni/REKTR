@@ -42,17 +42,17 @@ include "./admin/functions.php";
 			<?php if (isset( $_GET["rta"]) ) {
 				echo showMenssage( $_GET["rta"] );
 			} ?>
-			<form>
+			<form action="./admin/user.php?action=loginUser" method="POST">
 			  <div class="control-group">
 				<label class="control-label" for="inputEmail1">Email</label>
 				<div class="controls">
-				  <input class="span3"  type="text" id="inputEmail1" placeholder="Email">
+				  <input class="span3"  type="text" id="inputEmail1" placeholder="Email" name="email">
 				</div>
 			  </div>
 			  <div class="control-group">
 				<label class="control-label" for="inputPassword1">Password</label>
 				<div class="controls">
-				  <input type="password" class="span3"  id="inputPassword1" placeholder="Password">
+				  <input type="password" class="span3"  id="inputPassword1" placeholder="Password" name="password">
 				</div>
 			  </div>
 			  <div class="control-group">
