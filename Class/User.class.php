@@ -20,10 +20,10 @@
 
 		public function setId( $id ){	$this->_id = $id; }
 		public function getId(){ return $this->_id; }
-		public function setfirstname( $name ){	$this->firstName = $name; }
-		public function getfirstname(){ return $this->firstName; }
-		public function setLastname( $lastName ){	$this->lastName = $lastName; }
-		public function getLastname(){ return $this->lastName; }
+		public function setFirstName( $name ){	$this->firstName = $name; }
+		public function getFirstName(){ return $this->firstName; }
+		public function setLastName( $lastName ){	$this->lastName = $lastName; }
+		public function getLastName(){ return $this->lastName; }
 		public function setEmail( $email ){	$this->email = $email; }
 		public function getEmail(){ return $this->email; }
 		public function setPass( $pass ){	$this->pass = $pass; }
@@ -54,6 +54,19 @@
 			$sql = sprintf( "SELECT * FROM users WHERE idUser = '%d'", $this->id );
 
 			return $sql;
+		}
+
+	    public function checkUser($pass){
+			if (password_verify($pass, $this->pass)) {
+				session_start();
+				$_SESSION["user"] = array(
+					"firstname" => $this->firstname,
+					"lastName" => $this->lastName,
+					"email" => $this->email
+				);
+				$rta = "0x020";
+				header("location: ../admin/panel?rta=" . $rta);
+			}
 		}
 
 

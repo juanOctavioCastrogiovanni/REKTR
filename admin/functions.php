@@ -228,16 +228,16 @@
             if ( $user->execute() && $user->rowCount() > 0 ) {
                 $user = $user->fetch();
                 // el if de abajo lo tiene que ejecutar el metodo de login del objeto usuario
-                if (password_verify($pass, $user["pass"])) {
-                        session_start();
-                        $_SESSION["user"] = array(
-                            "firstname" => $user["firstname"],
-                            "lastName" => $user["lastName"],
-                            "email" => $user["email"]
-                        );
-                        $rta = "0x020";
-                        header("location: ../admin/panel?rta=" . $rta);
-                    }
+                try{ 
+                    $newUser = new User();
+                    $newUser->setId($user['idUser']);
+                    $newUser->setFirstName($user['firstname']);
+                    $newUser->setLastName($user['lastname']);
+                    $newUser->setEmail($user['email']);
+                    $newUser->setPass($user['password']);
+                    $newUser->checkUser($pass);
+                }catch(Exception $e){
+                    echo "<p>".$e->getMessage()."</p>";
                 }
                 header("location: ../login?rta=" . $rta);
         }
