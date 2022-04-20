@@ -1,4 +1,8 @@
 <?php
+    $path = getcwd();
+    include "C:/xampp/htdocs/php-ecommerce/init.php";
+
+
       function roundDown($a,$b){
         if($a%$b!=0){
             return ($a/$b)-1;
@@ -240,7 +244,7 @@
                     echo "<p>".$e->getMessage()."</p>";
                 }
                 unset($conect);
-                header("location: ../login?rta=" . $rta);
+                header("location:  " . FRONT_END_URL . "/login?rta=" . $rta);
             }
             
         }
@@ -251,7 +255,7 @@
 			setcookie(session_name(), '', time() - 42000, '/'); 
 			unset( $_SESSION );
 			session_destroy();
-			header("location: /login?rta=" . $rta);
+			header("location:  " . FRONT_END_URL . "/login?rta=" . $rta);
 		}
 
         function recoveryUser( $email ){
@@ -296,7 +300,7 @@
                     $rta = "0x022";
                 }
                 unset($conect);
-                header("location: /login?rta=" . $rta);
+                header("location:  " . FRONT_END_URL . "/login?rta=" . $rta);
                 
             }
         }
@@ -327,17 +331,17 @@
     
             }
             unset($conect);
-            header("location: " . BACK_END_URL . "/register?rta=" . $rta);
+            header("location: " . FRONT_END_URL . "/register?rta=" . $rta);
         }
 
-        function registrarUsuario($firstname, $lastname, $email, $pass){
+        function addUser($firstname, $lastname, $email, $pass){
             try{ 
                 $conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
                 $conect = $conect->conect();
             }catch(Exception $e){
                 echo "<p>".$e->getMessage()."</p>";
             }
-            $rta = "0x013";
+            $rta = "0x014";
             $user = $conect->prepare("SELECT * FROM users WHERE email = :email");
             $user->bindParam(":email", $email, PDO::PARAM_STR);
             $user->execute();
@@ -384,8 +388,12 @@
                 } else {
                     $rta = "0x015";
                 }
+            } else {
+                $rta = "0x013";
+                // var_dump(getcwd()."/init.php", "../init");
+                // die();
             }
-            header("location: " . BACK_END_URL . "/register?rta=" . $rta);
+            header("location: " . FRONT_END_URL . "/register?rta=" . $rta);
         }
 
 ?>

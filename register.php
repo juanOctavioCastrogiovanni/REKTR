@@ -1,5 +1,7 @@
 ﻿<?php
 	include "./components/header.php";
+	include "./admin/functions.php";
+	
 ?>
 <div id="mainBody">
 	<div class="container">
@@ -60,7 +62,7 @@
 	  <div class="control-group">
 		<label class="control-label" for="inputPassword1">Repeat password <sup>*</sup></label>
 		<div class="controls">
-		  <input type="re-password" id="inputPassword1" placeholder="Repeat password" name="rePassword" required>
+		  <input type="password" id="inputPassword1" placeholder="Repeat password" name="rePassword" required>
 		</div>
 	  </div>  
 		
