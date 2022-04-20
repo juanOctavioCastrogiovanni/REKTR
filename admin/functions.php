@@ -97,6 +97,7 @@
         return "products?".implode('&',$array);
     }
 
+    // Design an error array to display several errors simultaneously in validation
     // $errors=array();
     // if ( $email == "" || filter_var($email, FILTER_VALIDATE_EMAIL) === false ) {
     //     //email validation;
