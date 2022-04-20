@@ -1,6 +1,5 @@
 <?php
-    $path = getcwd();
-    include "C:/xampp/htdocs/php-ecommerce/init.php";
+    include $_SERVER["DOCUMENT_ROOT"] ."/php-ecommerce/init.php";
 
 
       function roundDown($a,$b){
@@ -230,7 +229,8 @@
             }
             
             $user = $conect->prepare("SELECT * FROM users WHERE email = :email AND state = 1");
-            $user->bindParam(":email", $email, PDO::PARAM_STR);
+            $user->bindParam(":email", $email, PDO::PARAM_STR
+        );
             
             if ( $user->execute() && $user->rowCount() > 0 ) {
                 $user = $user->fetch();
@@ -390,8 +390,6 @@
                 }
             } else {
                 $rta = "0x013";
-                // var_dump(getcwd()."/init.php", "../init");
-                // die();
             }
             header("location: " . FRONT_END_URL . "/register?rta=" . $rta);
         }
