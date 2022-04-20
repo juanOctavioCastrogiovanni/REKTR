@@ -1,6 +1,6 @@
 <?php
 
-	class Usuario
+	class User
 	{
 		private $id=NULL;
 		private $firstname=NULL;
@@ -65,7 +65,7 @@
 					"email" => $this->email
 				);
 				$rta = "0x020";
-				header("location: ../admin/panel?rta=" . $rta);
+				header("location:". BACK_END_URL."/panel?rta=" . $rta);
 			}
 		}
 

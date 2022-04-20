@@ -1,5 +1,6 @@
 <?php
     include $_SERVER["DOCUMENT_ROOT"] ."/php-ecommerce/init.php";
+    
 
 
       function roundDown($a,$b){
@@ -234,8 +235,9 @@
             
             if ( $user->execute() && $user->rowCount() > 0 ) {
                 $user = $user->fetch();
+                var_dump('usuario encontrado');
                 try{ 
-                    $newUser = new User($user['email'],$user['password']);
+                    $newUser = new User($user['email'],$user['pass']);
                     $newUser->setId($user['idUser']);
                     $newUser->setFirstName($user['firstname']);
                     $newUser->setLastName($user['lastname']);
@@ -244,6 +246,8 @@
                     echo "<p>".$e->getMessage()."</p>";
                 }
                 unset($conect);
+                var_dump('usuario encontrado');
+                die();
                 header("location:  " . FRONT_END_URL . "/login?rta=" . $rta);
             }
             

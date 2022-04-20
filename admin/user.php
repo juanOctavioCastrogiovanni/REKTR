@@ -1,7 +1,8 @@
 <?php
     if( isset( $_GET["action"] ) ){
         include("functions.php");
-        include("../Class/conect.class.php");
+        include("../Class/Conect.class.php");
+        include("../Class/User.class.php");
 
         $action = $_GET["action"];
     
