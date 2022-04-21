@@ -231,12 +231,10 @@
             }
             
             $user = $conect->prepare("SELECT * FROM users WHERE email = :email AND state = 1");
-            $user->bindParam(":email", $email, PDO::PARAM_STR
-        );
+            $user->bindParam(":email", $email, PDO::PARAM_STR);
             
             if ( $user->execute() && $user->rowCount() > 0 ) {
                 $user = $user->fetch();
-                var_dump('usuario encontrado');
                 try{ 
                     $newUser = new User($user['email'],$user['pass']);
                     $newUser->setId($user['idUser']);
@@ -247,12 +245,13 @@
                     echo "<p>".$e->getMessage()."</p>";
                 }
                 unset($conect);
-                var_dump('usuario encontrado');
-                die();
-                header("location:  " . FRONT_END_URL . "/login?rta=" . $rta);
+            } else {
+            header("location:  " . FRONT_END_URL . "/login?rta=" . $rta);
             }
             
         }
+
+        
 
         function logoutUser(){
 			$rta = "0x021";
@@ -352,47 +351,25 @@
             $user->execute();
     
             if ( $user->rowCount() == 0 ) {
-    
-                $hash = password_hash($pass, PASSWORD_DEFAULT);
-                
-                $string = "abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ0123456789ª!·$%&/()=?¿*^¨ç_:;\|@#~€¬][}{}]";
-                $key = str_shuffle( $string );
-                $key = md5( $key );
-    
-                $user = $conect->prepare("INSERT INTO users (firstname, lastname, email, pass, activation) VALUES (:firstname, :lastname, :email, :pass, :activation)");
-    
-                $user->bindParam(":firstname", $firstname, PDO::PARAM_STR);
-                $user->bindParam(":lastname", $lastname, PDO::PARAM_STR);
-                $user->bindParam(":email", $email, PDO::PARAM_STR);
-                $user->bindParam(":pass", $hash, PDO::PARAM_STR);
-                $user->bindParam(":activation", $key, PDO::PARAM_STR);
-                    
-                if ( $user->execute() ) {
-                    $url_activation = BACK_END_URL . "/";
-                    $url_activation.= "user.php";
-                    $url_activation.= "?u=" . $email;
-                    $url_activation.= "&k=" . $key;
-                    $url_activation.= "&action=activeUser";
-    
-                    $body = "<h1>Welcome</h1>";
-                    $body.= "<br>";
-                    $body.= "firstname: " . $firstname;
-                    $body.= "<br>";
-                    $body.= "lastname: " . $lastname;
-                    $body.= "<br>";
-                    $body.= "user: " . $email;
-                    $body.= "<br>";
-                    $body.= "<p>please activate your account </p>";
-                    $body.= "<a style='background-color:blue;color:white;display:block;padding:10px' href='".$url_activation."'>activate your account</a>";
-    
-                    $header = "From: no-reply@" . $_SERVER["SERVER_NAME"] . "\r\n";
-                    $header.= "MIME-Version: 1.0" . "\r\n";
-                    $header.= "Content-Type: text/html; charset=utf-8" . "\r\n";
-    
-                    mail($email, "Welcome", $body, $header);
-                } else {
-                    $rta = "0x015";
+
+                try{
+                   $newUser = new User();
+                   $newUser->setFirstName($firstname);
+                   $newUser->setLastName($lastname);
+                   $newUser->setEmail($email);
+                   $newUser->setPass($pass);
+                   $newUser->setActivation();
+                   $newUser->setState(0);
+                   $newUser->setAdmin(0);
+                   $user = $newUser->createUser($conect);
+                }catch(Exception $e){
+                   echo "<p>".$e->getMessage()."</p>";
                 }
+                    if ( $user->execute() ) {
+                        $newUser->emailActivation();
+                    } else {
+                            $rta = "0x015";
+                    }
             } else {
                 $rta = "0x013";
             }

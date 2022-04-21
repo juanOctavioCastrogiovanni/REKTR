@@ -28,19 +28,24 @@
 		public function getEmail(){ return $this->email; }
 		public function setPass( $pass ){	$this->pass = $pass; }
 		public function getPass(){ return $this->pass; }
-		public function setActivation( $activation ){	$this->activation = $activation; }
 		public function getActivation(){ return $this->activation; }
 		public function setState( $state ){	$this->state = $state; }
 		public function getState(){ return $this->state; }
 		public function setAdmin( $admin ){	$this->admin = $admin; }
 		public function getAdmin(){ return $this->admin; }
-
-		public function createUse()
+		
+		public function setActivation(){	
+			$string = "abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ0123456789ª!·$%&/()=?¿*^¨ç_:;\|@#~€¬][}{}]";
+			$key = str_shuffle($string);
+			$key = md5($key);
+			$this->activation = $key;
+		}
+		public function createUser($con)
 		{
-			$this->_pass = $this->encryptePass($this->pass);
+			$this->pass = $this->encryptPass($this->pass);
 			$sql = sprintf( "INSERT INTO users( firstname, lastname, email, pass, activation, state, admin) VALUES ( '%s', '%s', '%s','%s', '%s', '%s', '%s')", $this->firstName, $this->lastName , $this->email, $this->pass, $this->activation,$this->state,$this->admin );
-
-			return $sql;
+			$user = $con->prepare($sql);
+			return $user;
 
 		}
 		public function selectUser()
@@ -65,19 +70,44 @@
 					"email" => $this->email
 				);
 				$rta = "0x020";
-				header("location:". BACK_END_URL."/panel?rta=" . $rta);
+				header("location:". BACK_END_URL."/profile?rta=" . $rta);
+			} else {
+				$rta = "0x019";
+				header("location:  " . FRONT_END_URL . "/login?rta=" . $rta);
 			}
 		}
 
-
+		public function emailActivation(){
+					$url_activation = BACK_END_URL . "/";
+                    $url_activation.= "user.php";
+                    $url_activation.= "?u=" . $email;
+                    $url_activation.= "&k=" . $key;
+                    $url_activation.= "&action=activeUser";
+    
+                    $body = "<h1>Welcome</h1>";
+                    $body.= "<br>";
+                    $body.= "firstname: " . $firstname;
+                    $body.= "<br>";
+                    $body.= "lastname: " . $lastname;
+                    $body.= "<br>";
+                    $body.= "user: " . $email;
+                    $body.= "<br>";
+                    $body.= "<p>please activate your account </p>";
+                    $body.= "<a style='background-color:blue;color:white;display:block;padding:10px' href='".$url_activation."'>activate your account</a>";
+    
+                    $header = "From: no-reply@" . $_SERVER["SERVER_NAME"] . "\r\n";
+                    $header.= "MIME-Version: 1.0" . "\r\n";
+                    $header.= "Content-Type: text/html; charset=utf-8" . "\r\n";
+    
+                    mail($email, "Welcome", $body, $header);
+		}
 		private function encryptPass($pass)
 		{
-			$this->pass = hash('sha256', $pass);
-
+			$this->pass = password_hash($pass, PASSWORD_DEFAULT);
 			return $this->pass;
 		}
 
-		
+
 
 	}
 ?>
