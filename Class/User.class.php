@@ -50,7 +50,7 @@
 		}
 		public function selectUser()
 		{
-			$sql = sprintf( "SELECT * FROM users WHERE email = '%s'", $this->email );
+			$sql = sprintf( "SELECT * FROM users WHERE email = '%s' AND state = %d", $this->email,1);
 
 			return $sql;
 		}
@@ -80,17 +80,17 @@
 		public function emailActivation(){
 					$url_activation = BACK_END_URL . "/";
                     $url_activation.= "user.php";
-                    $url_activation.= "?u=" . $email;
-                    $url_activation.= "&k=" . $key;
+                    $url_activation.= "?u=" . $this->email;
+                    $url_activation.= "&k=" . $this->activation;
                     $url_activation.= "&action=activeUser";
     
                     $body = "<h1>Welcome</h1>";
                     $body.= "<br>";
-                    $body.= "firstname: " . $firstname;
+                    $body.= "firstname: " . $this->firstname;
                     $body.= "<br>";
-                    $body.= "lastname: " . $lastname;
+                    $body.= "lastname: " . $this->lastname;
                     $body.= "<br>";
-                    $body.= "user: " . $email;
+                    $body.= "user: " . $this->email;
                     $body.= "<br>";
                     $body.= "<p>please activate your account </p>";
                     $body.= "<a style='background-color:blue;color:white;display:block;padding:10px' href='".$url_activation."'>activate your account</a>";

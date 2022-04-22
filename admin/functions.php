@@ -263,18 +263,24 @@
 		}
 
         function recoveryUser( $email ){
-            try{ 
-                $conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
-                $conect = $conect->conect();
-            }catch(Exception $e){
-                echo "<p>".$e->getMessage()."</p>";
-            }
-            $rta = "0x023";
-            $user = $conect->prepare("SELECT * FROM users WHERE email = :email AND estado = 1");
-            $user->bindParam(":email", $email, PDO::PARAM_STR);
+        try{ 
+            $conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
+            $conect = $conect->conect();
+        }catch(Exception $e){
+             echo "<p>".$e->getMessage()."</p>";
+         }
+        $rta = "0x023";
+        try{ 
+           $recoveryUser = new User();
+           $recoveryUser->setEmail($email);
+           $sql = $recoveryUser->selectUser();
+           $user = $conect->prepare($sql);
+        }catch(Exception $e){
+            echo "<p>".$e->getMessage()."</p>";
+        }
     
             if ( $user->execute() ) {
-    
+                
                 $string = "abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ0123456789ª!·$%&/()=?¿*^¨ç_:;\|@#~€¬][}{}]";
                 $key = str_shuffle( $string );
                 $key = md5( $key );
@@ -346,30 +352,30 @@
                 echo "<p>".$e->getMessage()."</p>";
             }
             $rta = "0x014";
-            $user = $conect->prepare("SELECT * FROM users WHERE email = :email");
-            $user->bindParam(":email", $email, PDO::PARAM_STR);
+            try{ 
+                $newUser = new User();
+                $newUser->setEmail($email);
+                $sql = $newUser->selectUser();
+                $user = $conect->prepare($sql);
+             }catch(Exception $e){
+                 echo "<p>".$e->getMessage()."</p>";
+             }
+           
             $user->execute();
     
-            if ( $user->rowCount() == 0 ) {
-
-                try{
-                   $newUser = new User();
-                   $newUser->setFirstName($firstname);
-                   $newUser->setLastName($lastname);
-                   $newUser->setEmail($email);
-                   $newUser->setPass($pass);
-                   $newUser->setActivation();
-                   $newUser->setState(0);
-                   $newUser->setAdmin(0);
-                   $user = $newUser->createUser($conect);
-                }catch(Exception $e){
-                   echo "<p>".$e->getMessage()."</p>";
-                }
-                    if ( $user->execute() ) {
-                        $newUser->emailActivation();
-                    } else {
-                            $rta = "0x015";
-                    }
+            if ($user->rowCount()==0) {
+              $newUser->setFirstName($firstname);
+              $newUser->setLastName($lastname);
+              $newUser->setPass($pass);
+              $newUser->setActivation();
+              $newUser->setState(0);
+              $newUser->setAdmin(0);
+              $user = $newUser->createUser($conect);
+                 if ($user->execute()) {
+                    $newUser->emailActivation();
+                 } else {
+                    $rta = "0x015";
+                 }
             } else {
                 $rta = "0x013";
             }
