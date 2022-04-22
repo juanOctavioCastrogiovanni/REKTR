@@ -10,7 +10,6 @@
 		private $activation=NULL;
 		private $state=NULL;
 		private $admin=NULL;
-		private $usuarios=NULL;
 		
 		function __construct( $email = '', $pass = '' )
 		{
@@ -20,44 +19,52 @@
 
 		public function setId( $id ){	$this->_id = $id; }
 		public function getId(){ return $this->_id; }
-		public function setFirstName( $name ){	$this->firstName = $name; }
-		public function getFirstName(){ return $this->firstName; }
-		public function setLastName( $lastName ){	$this->lastName = $lastName; }
-		public function getLastName(){ return $this->lastName; }
+		public function setFirstName( $name ){	$this->firstname = $name; }
+		public function getFirstName(){ return $this->firstname; }
+		public function setLastName( $lastName ){	$this->lastname = $lastName; }
+		public function getLastName(){ return $this->lastname; }
 		public function setEmail( $email ){	$this->email = $email; }
 		public function getEmail(){ return $this->email; }
 		public function setPass( $pass ){	$this->pass = $pass; }
 		public function getPass(){ return $this->pass; }
+		public function setActivation( $activation ){	$this->activation = $activation; }
 		public function getActivation(){ return $this->activation; }
 		public function setState( $state ){	$this->state = $state; }
 		public function getState(){ return $this->state; }
 		public function setAdmin( $admin ){	$this->admin = $admin; }
 		public function getAdmin(){ return $this->admin; }
 		
-		public function setActivation(){	
+		public function configActivationCode(){	
 			$string = "abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ0123456789ª!·$%&/()=?¿*^¨ç_:;\|@#~€¬][}{}]";
 			$key = str_shuffle($string);
 			$key = md5($key);
 			$this->activation = $key;
 		}
-		public function createUser($con)
-		{
+		public function createUser($con){
 			$this->pass = $this->encryptPass($this->pass);
-			$sql = sprintf( "INSERT INTO users( firstname, lastname, email, pass, activation, state, admin) VALUES ( '%s', '%s', '%s','%s', '%s', '%s', '%s')", $this->firstName, $this->lastName , $this->email, $this->pass, $this->activation,$this->state,$this->admin );
+			$sql = sprintf( "INSERT INTO users( firstname, lastname, email, pass, activation, state, admin) VALUES ( '%s', '%s', '%s','%s', '%s', '%d', '%d')", $this->firstname, $this->lastname , $this->email, $this->pass, $this->activation,$this->state,$this->admin );
 			$user = $con->prepare($sql);
 			return $user;
-
 		}
-		public function selectUser()
-		{
+		
+		public function selectUser(){
 			$sql = sprintf( "SELECT * FROM users WHERE email = '%s' AND state = %d", $this->email,1);
+			return $sql;
+		}
+
+		public function User(){
+			$sql = sprintf( "SELECT * FROM users WHERE idUser = '%d'", $this->id );
 
 			return $sql;
 		}
-		public function User()
-		{
-			$sql = sprintf( "SELECT * FROM users WHERE idUser = '%d'", $this->id );
 
+		public function recoveryUser(){
+			$sql = sprintf("UPDATE users SET activation = %s WHERE email = %s",$this->activation,$this->email );
+			return $sql;
+		}
+		
+		public function searchUser(){
+			$sql = sprintf("SELECT * FROM users WHERE email = %s AND activation = %s", $this->email,$this->activation);
 			return $sql;
 		}
 
@@ -66,7 +73,7 @@
 				session_start();
 				$_SESSION["user"] = array(
 					"firstname" => $this->firstname,
-					"lastName" => $this->lastName,
+					"lastName" => $this->lastname,
 					"email" => $this->email
 				);
 				$rta = "0x020";
@@ -77,7 +84,7 @@
 			}
 		}
 
-		public function emailActivation(){
+		public function activationMail(){
 					$url_activation = BACK_END_URL . "/";
                     $url_activation.= "user.php";
                     $url_activation.= "?u=" . $this->email;
@@ -98,11 +105,31 @@
                     $header = "From: no-reply@" . $_SERVER["SERVER_NAME"] . "\r\n";
                     $header.= "MIME-Version: 1.0" . "\r\n";
                     $header.= "Content-Type: text/html; charset=utf-8" . "\r\n";
-    
-                    mail($email, "Welcome", $body, $header);
+                    mail($this->email, "Welcome", $body, $header);
+					
 		}
-		private function encryptPass($pass)
-		{
+		public function recoveryEmail(){
+					$url_recovery = BACK_END_URL . "/";
+                    $url_recovery.= "?page=recovery";
+                    $url_recovery.= "&u=" . $this->email;
+                    $url_recovery.= "&k=" . $this->activation;
+    
+                    $body = "<h1>recovery password</h1>";
+                    $body.= "<br>";
+                    $body.= "user: " . $this->email;
+                    $body.= "<br>";
+                    $body.= "<p>Please click on the link below to reactivate your password.</p>";
+                    $body.= "<a style='background-color:blue;color:white;display:block;padding:10px' href='".$url_recovery."'>RECUPERAR MI CUENTA</a>";
+    
+                    $header = "From: no-reply@" . $_SERVER["SERVER_NAME"] . "\r\n";
+                    $header.= "MIME-Version: 1.0" . "\r\n";
+                    $header.= "Content-Type: text/html; charset=utf-8" . "\r\n";
+
+					
+                    mail( $this->email, "Recovery password", $body, $header);
+
+		}
+		private function encryptPass($pass){
 			$this->pass = password_hash($pass, PASSWORD_DEFAULT);
 			return $this->pass;
 		}

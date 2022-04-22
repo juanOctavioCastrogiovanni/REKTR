@@ -263,56 +263,38 @@
 		}
 
         function recoveryUser( $email ){
-        try{ 
-            $conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
-            $conect = $conect->conect();
-        }catch(Exception $e){
-             echo "<p>".$e->getMessage()."</p>";
-         }
-        $rta = "0x023";
-        try{ 
-           $recoveryUser = new User();
-           $recoveryUser->setEmail($email);
-           $sql = $recoveryUser->selectUser();
-           $user = $conect->prepare($sql);
-        }catch(Exception $e){
-            echo "<p>".$e->getMessage()."</p>";
-        }
-    
-            if ( $user->execute() ) {
-                
-                $string = "abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ0123456789ª!·$%&/()=?¿*^¨ç_:;\|@#~€¬][}{}]";
-                $key = str_shuffle( $string );
-                $key = md5( $key );
-    
-                $user = $conect->prepare("UPDATE users SET activation = :activation WHERE email = :email");
-                $user->bindParam(":email", $email, PDO::PARAM_STR);
-                $user->bindParam(":activation", $key, PDO::PARAM_STR);
-    
-                if ( $user->execute() ) {
-                    $url_recovery = BACK_END_URL . "/";
-                    $url_recovery.= "?page=recovery";
-                    $url_recovery.= "&u=" . $email;
-                    $url_recovery.= "&k=" . $key;
-    
-                    $body = "<h1>recovery password</h1>";
-                    $body.= "<br>";
-                    $body.= "user: " . $email;
-                    $body.= "<br>";
-                    $body.= "<p>Please click on the link below to reactivate your password.</p>";
-                    $body.= "<a style='background-color:blue;color:white;display:block;padding:10px' href='".$url_recovery."'>RECUPERAR MI CUENTA</a>";
-    
-                    $header = "From: no-reply@" . $_SERVER["SERVER_NAME"] . "\r\n";
-                    $header.= "MIME-Version: 1.0" . "\r\n";
-                    $header.= "Content-Type: text/html; charset=utf-8" . "\r\n";
-
-                    mail( $email, "Recovery password", $body, $header);
-                    $rta = "0x022";
-                }
-                unset($conect);
-                header("location:  " . FRONT_END_URL . "/login?rta=" . $rta);
-                
+            try{ 
+                $conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
+                $conect = $conect->conect();
+            }catch(Exception $e){
+                echo "<p>".$e->getMessage()."</p>";
             }
+            $rta = "0x023";
+            try{ 
+                $recoveryUser = new User();
+                $recoveryUser->setEmail($email);
+                $sql = $recoveryUser->selectUser();
+                $user = $conect->prepare($sql);
+            }catch(Exception $e){
+                echo "<p>".$e->getMessage()."</p>";
+            }
+    
+                if ($user->execute()) {              
+                    $recoveryUser->configActivationCode();
+                    $sql = $recoveryUser->recoveryUser();
+                    $user = $conect->prepare($sql);
+                    // $user = $conect->prepare("UPDATE users SET activation = :activation WHERE email = :email");
+                    // $user->bindParam(":email", $email, PDO::PARAM_STR);
+                    // $user->bindParam(":activation", $key, PDO::PARAM_STR);
+        
+                    if ( $user->execute() ) {
+                        $recoveryUser->recoveryEmail();
+                        $rta = "0x022";
+                    }
+                    unset($conect);
+                    header("location:  " . FRONT_END_URL . "/login?rta=" . $rta);
+                    
+                }
         }
 
         function activeUser($email, $key){
@@ -324,9 +306,18 @@
             }
             
             $rta = "0x016";
-            $user = $conect->prepare("SELECT * FROM users WHERE email = :email AND activation = :activation");
-            $user->bindParam(":email", $email, PDO::PARAM_STR);
-            $user->bindParam(":activation", $key, PDO::PARAM_STR);
+            try{ 
+                $activeUser = new User();
+                $activeUser->setEmail($email);
+                $activeUser->setActivation($key);                
+                $sql = $activeUser->searchUser();
+                $user = $conect->prepare($sql);
+             }catch(Exception $e){
+                 echo "<p>".$e->getMessage()."</p>";
+             }
+            // $user = $conect->prepare("SELECT * FROM users WHERE email = :email AND activation = :activation");
+            // $user->bindParam(":email", $email, PDO::PARAM_STR);
+            // $user->bindParam(":activation", $key, PDO::PARAM_STR);
     
             if ( $user->execute() ) {
                 
@@ -367,12 +358,12 @@
               $newUser->setFirstName($firstname);
               $newUser->setLastName($lastname);
               $newUser->setPass($pass);
-              $newUser->setActivation();
+              $newUser->configActivationCode();
               $newUser->setState(0);
               $newUser->setAdmin(0);
               $user = $newUser->createUser($conect);
-                 if ($user->execute()) {
-                    $newUser->emailActivation();
+              if ($user->execute()){
+                   $newUser->activationMail();
                  } else {
                     $rta = "0x015";
                  }
