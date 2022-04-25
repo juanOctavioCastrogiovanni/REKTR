@@ -215,7 +215,7 @@
                     $mensaje = "Error, password is not update";
                 break;
                 case '0x027':
-                    $mensaje = "Passwords are not the same";
+                    $mensaje = "The password must have at least 8 and must be the same";
                 break;
             }
             return "<p class='rta rta-".$cod."'>".$mensaje."</p>";
@@ -310,28 +310,17 @@
                 $activeUser = new User();
                 $activeUser->setEmail($email);
                 $activeUser->setActivation($key);                
-                $sql = $activeUser->searchUser();
-                $user = $conect->prepare($sql);
+                $user = $activeUser->activeUser($conect);
+                if ( $user->execute() ) {
+                        $rta = "0x018";
+                }
              }catch(Exception $e){
                  echo "<p>".$e->getMessage()."</p>";
              }
-            // $user = $conect->prepare("SELECT * FROM users WHERE email = :email AND activation = :activation");
-            // $user->bindParam(":email", $email, PDO::PARAM_STR);
-            // $user->bindParam(":activation", $key, PDO::PARAM_STR);
+        
     
-            if ( $user->execute() ) {
-                
-                $user = $conect->prepare("UPDATE users SET state = 1 WHERE email = :email");
-                $user->bindParam(":email", $email, PDO::PARAM_STR);
-    
-                if ( $user->execute() ) {
-                    $rta = "0x018";
-                } else {
-                    $rta = "0x017";
-                }
-    
-            }
             unset($conect);
+            // die();
             header("location: " . FRONT_END_URL . "/register?rta=" . $rta);
         }
 

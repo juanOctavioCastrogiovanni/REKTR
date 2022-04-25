@@ -12,7 +12,7 @@
                 $lastname = $_POST["lastname"];
                 $email = $_POST["email"];
                 $pass = $_POST["password"];
-                if($pass==$_POST["rePassword"]){
+                if($pass==$_POST["rePassword"]&&strlen($pass)>8){
                     addUser($firstname, $lastname, $email, $pass);
                 } else {
                     header("location: ../register?rta=0x027");
@@ -34,7 +34,7 @@
             case 'logoutUser':
                 logoutUser();
             break;
-    
+    //cambiar la funcion recoveryUser por recoveryEmail, puesto que primero debe mandar el mail y luego cambiar la contraseña
             case 'recoveryUser':
                 $email = $_POST["email"];
                 recoveryUser( $email );

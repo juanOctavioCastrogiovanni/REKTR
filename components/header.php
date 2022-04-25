@@ -94,16 +94,17 @@
 												<input type="text" id="inputEmail" placeholder="Email" name="email">
 												<input type="hidden" name="type" value="login">
 											</div>
-											<div class="control-group">
+											<div class="control-group" style="margin-bottom:10px">
 												<input type="password" id="inputPassword" placeholder="Password" name="password">
 											</div>
-											<div class="control-group" >
+											<!-- <div class="control-group" >
 												<label class="checkbox" style="display: inline-block;">
 													<input type="checkbox"> Remember me
 												</label>
-											</div>
+											</div> -->
 											<button type="submit" class="btn btn-success">Sign in</button>
-											<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+											<!-- <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button> -->
+											<a href="../php-ecommerce/forgetpass" class="btn-sm" >Forget password</a>
 										</form>
 									</div>
 									<div class="div2">

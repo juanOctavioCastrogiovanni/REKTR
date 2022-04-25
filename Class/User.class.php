@@ -48,7 +48,7 @@
 		}
 		
 		public function selectUser(){
-			$sql = sprintf( "SELECT * FROM users WHERE email = '%s' AND state = %d", $this->email,1);
+			$sql = sprintf( "SELECT * FROM users WHERE email = '%s' AND state = %d", $this->email,0);
 			return $sql;
 		}
 
@@ -58,14 +58,18 @@
 			return $sql;
 		}
 
-		public function recoveryUser(){
-			$sql = sprintf("UPDATE users SET activation = %s WHERE email = %s",$this->activation,$this->email );
-			return $sql;
+		public function recoveryUser($conect){
+			$user = $conect->prepare("UPDATE users SET pass = :pass WHERE email = :email");
+            $user->bindParam(":pass", $this->pass, PDO::PARAM_STR);
+            $user->bindParam(":email", $this->email, PDO::PARAM_STR);
+			return $user;
 		}
 		
-		public function searchUser(){
-			$sql = sprintf("SELECT * FROM users WHERE email = %s AND activation = %s", $this->email,$this->activation);
-			return $sql;
+		public function activeUser($conect){
+			$user = $conect->prepare("UPDATE users SET state = 1 WHERE email = :email AND activation = :activation");
+            $user->bindParam(":email", $this->email, PDO::PARAM_STR);
+            $user->bindParam(":activation", $this->activation, PDO::PARAM_STR);
+			return $user;
 		}
 
 	    public function checkUser($pass){
