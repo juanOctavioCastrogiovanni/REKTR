@@ -1,5 +1,6 @@
 <?php
-	include "./Class/Conect.class.php";
+	$point = isset($point)?"..":".";
+	include $point."/Class/Conect.class.php";
 
 ?>
 <!-- Todos las paginas llamaran con un include a header -->
@@ -23,23 +24,23 @@
 	<script src="themes/js/less.js" type="text/javascript"></script> -->
 
 	<!-- Bootstrap style -->
-	<link id="callCss" rel="stylesheet" href="themes/bootshop/bootstrap.min.css" media="screen" />
-	<link href="themes/css/base.css" rel="stylesheet" media="screen" />
+	<link id="callCss" rel="stylesheet" href="<?php echo $point ?>/themes/bootshop/bootstrap.min.css" media="screen" />
+	<link href="<?php echo $point ?>/themes/css/base.css" rel="stylesheet" media="screen" />
 	<!-- Bootstrap style responsive -->
-	<!-- <link href="themes/css/priceFilter.css" rel="stylesheet" type="text/css"> -->
-	<link href="themes/css/bootstrap-responsive.min.css" rel="stylesheet" />
-	<link href="themes/css/font-awesome.css" rel="stylesheet" type="text/css">
+	<!-- <link href="<?php echo $point ?>/themes/css/priceFilter.css" rel="stylesheet" type="text/css"> -->
+	<link href="<?php echo $point ?>/themes/css/bootstrap-responsive.min.css" rel="stylesheet" />
+	<link href="<?php echo $point ?>/themes/css/font-awesome.css" rel="stylesheet" type="text/css">
 	<!-- Google-code-prettify -->
-	<link href="themes/js/google-code-prettify/prettify.css" rel="stylesheet" />
+	<link href="<?php echo $point ?>/themes/js/google-code-prettify/prettify.css" rel="stylesheet" />
 	<!-- fav and touch icons -->
-	<link rel="shortcut icon" href="themes/images/ico/favicon.ico">
+	<link rel="shortcut icon" href="<?php echo $point ?>/themes/images/ico/favicon.ico">
 	<link rel="apple-touch-icon-precomposed" sizes="144x144"
-	href="themes/images/ico/apple-touch-icon-144-precomposed.png">
+	href="<?php echo $point ?>/themes/images/ico/apple-touch-icon-144-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" sizes="114x114"
-	href="themes/images/ico/apple-touch-icon-114-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="themes/images/ico/apple-touch-icon-72-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple-touch-icon-57-precomposed.png">
-	<link href="themes/css/styles.css" rel="stylesheet" type="text/css"> 
+	href="<?php echo $point ?>/themes/images/ico/apple-touch-icon-114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo $point ?>/themes/images/ico/apple-touch-icon-72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="<?php echo $point ?>/themes/images/ico/apple-touch-icon-57-precomposed.png">
+	<link href="<?php echo $point ?>/<?php echo $point ?>/themes/css/styles.css" rel="stylesheet" type="text/css"> 
 	<style type="text/css" id="enject"></style>
 </head>
 
@@ -53,10 +54,10 @@
 				?>
 				<div class="span6">
 					<div class="pull-right">
-						<a href="product_summary"><span>Total</span></a>
+						<a href="<?php echo $point ?>/product_summary"><span>Total</span></a>
 						<span class="btn btn-mini">$155.00</span>
-						<a href="product_summary"><span class="">$</span></a>
-						<a href="product_summary"><span class="btn btn-mini btn-primary"><i
+						<a href="<?php echo $point ?>/product_summary"><span class="">$</span></a>
+						<a href="<?php echo $point ?>/product_summary"><span class="btn btn-mini btn-primary"><i
 									class="icon-shopping-cart icon-white"></i> [ 3 ] Itemes in your cart </span> </a>
 					</div>
 				</div>
@@ -69,14 +70,15 @@
 					<span class="icon-bar"></span>
 				</a>
 				<div class="navbar-inner">
-					<a class="brand" href="index"><img src="themes/images/logo.png" alt="Bootsshop" /></a>
+					<a class="brand" href="<?php echo $point ?>/index"><img src="<?php echo $point ?>/themes/images/logo.png" alt="Bootsshop" /></a>
 					<form class="form-inline navbar-search" method="post" action="products">
 						<input id="srchFld" class="srchTxt" type="text" />
 						<button type="submit" id="submitButton" class="btn btn-primary">Go</button>
 					</form>
 					<ul id="topMenu" class="nav pull-right">
-						<li class=""><a href="products">Products</a></li>
-						<li class=""><a href="contact">Contact</a></li>
+						<li class=""><a href="<?php echo $point ?>/products">Products</a></li>
+						<li class=""><a href="<?php echo $point ?>/user/panel">USER</a></li>
+						<li class=""><a href="<?php echo $point ?>/contact">Contact</a></li>
 						<li class="">
 							<a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span
 									class="btn btn-large btn-warning">Login</span></a>
@@ -104,12 +106,12 @@
 											</div> -->
 											<button type="submit" class="btn btn-success">Sign in</button>
 											<!-- <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button> -->
-											<a href="../php-ecommerce/forgetpass" class="btn-sm" >Forget password</a>
+											<a href="<?php echo $point ?>forgetpass" class="btn-sm" >Forget password</a>
 										</form>
 									</div>
 									<div class="div2">
 										<p>you are not registered?</p>
-										<a href="register" class="btn-info btn">Register</a>
+										<a href="<?php echo $point ?>/register" class="btn-info btn">Register</a>
 									</div>
 								</div>
 							</div>
