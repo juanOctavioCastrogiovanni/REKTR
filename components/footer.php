@@ -1,7 +1,4 @@
-<?php
-	$point = isset($point)?"..":".";
-	
-?>
+
 <!-- Todos las paginas llamaran con un include a footer -->
 <!-- All the pages will call with an include footer -->
 <!-- Footer ================================================================== -->
