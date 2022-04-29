@@ -1,6 +1,7 @@
 <?php
 $point = 1;
 include "../components/header.php";
+include "../init.php";
 ?>
 <div id="mainBody">
     <div class="container">
