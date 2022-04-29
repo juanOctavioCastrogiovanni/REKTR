@@ -21,7 +21,7 @@
                                 
                                 <!-- total -->
                                 <tr>
-                                <td colspan="5" style="text-align:right"><strong>Order detail</strong></td>
+                                <td colspan="5" style="text-align:right"><strong>Order date_date_set</strong></td>
                                 <td><strong> 04-29-2022 <br> 11:00hs</strong></td>
                                 </tr>
                                 <tr>

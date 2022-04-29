@@ -2,6 +2,8 @@
     class Product {
       private $idProduct = NULL;
       private $name = NULL;
+      private $qty = 0;
+      private $subTotal = NULL;
       private $price = NULL;
       private $brand = NULL;
       private $category = NULL;
@@ -263,6 +265,20 @@
                     </div>
                   </div>
                 </li>";
+        }
+
+        public function setQty($qty){
+          $this->qty += $qty
+          $this->qty<0?0:$this->qty;
+        }
+
+        public function getQty($qty){
+          return $this->qty;
+        }
+
+        public function getSubTotal(){
+          $this->subTotal = $this->qty * $this->price; 
+          return $this->subTotal;
         }
     }
 
