@@ -22,7 +22,7 @@
                                     <td>1</td>
                                     <td>04-29-2022 11:00</td>
                                     <td>$945</td>
-                                    <td><a href='".FRONT_END_PATH."/user/panel?action=orderDetail&id=1'>Detail</a></td>
+                                    <td><a href='".FRONT_END_URL."/user/panel?action=orderDetail&id=1' class='btn btn-danger'>Detail</a></td>
                                 </tr>";
                         ?>    
                           </tbody>
