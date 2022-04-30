@@ -268,8 +268,7 @@
         }
 
         public function setQty($qty){
-          $this->qty += $qty
-          $this->qty<0?0:$this->qty;
+          $this->qty = $qty;
         }
 
         public function getQty($qty){

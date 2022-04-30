@@ -71,7 +71,8 @@
 #logoArea, #logoArea a{outline:none;}
 .alignR .checkbox input[type="checkbox"] {float: right;margin: 4px 0 8px 11px;}
 
-.navbar .nav.pull-right, #sideManu {overflow:hidden;}
+.navbar .nav.pull-right {overflow:hidden;}
+/* #sideManu {overflow:hidden;} */
 #logoArea  #smallScreen {margin: 21px 14px 0 0;}
 .navbar-search {margin-top: 8px;}
 /* Responsive--------------------- */
@@ -80,18 +81,21 @@
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) {
 .navbar .brand {float: none;text-align: center;}
-#sideManu,#topMenu{height:0}
+/* #sideManu{height:0} */
+#topMenu{height:0}
 .navbar-search {margin-top: 8px;width: 100%;float: none;}
 #topMenu{height: auto;float: none;}
 #topMenu li{float: none;}
 .navbar .nav > li > a {border-top:1px solid #666; padding:0}
-#sideManu,#topMenu{height:0}
+/* #sideManu{height:0} */
+#topMenu{height:0}
 }
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
 .navbar .brand {float: none;text-align: center;}
 #header, #carouselBlk{margin: 0 -20px;}
-#sideManu,#topMenu{height:0}
+/* #sideManu{height:0} */
+#topMenu{height:0}
 .navbar-search {margin-top: 8px;width: 100%;float: none;}
 #topMenu{height: auto;float: none;}
 #topMenu li{float: none;}
@@ -100,7 +104,8 @@
 /* Landscape phones and down */
 @media (max-width: 480px) {
 #header, #carouselBlk{margin: 0 -20px;}
-#sideManu, #topMenu{height:0}
+/* #sideManu{height:0} */
+#topMenu{height:0}
 #topMenu{height: auto;float: none;}
 #topMenu li{float: none;}
 .navbar .nav > li > a {border-top:1px solid #666; padding:0}
