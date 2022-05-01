@@ -1,10 +1,11 @@
+
 <?php
     class Product {
       private $idProduct = NULL;
       private $name = NULL;
       private $qty = 0;
-      private $subTotal = NULL;
-      private $price = NULL;
+      private $subTotal = 0;
+      private $price = 0;
       private $brand = NULL;
       private $category = NULL;
       private $stock = NULL;
@@ -16,7 +17,9 @@
       private $new = 0;
       public $array = ['idProduct','name','price','brand','category','stock','short_description','description','image1','image2','image3','new'];
 
-      public function __construct($id = NULL,$name = NULL,$price = NULL,$brand = NULL,$category = NULL,$stock = NULL,$short_description = NULL,$description = NULL,$image1 = NULL,$image2 = NULL,$image3 = NULL,$new = 0){
+      public function getPrice(){return $this->price;}
+
+      public function __construct($id = NULL,$name = NULL,$price = 0,$brand = NULL,$category = NULL,$stock = 0,$short_description = NULL,$description = NULL,$image1 = NULL,$image2 = NULL,$image3 = NULL,$new = 0){
         $this->idProduct = $id;
         $this->name = $name;
         $this->price = $price;
@@ -29,6 +32,34 @@
         $this->image2 = $image2;
         $this->image3 = $image3;
         $this->new = $new;
+        }
+
+        public function addQty($qty){
+          $this->qty += $qty;
+          if ($this->qty<0){
+            $this->qty = 0;
+          }
+          return $this->qty;
+        }
+
+        public function setImage($image){
+          $this->image1 = $image;
+        }
+
+        public function setQty($qty){
+          $this->qty = $qty;
+        }
+
+        public function getQty(){
+          return $this->qty;
+        }
+
+        public function setSubTotal(){
+          $this->subTotal = $this->qty * $this->price; 
+        }
+        
+        public function getSubTotal(){
+          return $this->subTotal;
         }
 
         public function getter(){
@@ -160,11 +191,16 @@
                     <div class='span6'>
                       <h3>{$this->name} </h3>
                       <hr class='soft' />
-                      <form class='form-horizontal qtyFrm'>
+                      <a href='./cart.php?b=0'>BORRAR</a>
+                      <form class='form-horizontal qtyFrm' method='POST' action='cart.php'>
+                      <input type='hidden' name='idProduct' value='".$this->idProduct."'>
+                      <input type='hidden' name='name' value='".$this->name."'>
+                      <input type='hidden' name='price' value='".$this->price."'>
+                      <input type='hidden' name='image1' value='".$this->image1."'>
                         <div class='control-group'>
                           <label class='control-label'><span>".$this->price."</span></label>
                           <div class='controls'>
-                            <input type='number' class='span1' placeholder='Qty.' />
+                            <input type='number' name='qty' class='span1' placeholder='Qty.' value='1' />
                             <button type='submit' class='btn btn-large btn-primary pull-right'> Add to cart <i
                                 class=' icon-shopping-cart'></i></button>
                           </div>
@@ -267,18 +303,7 @@
                 </li>";
         }
 
-        public function setQty($qty){
-          $this->qty = $qty;
-        }
-
-        public function getQty($qty){
-          return $this->qty;
-        }
-
-        public function getSubTotal(){
-          $this->subTotal = $this->qty * $this->price; 
-          return $this->subTotal;
-        }
+        
     }
 
 ?>
