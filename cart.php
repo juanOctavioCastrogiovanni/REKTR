@@ -4,7 +4,7 @@
     session_start();
     if(isset($_GET['b'])){
         session_destroy();
-        echo "<p>borrado</p>";
+        echo "<p>borrado</p><a href='product_details?id=4'>home</a>";
     }
     if(isset($_POST['idProduct'])&&isset($_POST['qty'])){
         //if dont exist cart create in this moment

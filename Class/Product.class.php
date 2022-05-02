@@ -18,6 +18,7 @@
       public $array = ['idProduct','name','price','brand','category','stock','short_description','description','image1','image2','image3','new'];
 
       public function getPrice(){return $this->price;}
+      public function getId(){return $this->idProduct;}
 
       public function __construct($id = NULL,$name = NULL,$price = 0,$brand = NULL,$category = NULL,$stock = 0,$short_description = NULL,$description = NULL,$image1 = NULL,$image2 = NULL,$image3 = NULL,$new = 0){
         $this->idProduct = $id;
@@ -39,6 +40,7 @@
           if ($this->qty<0){
             $this->qty = 0;
           }
+          $this->setSubTotal();
           return $this->qty;
         }
 
@@ -82,8 +84,16 @@
                         }
                         echo "
                         <h5>{$this->name} {$this->brand}</h5>
-                        <h4 style='text-align:center'><a class='btn' href='product_details'> <i class='icon-zoom-in'></i></a> <a class='btn' href='#'>
-                        Add to <i class='icon-shopping-cart'></i></a> <a class='btn btn-primary' href='#'>$".$this->price."</a></h4>
+                        <h4 style='text-align:center'><a class='btn' href='product_details'> <i class='icon-zoom-in'></i></a> 
+                        <form method='POST' action='cart.php' style='display: inline;'>
+                          <input type='hidden' name='idProduct' value='".$this->idProduct."'>
+                          <input type='hidden' name='name' value='".$this->name."'>
+                          <input type='hidden' name='price' value='".$this->price."'>
+                          <input type='hidden' name='image1' value='".$this->image1."'>
+                          <input type='hidden' name='qty' value='1'>
+                          <button class='btn' type='submit'>Add to <i class='icon-shopping-cart'></i></button>
+                        </form>
+                        <a class='btn btn-primary'>$".$this->price."</a></h4>
                         </div>
                     </div>
                  </li>";
@@ -120,13 +130,20 @@
                 <br class='clr'/>
               </div>
               <div class='span3 alignR'>
-                <form class='form-horizontal qtyFrm'>
+
                   <h3>$".$this->price."</h3>
              
-                <a href='product_details?id={$this->idProduct}' class='btn btn-large btn-primary'> Add to <i class=' icon-shopping-cart'></i></a>
+              <form method='POST' action='cart.php' style='display: inline;'>
+                <input type='hidden' name='idProduct' value='".$this->idProduct."'>
+                <input type='hidden' name='name' value='".$this->name."'>
+                <input type='hidden' name='price' value='".$this->price."'>
+                <input type='hidden' name='image1' value='".$this->image1."'>
+                <input type='hidden' name='qty' value='1'>
+                <button class='btn btn-large btn-primary' type='submit'>Add to <i class='icon-shopping-cart'></i></button>
+              </form>
                 <a href='product_details?id={$this->idProduct}' class='btn btn-large'><i class='icon-zoom-in'></i></a>
               
-                </form>
+                
               </div>
          </div>
         <hr class='soft'/>";
@@ -138,7 +155,14 @@
               <a href='product_details?id={$this->idProduct}'><img src='themes/images/products/upload/{$this->image1}' alt=''/></a>
               <div class='caption'>
                 <h5>{$this->name} {$this->brand}</h5>
-                <h4 style='text-align:center'><a class='btn' href='product_details?id={$this->idProduct}'> <i class='icon-zoom-in'></i></a> <a class='btn' href='#'>Add to <i class='icon-shopping-cart'></i></a> <a class='btn btn-primary' href='#'>$".$this->price."</a></h4>
+                <h4 style='text-align:center'><a class='btn' href='product_details?id={$this->idProduct}'> <i class='icon-zoom-in'></i></a>  <form method='POST' action='cart.php' style='display: inline;'>
+                <input type='hidden' name='idProduct' value='".$this->idProduct."'>
+                <input type='hidden' name='name' value='".$this->name."'>
+                <input type='hidden' name='price' value='".$this->price."'>
+                <input type='hidden' name='image1' value='".$this->image1."'>
+                <input type='hidden' name='qty' value='1'>
+                <button class='btn' type='submit'>Add to <i class='icon-shopping-cart'></i></button>
+              </form> <a class='btn btn-primary' href='#'>$".$this->price."</a></h4>
               </div>
             </div>
 			    </li>";
@@ -200,7 +224,7 @@
                         <div class='control-group'>
                           <label class='control-label'><span>".$this->price."</span></label>
                           <div class='controls'>
-                            <input type='number' name='qty' class='span1' placeholder='Qty.' value='1' />
+                            <input type='number' name='qty' class='span1' placeholder='Qty.' value='1' min='1'/>
                             <button type='submit' class='btn btn-large btn-primary pull-right'> Add to cart <i
                                 class=' icon-shopping-cart'></i></button>
                           </div>
@@ -208,7 +232,7 @@
                       </form>
 
                       <hr class='soft' />
-                      <h4>Available stock today{$this->stock}</h4>
+                      <h4>Available stock today <br> Stock: {$this->stock}</h4>
                       <hr class='soft clr' />
                       <p>
                         {$this->short_description}

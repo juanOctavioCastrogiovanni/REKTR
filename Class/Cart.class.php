@@ -3,6 +3,7 @@
 	class Cart
 	{
 		private $productList = [];
+		private $idList = [];
 		private $total = 0;
 		private $products = 0;
 
@@ -10,15 +11,23 @@
 
 		public function addItem($product,$qty){
 			//Este if no funciona, nunca encuentra el producto que ya existe dentro del carrito, por ende agrega el mismo muchas veces.
-			if(!in_array($product,$this->productList)){
+			if(!in_array($product->getId(),$this->idList)){
 				$product->setQty($qty);
 				$product->setSubTotal($qty);
 				array_push($this->productList,$product);
+				array_push($this->idList,$product->getId());
 			} else {
 				$this->qtyModify($product,$qty);
 			}	
 		}
-
+		
+		private function qtyModify ($product,$qty){
+			$key = array_search($product->getId(), $this->idList);
+			if($this->productList[$key]->addQty($qty)<1){
+				unset($this->productList[$key]);
+			}
+		}
+		
 		public function setTotal(){
 			$totalPrice = 0;
 			foreach($this->productList as $product){
@@ -47,12 +56,6 @@
 		}
 
 
-		private function qtyModify ($product,$qty){
-			$key = array_search($product, $this->productList);
-			if($this->getProductList[$key]->addQty($qty)<1){
-				unset($this->getProductList[$key]);
-			}
-		}
 
 	}
 ?>
