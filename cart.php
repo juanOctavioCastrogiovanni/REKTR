@@ -25,8 +25,7 @@
                 echo "<p>".$e->getMessage()."</p>";
             }           
             //if exist 
-            var_dump($_SESSION['Cart']);
-            die();
+            
         } else if(isset($_SESSION['Cart'])){
             try{
                 $product = new Product($_POST['idProduct'],$_POST['name'],$_POST['price']);
@@ -37,9 +36,11 @@
             $_SESSION['Cart']->addItem($product, $_POST['qty']);
             $_SESSION['Cart']->setTotal();
             $_SESSION['Cart']->setProducts();
-            var_dump($_SESSION['Cart']);
-            die();
         }
+        echo "<pre>";
+        var_dump($_SESSION['Cart']);
+        echo "</pre>";
+        die();
     }
 
 ?>
