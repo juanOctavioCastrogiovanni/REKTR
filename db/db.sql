@@ -37,7 +37,7 @@ USE `tecnology`;
 
 
 CREATE TABLE `categories` (
-  `idCategory` int(11) NOT NULL,
+  `categoryId` int(11) NOT NULL,
   `name` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -45,7 +45,7 @@ CREATE TABLE `categories` (
 -- datos para la tabla `categories`
 -- data for table `categories`
 
-INSERT INTO `categories` (`idCategory`, `name`) VALUES
+INSERT INTO `categories` (`categoryId`, `name`) VALUES
 (1, 'Cameras'),
 (2, 'Cards'),
 (3, 'Card reader');
@@ -58,7 +58,7 @@ INSERT INTO `categories` (`idCategory`, `name`) VALUES
 -- `brands` table structure
 
 CREATE TABLE `brands` (
-  `idBrand` int(11) NOT NULL,
+  `brandId` int(11) NOT NULL,
   `name` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -66,7 +66,7 @@ CREATE TABLE `brands` (
 -- datos para la tabla `brands`
 -- data for table `brands`
 
-INSERT INTO `brands` (`idBrand`, `name`) VALUES
+INSERT INTO `brands` (`brandId`, `name`) VALUES
 (1, 'Nikon'),
 (2, 'Sony'),
 (3, 'SandDisk'),
@@ -80,7 +80,7 @@ INSERT INTO `brands` (`idBrand`, `name`) VALUES
 -- `products` table structure
 
 CREATE TABLE `products` (
-  `idProduct` int(11) NOT NULL,
+  `productId` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
   `price` double NOT NULL,
   `brand` int(11) NOT NULL,
@@ -98,7 +98,7 @@ CREATE TABLE `products` (
 -- datos para la tabla `products`
 -- data for table `products`
 
-INSERT INTO `products` (`idProduct`, `name`, `price`, `brand`, `category`, `stock`, `short_description`, `description`, `image1`, `image2`, `image3`, `new`) VALUES
+INSERT INTO `products` (`productId`, `name`, `price`, `brand`, `category`, `stock`, `short_description`, `description`, `image1`, `image2`, `image3`, `new`) VALUES
 (1, 'A7', 1199.99, 2, 1, 50, "Sony A7 has a 24.0MP Full frame (35.8 x 23.9 mm ) sized CMOS sensor and
  features Bionz X processor. You can shoot at maximum resolution of 6000 x 4000 pixels with aspect 
  ratios of 3:2 and 16:9. A7 has a native ISO range of 50 - 25600 and it can save files in RAW format
@@ -185,6 +185,10 @@ to the now-obsolete MultiMediaCard (MMC). It was one of a number of competing me
  formats in use by consumer electronics, such as Sony's defunct Memory Stick and the 
  CompactFlash card, which, while still in use, is much less common than it was in decades past. 
  ", 'sandisk-128gb.webp', NULL, NULL, 1);
+ 
+ 
+ 
+ 
 
 -- --------------------------------------------------------
 
@@ -193,7 +197,7 @@ to the now-obsolete MultiMediaCard (MMC). It was one of a number of competing me
 -- `users` table structure
 
 CREATE TABLE `users` (
-  `idUser` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
   `firstname` varchar(30) NOT NULL,
   `lastname` varchar(30) NOT NULL,
   `email` varchar(30) NOT NULL,
@@ -207,56 +211,109 @@ CREATE TABLE `users` (
 -- datos para la tabla `users`
 -- data for table `users`
 
-INSERT INTO `users` (`idUser`, `firstname`, `lastname`, `email`, `pass`, `activation`, `state`,`admin`) VALUES
+INSERT INTO `users` (`userId`, `firstname`, `lastname`, `email`, `pass`, `activation`, `state`,`admin`) VALUES
 (1, 'admin', 'admin', 'admin@admin.com', '$2y$10$zYH5CY5M17DYsC0zPCABu.acQphxUEZFBkss/RjUhOu4j8EFlIRV.', '0d3ccb5cb418d3d648bfbc768fabd1b1', 1, 1);
 
---
+
+ -- ---------------------------------------------------------------------
+ 
+ 
+   -- carts
+  CREATE TABLE `carts` (
+  `cartId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `date` DATE,
+  `sale` tinyint(1) DEFAULT 0,
+  `products` int(11),
+  `total` FLOAT(6,2)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+ALTER TABLE `carts`
+  ADD PRIMARY KEY (`cartId`),
+  ADD KEY `user` (`userId`);
+  
+ALTER TABLE `carts`
+MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+
+-- --------------------------------------------------------------------------------------
+
+--
+CREATE TABLE `productsCarts` (
+  `productCartId` int(11) NOT NULL,
+  `productId` int(11) NOT NULL,
+  `cartId` int(11) NOT NULL,
+  `qty` int(11),
+  `subtotal` FLOAT(6,2)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+ALTER TABLE `productsCarts`
+  ADD PRIMARY KEY (`productCartId`),
+  ADD KEY `product` (`productId`),
+  ADD KEY `cart` (`cartId`);
+  
+ALTER TABLE `productsCarts`
+MODIFY `productCartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+  
+ -- -------------------------------------------------------------------------------------------------------------------------------- 
+  
+
 ALTER TABLE `categories`
-  ADD PRIMARY KEY (`idCategory`);
+  ADD PRIMARY KEY (`categoryId`);
 
 
 --
 ALTER TABLE `brands`
-  ADD PRIMARY KEY (`idbrand`);
+  ADD PRIMARY KEY (`BrandId`);
 
 --
 
 ALTER TABLE `products`
-  ADD PRIMARY KEY (`idProduct`),
+  ADD PRIMARY KEY (`productId`),
   ADD KEY `brand` (`brand`),
   ADD KEY `category` (`Category`);
 
 --
 
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`idUser`),
+  ADD PRIMARY KEY (`userId`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
 
 ALTER TABLE `categories`
-  MODIFY `idCategory` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `categoryId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 
 ALTER TABLE `brands`
-  MODIFY `idBrand` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `brandId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 
 ALTER TABLE `products`
-  MODIFY `idProduct` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 
 ALTER TABLE `users`
-  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  
+  
+-- relationship foreign key
+  
+ALTER TABLE `productsCarts`
+  ADD CONSTRAINT `productsCarts_ibfk_1` FOREIGN KEY (`productId`) REFERENCES `products` (`productId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `productsCarts_ibfk_2` FOREIGN KEY (`cartId`) REFERENCES `carts` (`cartId`) ON DELETE CASCADE ON UPDATE CASCADE;
+  
 
 
-
+ALTER TABLE `carts`
+  ADD CONSTRAINT `carts_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE `products`
-  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`brand`) REFERENCES `brands` (`idBrand`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `products_ibfk_2` FOREIGN KEY (`category`) REFERENCES `categories` (`idCategory`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`brand`) REFERENCES `brands` (`BrandId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `products_ibfk_2` FOREIGN KEY (`category`) REFERENCES `categories` (`categoryId`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

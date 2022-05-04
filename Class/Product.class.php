@@ -1,7 +1,7 @@
 
 <?php
     class Product {
-      private $idProduct = NULL;
+      private $productId = NULL;
       private $name = NULL;
       private $qty = 0;
       private $subTotal = 0;
@@ -15,13 +15,13 @@
       private $image2 = NULL;
       private $image3 = NULL;
       private $new = 0;
-      public $array = ['idProduct','name','price','brand','category','stock','short_description','description','image1','image2','image3','new'];
+      public $array = ['productId','name','price','brand','category','stock','short_description','description','image1','image2','image3','new'];
 
       public function getPrice(){return $this->price;}
-      public function getId(){return $this->idProduct;}
+      public function getId(){return $this->productId;}
 
       public function __construct($id = NULL,$name = NULL,$price = 0,$brand = NULL,$category = NULL,$stock = 0,$short_description = NULL,$description = NULL,$image1 = NULL,$image2 = NULL,$image3 = NULL,$new = 0){
-        $this->idProduct = $id;
+        $this->productId = $id;
         $this->name = $name;
         $this->price = $price;
         $this->brand = $brand;
@@ -77,7 +77,7 @@
         public function showCard(){
            echo "<li class='span2 height290'>
                     <div class='thumbnail'>
-                        <a  href='product_details?id={$this->idProduct}'><img src='themes/images/products/upload/{$this->image1}' width='200px' height='200px' alt=''/></a>
+                        <a  href='product_details?id={$this->productId}'><img src='themes/images/products/upload/{$this->image1}' width='200px' height='200px' alt=''/></a>
                         <div class='caption'>";
                         if($this->new){
                            echo "<i class='tag'></i>";
@@ -86,7 +86,7 @@
                         <h5>{$this->name} {$this->brand}</h5>
                         <h4 style='text-align:center'><a class='btn' href='product_details'> <i class='icon-zoom-in'></i></a> 
                         <form method='POST' action='cart.php' style='display: inline;'>
-                          <input type='hidden' name='idProduct' value='".$this->idProduct."'>
+                          <input type='hidden' name='productId' value='".$this->productId."'>
                           <input type='hidden' name='name' value='".$this->name."'>
                           <input type='hidden' name='price' value='".$this->price."'>
                           <input type='hidden' name='image1' value='".$this->image1."'>
@@ -102,13 +102,13 @@
         public function showCardCarrousel(){
            echo "<li class='span3'>
                 <div class='thumbnail'>
-                  <a href='product_details?id={$this->idProduct}'><img src='themes/images/products/upload/{$this->image1}' alt=''></a>
+                  <a href='product_details?id={$this->productId}'><img src='themes/images/products/upload/{$this->image1}' alt=''></a>
                   <div class='caption'>";
                   if($this->new){
                     echo "<i class='tag'></i>";
                  }
                   echo "<h5>{$this->name}</h5>
-                    <h4><a class='btn' href='product_details?id={$this->idProduct}'>VIEW</a> <span class='pull-right'>$".$this->price."</span></h4>
+                    <h4><a class='btn' href='product_details?id={$this->productId}'>VIEW</a> <span class='pull-right'>$".$this->price."</span></h4>
                   </div>
                 </div>
               </li>";
@@ -126,7 +126,7 @@
                 <p>
                   {$this->short_description}
                 </p>
-                <a class='btn btn-small pull-right' href='product_details?id={$this->idProduct}'>View Details</a>
+                <a class='btn btn-small pull-right' href='product_details?id={$this->productId}'>View Details</a>
                 <br class='clr'/>
               </div>
               <div class='span3 alignR'>
@@ -134,14 +134,14 @@
                   <h3>$".$this->price."</h3>
              
               <form method='POST' action='cart.php' style='display: inline;'>
-                <input type='hidden' name='idProduct' value='".$this->idProduct."'>
+                <input type='hidden' name='productId' value='".$this->productId."'>
                 <input type='hidden' name='name' value='".$this->name."'>
                 <input type='hidden' name='price' value='".$this->price."'>
                 <input type='hidden' name='image1' value='".$this->image1."'>
                 <input type='hidden' name='qty' value='1'>
                 <button class='btn btn-large btn-primary' type='submit'>Add to <i class='icon-shopping-cart'></i></button>
               </form>
-                <a href='product_details?id={$this->idProduct}' class='btn btn-large'><i class='icon-zoom-in'></i></a>
+                <a href='product_details?id={$this->productId}' class='btn btn-large'><i class='icon-zoom-in'></i></a>
               
                 
               </div>
@@ -152,11 +152,11 @@
         public function showProduct(){
          echo "<li class='span2'>
             <div class='thumbnail'>
-              <a href='product_details?id={$this->idProduct}'><img src='themes/images/products/upload/{$this->image1}' alt=''/></a>
+              <a href='product_details?id={$this->productId}'><img src='themes/images/products/upload/{$this->image1}' alt=''/></a>
               <div class='caption'>
                 <h5>{$this->name} {$this->brand}</h5>
-                <h4 style='text-align:center'><a class='btn' href='product_details?id={$this->idProduct}'> <i class='icon-zoom-in'></i></a>  <form method='POST' action='cart.php' style='display: inline;'>
-                <input type='hidden' name='idProduct' value='".$this->idProduct."'>
+                <h4 style='text-align:center'><a class='btn' href='product_details?id={$this->productId}'> <i class='icon-zoom-in'></i></a>  <form method='POST' action='cart.php' style='display: inline;'>
+                <input type='hidden' name='productId' value='".$this->productId."'>
                 <input type='hidden' name='name' value='".$this->name."'>
                 <input type='hidden' name='price' value='".$this->price."'>
                 <input type='hidden' name='image1' value='".$this->image1."'>
@@ -217,7 +217,7 @@
                       <hr class='soft' />
                       <a href='./cart.php?b=0'>BORRAR</a>
                       <form class='form-horizontal qtyFrm' method='POST' action='cart.php'>
-                      <input type='hidden' name='idProduct' value='".$this->idProduct."'>
+                      <input type='hidden' name='productId' value='".$this->productId."'>
                       <input type='hidden' name='name' value='".$this->name."'>
                       <input type='hidden' name='price' value='".$this->price."'>
                       <input type='hidden' name='image1' value='".$this->image1."'>
@@ -290,7 +290,7 @@
                                   <p>
                                     {$this->short_description}
                                   </p>
-                                  <a class='btn btn-small pull-right' href='product_details?id={$this->idProduct}'>View
+                                  <a class='btn btn-small pull-right' href='product_details?id={$this->productId}'>View
                                     Details</a>
                                   <br class='clr' />
                                 </div>
@@ -299,9 +299,9 @@
                                     <h3>$". $this->price."</h3>
                                     <br />
                                     <div class='btn-group'>
-                                      <a href='product_details?id={$this->idProduct}' class='btn btn-large btn-primary'> Add
+                                      <a href='product_details?id={$this->productId}' class='btn btn-large btn-primary'> Add
                                         to <i class=' icon-shopping-cart'></i></a>
-                                      <a href='product_details?id={$this->idProduct}' class='btn btn-large'><i
+                                      <a href='product_details?id={$this->productId}' class='btn btn-large'><i
                                           class='icon-zoom-in'></i></a>
                                     </div>
                                   </form>
@@ -313,12 +313,12 @@
         public function showRelatedProductList(){
             echo "<li class='span3'>
                   <div class='thumbnail'>
-                    <a href='product_details?id={$this->idProduct}'><img src='themes/images/products/upload/{$this->image1}'
+                    <a href='product_details?id={$this->productId}'><img src='themes/images/products/upload/{$this->image1}'
                         alt='' /></a>
                     <div class='caption'>
                       <h5>{$this->name} {$this->brand}</h5>
                       <h4 style='text-align:center'><a class='btn'
-                          href='product_details?id={$this->idProduct}'> <i class='icon-zoom-in'></i></a>
+                          href='product_details?id={$this->productId}'> <i class='icon-zoom-in'></i></a>
                         <a class='btn' href='#'>Add to <i
                             class='icon-shopping-cart'></i></a> <a
                           class='btn btn-primary' href='#'>$".$this->price."</a></h4>

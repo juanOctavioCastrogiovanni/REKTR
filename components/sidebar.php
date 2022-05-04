@@ -14,7 +14,7 @@
                 $categories = $conect->prepare($query);
                 $categories->execute();
                 foreach ($categories->fetchAll(PDO::FETCH_ASSOC) as $category){
-                    echo "<li><a href='products?category=".$category['idCategory']."'><i class='icon-chevron-right'></i>".$category['name']."</a></li>";
+                    echo "<li><a href='products?category=".$category['categoryId']."'><i class='icon-chevron-right'></i>".$category['name']."</a></li>";
                 }
             }catch(Exception $e){
               echo "<p>".$e->getMessage()."</p>";

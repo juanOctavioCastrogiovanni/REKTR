@@ -8,7 +8,7 @@ include "./Class/Product.class.php";
 		echo "<p>".$e->getMessage()."</p>";
 	}
 	try{
-		$query = "SELECT idProduct,name,price,image1 as image, new FROM products";
+		$query = "SELECT productId,name,price,image1 as image, new FROM products";
 		$products = $conect->prepare($query);
 		$products->execute();
 		$count = $products->rowcount();
@@ -108,7 +108,7 @@ include "./Class/Product.class.php";
 								<ul class='thumbnails'>";
 							}
 							
-							$element = new Product($products[$i]['idProduct'],$products[$i]['name'],$products[$i]['price'],NULL,NULL,NULL,NULL,NULL,$products[$i]['image'],NULL,NULL,$products[$i]['new']);						
+							$element = new Product($products[$i]['productId'],$products[$i]['name'],$products[$i]['price'],NULL,NULL,NULL,NULL,NULL,$products[$i]['image'],NULL,NULL,$products[$i]['new']);						
 							$element->showCardCarrousel();
 							
 							//every three iteratios and is not the first time
@@ -133,11 +133,11 @@ include "./Class/Product.class.php";
 			  <ul class="thumbnails">
 				<?php
 				try{
-					$query = "SELECT idProduct,products.name,price,brands.name as brand,categories.name as category,stock,short_description,description,image1,image2,image3,new FROM products INNER JOIN brands ON products.brand=brands.idBrand INNER JOIN categories ON products.category=categories.idCategory WHERE new=1";
+					$query = "SELECT productId,products.name,price,brands.name as brand,categories.name as category,stock,short_description,description,image1,image2,image3,new FROM products INNER JOIN brands ON products.brand=brands.brandId INNER JOIN categories ON products.category=categories.categoryId WHERE new=1";
 					$products_list = $conect->prepare($query);
 					$products_list->execute();
 					foreach($products_list->fetchAll(PDO::FETCH_ASSOC) as $product){
-						$element = new Product($product['idProduct'],$product['name'],$product['price'],$product['brand'],$product['category'],$product['stock'],$product['short_description'],$product['description'],$product['image1'],$product['image2'],$product['image3'],$product['new']);
+						$element = new Product($product['productId'],$product['name'],$product['price'],$product['brand'],$product['category'],$product['stock'],$product['short_description'],$product['description'],$product['image1'],$product['image2'],$product['image3'],$product['new']);
 						$element->showCard();
 					}
 				}catch(Exception $e){

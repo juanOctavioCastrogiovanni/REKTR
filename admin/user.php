@@ -32,9 +32,9 @@
             break;
     
             case 'logoutUser':
-                logoutUser();
+                logOutUser();
             break;
-    //cambiar la funcion recoveryUser por recoveryEmail, puesto que primero debe mandar el mail y luego cambiar la contraseña
+            
             case 'recoveryUser':
                 $email = $_POST["email"];
                 recoveryUser( $email );

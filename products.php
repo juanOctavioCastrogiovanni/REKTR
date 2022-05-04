@@ -44,7 +44,7 @@
 		$count = $count->rowcount();
 		$array = array();
 		foreach($products->fetchAll(PDO::FETCH_ASSOC) as $product){
-			array_push($array,new Product($product['idProduct'],$product['name'],$product['price'],$product['brand'],$product['category'],$product['stock'],$product['short_description'],$product['description'],$product['image1'],$product['image2'],$product['image3'],$product['new']));
+			array_push($array,new Product($product['productId'],$product['name'],$product['price'],$product['brand'],$product['category'],$product['stock'],$product['short_description'],$product['description'],$product['image1'],$product['image2'],$product['image3'],$product['new']));
 		}
 	}catch(Exception $e){
 		echo "<p>".$e->getMessage()."</p>";

@@ -6,11 +6,11 @@
         session_destroy();
         echo "<p>borrado</p><a href='product_details?id=4'>home</a>";
     }
-    if(isset($_POST['idProduct'])&&isset($_POST['qty'])){
+    if(isset($_POST['productId'])&&isset($_POST['qty'])){
         //if dont exist cart create in this moment
         if(!isset($_SESSION['Cart'])){
             try{ 
-                $product = new Product($_POST['idProduct'],$_POST['name'],$_POST['price']);
+                $product = new Product($_POST['productId'],$_POST['name'],$_POST['price']);
                 $product->setImage($_POST['image1']);
             }catch(Exception $e){
                 echo "<p>".$e->getMessage()."</p>";
@@ -28,7 +28,7 @@
             
         } else if(isset($_SESSION['Cart'])){
             try{
-                $product = new Product($_POST['idProduct'],$_POST['name'],$_POST['price']);
+                $product = new Product($_POST['productId'],$_POST['name'],$_POST['price']);
                 $product->setImage($_POST['image1']);
             }catch(Exception $e){
                 echo "<p>".$e->getMessage()."</p>";

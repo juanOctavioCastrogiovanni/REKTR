@@ -53,7 +53,7 @@
 		}
 
 		public function User(){
-			$sql = sprintf( "SELECT * FROM users WHERE idUser = '%d'", $this->id );
+			$sql = sprintf( "SELECT * FROM users WHERE userId = '%d'", $this->id );
 
 			return $sql;
 		}
