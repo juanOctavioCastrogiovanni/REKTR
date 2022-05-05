@@ -241,6 +241,9 @@
                     $newUser->setFirstName($user['firstname']);
                     $newUser->setLastName($user['lastname']); 
                         if ($newUser->checkUser($pass)) {
+                            if(!isset($_SESSION['Cart'])&&!existCart()){
+                                
+                            }
                             $rta = "0x020";
                             header("location:". BACK_END_URL."/profile?rta=" . $rta);
                         } else {

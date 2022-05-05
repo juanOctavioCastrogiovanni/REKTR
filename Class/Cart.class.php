@@ -6,6 +6,7 @@
 		private $idList = [];
 		private $total = 0;
 		private $products = 0;
+		private $sale = 0;
 
 		public function cartDelete(){$this->productList = [];}
 
@@ -56,6 +57,14 @@
 		}
 
 
+		public function createCartDB($con, $id){
+			$user = $conect->prepare("INSERT INTO carts( userId, sale, products, total) VALUES ( ':userId', ':sale', ':products', ':total')");
+            $user->bindParam(":userId", $id, PDO::PARAM_INT);
+            $user->bindParam(":sale", $this->sale, PDO::PARAM_INT);
+            $user->bindParam(":products", $this->products, PDO::PARAM_INT);
+            $user->bindParam(":total", $this->total, PDO::PARAM_STR);
+			return $user;
+		}
 
 	}
 ?>
