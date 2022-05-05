@@ -239,8 +239,15 @@
                     $newUser = new User($user['email'],$user['pass']);
                     $newUser->setId($user['userId']);
                     $newUser->setFirstName($user['firstname']);
-                    $newUser->setLastName($user['lastname']);
-                    $newUser->checkUser($pass);
+                    $newUser->setLastName($user['lastname']); 
+                        if ($newUser->checkUser($pass)) {
+                            $rta = "0x020";
+                            header("location:". BACK_END_URL."/profile?rta=" . $rta);
+                        } else {
+                            $rta = "0x019";
+                            header("location:  " . FRONT_END_URL . "/login?rta=" . $rta);
+                        }
+
                 }catch(Exception $e){
                     echo "<p>".$e->getMessage()."</p>";
                 }

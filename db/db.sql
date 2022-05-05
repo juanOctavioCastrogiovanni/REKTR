@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
@@ -204,15 +204,19 @@ CREATE TABLE `users` (
   `pass` text NOT NULL,
   `activation` text NOT NULL,
   `state` tinyint(1) DEFAULT 0,
-  `admin` tinyint(1) DEFAULT 0
+  `admin` tinyint(1) DEFAULT 0,
+  `clave` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- datos para la tabla `users`
 -- data for table `users`
 
-INSERT INTO `users` (`userId`, `firstname`, `lastname`, `email`, `pass`, `activation`, `state`,`admin`) VALUES
-(1, 'admin', 'admin', 'admin@admin.com', '$2y$10$zYH5CY5M17DYsC0zPCABu.acQphxUEZFBkss/RjUhOu4j8EFlIRV.', '0d3ccb5cb418d3d648bfbc768fabd1b1', 1, 1);
+INSERT INTO `users` (`userId`, `firstname`, `lastname`, `email`, `pass`, `activation`, `state`,`admin`,`clave`) VALUES
+(1, 'admin', 'admin', 'admin@admin.com', '$2y$10$zYH5CY5M17DYsC0zPCABu.acQphxUEZFBkss/RjUhOu4j8EFlIRV.', '0d3ccb5cb418d3d648bfbc768fabd1b1', 1, 1, null);
+
+INSERT INTO `users` (`userId`, `firstname`, `lastname`, `email`, `pass`, `activation`, `state`,`admin`,`clave`) VALUES
+(2, 'Palermo', 'Tv', 'palermotv.up@gmail.com', '$2y$10$wQ1RmUcBNIaN2Z3eemOTneSLpn2qkpGknXyZzjp2rceh5ygjyBpDG', '76572eff69a3f54cc18d52c4bfb4e216', 1, 0, '111111111');
 
 
  -- ---------------------------------------------------------------------

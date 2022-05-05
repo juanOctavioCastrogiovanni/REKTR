@@ -80,12 +80,10 @@
 					"lastName" => $this->lastname,
 					"email" => $this->email
 				);
-				$rta = "0x020";
-				header("location:". BACK_END_URL."/profile?rta=" . $rta);
-			} else {
-				$rta = "0x019";
-				header("location:  " . FRONT_END_URL . "/login?rta=" . $rta);
-			}
+				return TRUE;
+			} 	
+			return FALSE;
+			
 		}
 
 		public function activationMail(){
