@@ -249,8 +249,11 @@
                                 // $_SESSION['cartId'] = $newCart->createCartDB($conect,$newUser->getId());
                                 $newCart = $newCart->createCartDB($conect,$user['userId']);
                                 if($newCart->execute()){
-                                    $newCart = $newCart->createCartDB($conect,$user['userId']);
+                                    $_SESSION['Cart']=$newCart;
+                                    var_dump($newCart);
+                                    die();
                                 }
+                                
                             }
                             $rta = "0x020";
                             header("location:". FRONT_END_URL."/");

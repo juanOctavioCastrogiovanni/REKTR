@@ -18,7 +18,7 @@ include "./Class/Product.class.php";
 		echo "<p>".$e->getMessage()."</p>";
 	}
 
-	var_dump($_SESSION['cartId']);
+	var_dump($_SESSION);
 
 ?>
 

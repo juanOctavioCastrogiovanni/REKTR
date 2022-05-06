@@ -57,6 +57,12 @@
 				$newCart = $con->prepare($sql);
 				return $newCart;
 			}
+		
+		public function lastId($con){
+				$sql = "SELECT MAX(cartId) AS id FROM carts WHERE sale = 0";
+				$lastId = $con->prepare($sql);
+				return $lastId;
+		}
 
 	}
 	?>
