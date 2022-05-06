@@ -1,4 +1,5 @@
 <?php
+    // include "../Class/Cart.class.php";
     include $_SERVER["DOCUMENT_ROOT"] ."/php-ecommerce/init.php";
     
 
@@ -240,12 +241,20 @@
                     $newUser->setId($user['userId']);
                     $newUser->setFirstName($user['firstname']);
                     $newUser->setLastName($user['lastname']); 
+                    $_SESSION['userId']=$newUser->getId();
                         if ($newUser->checkUser($pass)) {
-                            if(!isset($_SESSION['Cart'])&&!existCart()){
-                                
+                            //crear cartExist()
+                            if(!isset($_SESSION['Cart'])){
+                                $newCart = new Cart();
+                                // $_SESSION['cartId'] = $newCart->createCartDB($conect,$newUser->getId());
+                                $newCart = $newCart->createCartDB($conect,$user['userId']);
+                                if($newCart->execute()){
+                                    $newCart = $newCart->createCartDB($conect,$user['userId']);
+                                }
                             }
                             $rta = "0x020";
-                            header("location:". BACK_END_URL."/profile?rta=" . $rta);
+                            header("location:". FRONT_END_URL."/");
+                            // header("location:". BACK_END_URL."/profile?rta=" . $rta);
                         } else {
                             $rta = "0x019";
                             header("location:  " . FRONT_END_URL . "/login?rta=" . $rta);

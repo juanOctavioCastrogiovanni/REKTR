@@ -38,7 +38,7 @@
             $_SESSION['Cart']->setProducts();
         }
         echo "<pre>";
-        var_dump($_SESSION['Cart']);
+        var_dump(get_class_methods($_SESSION['Cart']));
         echo "</pre>";
         die();
     }

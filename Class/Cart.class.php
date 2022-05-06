@@ -40,9 +40,7 @@
 		public function getTotal(){return $this->total;}
 		public function getProducts(){return $this->products;}
 
-		public function getProductList(){
-			return $this->productList;
-		}
+		public function getProductList(){return $this->productList;}
 
 		public function setProducts(){
 			$productsQty = 0;
@@ -52,19 +50,14 @@
 			$this->products = $productsQty;
 		}
 
-		public function removeItem($product){
-			array_push($this->productList,$product);
-		}
-
+		public function removeItem($product){array_push($this->productList,$product);}
 
 		public function createCartDB($con, $id){
-			$user = $conect->prepare("INSERT INTO carts( userId, sale, products, total) VALUES ( ':userId', ':sale', ':products', ':total')");
-            $user->bindParam(":userId", $id, PDO::PARAM_INT);
-            $user->bindParam(":sale", $this->sale, PDO::PARAM_INT);
-            $user->bindParam(":products", $this->products, PDO::PARAM_INT);
-            $user->bindParam(":total", $this->total, PDO::PARAM_STR);
-			return $user;
-		}
+				$sql = sprintf( "INSERT INTO carts( userId, sale, products, total) VALUES ( %d, 0, 0, 0)",$id );
+				$newCart = $con->prepare($sql);
+				return $newCart;
+			}
 
 	}
-?>
+	?>
+	<!-- INSERT INTO carts( userId, sale, products, total) VALUES ( ':userId', 1, 0, 0); -->

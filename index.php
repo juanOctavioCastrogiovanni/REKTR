@@ -1,6 +1,7 @@
 ﻿<?php
 include "./components/header.php";
 include "./Class/Product.class.php";
+
 	try{
 		$conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
 		$conect = $conect->conect();
@@ -16,6 +17,8 @@ include "./Class/Product.class.php";
 	}catch(Exception $e){
 		echo "<p>".$e->getMessage()."</p>";
 	}
+
+	var_dump($_SESSION['cartId']);
 
 ?>
 

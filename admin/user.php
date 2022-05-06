@@ -1,5 +1,7 @@
 <?php
-    if( isset( $_GET["action"] ) ){
+
+if( isset( $_GET["action"] ) ){
+        include "../Class/Cart.class.php";
         include("functions.php");
         include("../Class/Conect.class.php");
         include("../Class/User.class.php");

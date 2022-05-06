@@ -1,6 +1,8 @@
 <?php
 	$point = isset($point)?"..":".";
 	include $point."/Class/Conect.class.php";
+	include $point."/Class/Cart.class.php";
+	session_start();
 
 ?>
 <!-- Todos las paginas llamaran con un include a header -->
@@ -56,10 +58,10 @@
 				<div class="span6">
 					<div class="pull-right">
 						<a href="<?php echo $point ?>/product_summary"><span>Total</span></a>
-						<span class="btn btn-mini">$155.00</span>
-						<a href="<?php echo $point ?>/product_summary"><span class="">$</span></a>
+						<span class="btn btn-mini">$<?php if(isset($_SESSION['Cart'])){echo $_SESSION['Cart']->getTotal();}else{echo 0;}  ?></span>
+						<a href="<?php echo $point ?>/product_summary"><span class=""></span></a>
 						<a href="<?php echo $point ?>/product_summary"><span class="btn btn-mini btn-primary"><i
-									class="icon-shopping-cart icon-white"></i> [ 3 ] Itemes in your cart </span> </a>
+									class="icon-shopping-cart icon-white"></i>[ <?php if(isset($_SESSION['Cart'])){echo $_SESSION['Cart']->getProducts();}else{echo 0;}  ?> ]  Itemes in your cart </span> </a>
 					</div>
 				</div>
 			</div>
