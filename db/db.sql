@@ -226,7 +226,7 @@ INSERT INTO `users` (`userId`, `firstname`, `lastname`, `email`, `pass`, `activa
   CREATE TABLE `carts` (
   `cartId` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
-  `date` DATE,
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `sale` tinyint(1) DEFAULT 0,
   `products` int(11),
   `total` FLOAT(6,2)

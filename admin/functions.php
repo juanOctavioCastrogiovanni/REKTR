@@ -235,24 +235,27 @@
             $user->bindParam(":email", $email, PDO::PARAM_STR);
             
             if ( $user->execute() && $user->rowCount() > 0 ) {
-                $user = $user->fetch();
+                $user = $user->fetch(PDO::FETCH_ASSOC);
                 try{ 
                     $newUser = new User($user['email'],$user['pass']);
                     $newUser->setId($user['userId']);
                     $newUser->setFirstName($user['firstname']);
                     $newUser->setLastName($user['lastname']); 
-                    $_SESSION['userId']=$newUser->getId();
                         if ($newUser->checkUser($pass)) {
-                            //crear cartExist()
-                            if(!isset($_SESSION['Cart'])){
+                            if(!isset($_SESSION['Cart']&&!existCart($conect,$user['userId']))){
                                 $newCart = new Cart();
                                 // $_SESSION['cartId'] = $newCart->createCartDB($conect,$newUser->getId());
-                                $newCart = $newCart->createCartDB($conect,$user['userId']);
-                                if($newCart->execute()){
-                                    $_SESSION['Cart']=$newCart;
-                                    var_dump($newCart);
-                                    die();
+                                $createCart = $newCart->createCartDB($conect,$user['userId']);
+                                if($createCart->execute()){
+                                    // $_SESSION['Cart']=$newCart;
+                                    $newCart = $newCart->lastId($conect);
+                                    if($newCart->execute()){
+                                        $_SESSION['ids'] = $newCart->fetch(PDO::FETCH_ASSOC);
+                                    }
+                                    unset($newCart);
                                 }
+                            } else if(existCart($conect,$user['userId'])){
+                                $existCart = new Cart();
                                 
                             }
                             $rta = "0x020";
@@ -273,6 +276,17 @@
             
         }
 
+        function existCart($conect,$userId){
+            $existCart = $conect->prepare("SELECT MAX(cartId) AS cartId, sale FROM carts WHERE userId = :user");
+            $existCart->bindParam(":user", $userId, PDO::PARAM_INT);
+            if($existCart->execute()){
+               if (($existCart->fetch(PDO::FETCH_ASSOC))['sale']==1){
+                    return TRUE;
+                }
+                return FALSE;
+
+            }
+        }
         
 
         function logOutUser(){

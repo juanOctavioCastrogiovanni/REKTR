@@ -59,9 +59,16 @@
 			}
 		
 		public function lastId($con){
-				$sql = "SELECT MAX(cartId) AS id FROM carts WHERE sale = 0";
+				$sql = "SELECT MAX(cartId) AS cartId, userId FROM carts WHERE sale = 0";
 				$lastId = $con->prepare($sql);
 				return $lastId;
+		}
+
+		public function getProducts($userId,$id){
+			// falta hacer una consulta que traiga todos los productos asociados con el carrito que ya estaba creado en DB
+			$sql = sprintf( "SELECT * from productsCarts WHERE userId = %d AND cartsId = %d",$userId,$id);
+				$getProducts = $con->prepare($sql);
+				return $getProducts;
 		}
 
 	}
