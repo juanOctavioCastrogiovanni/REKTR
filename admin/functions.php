@@ -1,10 +1,7 @@
 <?php
-    // include "../Class/Cart.class.php";
     include $_SERVER["DOCUMENT_ROOT"] ."/php-ecommerce/init.php";
-    
 
-
-      function roundDown($a,$b){
+    function roundDown($a,$b){
         if($a%$b!=0){
             return ($a/$b)-1;
         }
@@ -241,8 +238,12 @@
                     $newUser->setId($user['userId']);
                     $newUser->setFirstName($user['firstname']);
                     $newUser->setLastName($user['lastname']); 
+
+
                         if ($newUser->checkUser($pass)) {
-                            if(!isset($_SESSION['Cart']&&!existCart($conect,$user['userId']))){
+                            include "../Class/Cart.class.php";
+                            //SI NO HAY NADA EN EL CARRITO DB NI TAMPOCO EN SESSION ENTONCES CREO UNO NUEVO Y GUARDO EN SESSION LOS IDS
+                            if(!isset($_SESSION['Cart'])&&!existCart($conect,$user['userId'])){
                                 $newCart = new Cart();
                                 // $_SESSION['cartId'] = $newCart->createCartDB($conect,$newUser->getId());
                                 $createCart = $newCart->createCartDB($conect,$user['userId']);
@@ -254,10 +255,48 @@
                                     }
                                     unset($newCart);
                                 }
-                            } else if(existCart($conect,$user['userId'])){
+                                //SI NO HAY NADA EN EL CARRITO SESSION PERO TENGO CARRITO EN LA BASE DE DATOS, CREO UN NUEVO OBJETO CARRITO EN BASE A LA BASE DE DATOS
+                            } else if(($cartId = existCart($conect,$user['userId']))!=0 && !isset($_SESSION['Cart'])){
+                                include "../Class/Product.class.php";
+
                                 $existCart = new Cart();
-                                
+                                $prepareSql = $existCart->getProductsDB($conect,$user['userId'],$cartId);
+                                    if($prepareSql->execute()){
+                                        $cart = Array();
+                                        foreach($prepareSql->fetchAll(PDO::FETCH_ASSOC) as $item){
+                                            array_push($cart,$item);
+                                        }
+                                    
+                                    $newCart = new Cart();
+                                            foreach($cart as $productArray){
+                                                try{ 
+                                                    $product = new Product($productArray['productId'],$productArray['name'],$productArray['price']);
+                                                    $product->setImage($productArray['image1']);
+                                                }catch(Exception $e){
+                                                    echo "<p>".$e->getMessage()."</p>";
+                                                }
+                                                $newCart->addItem($product, $productArray['qty']);
+                                                $newCart->setTotal();
+                                                $newCart->setProducts();
+                                            }
+                                                
+                                    $_SESSION['Cart'] = $newCart;      
+                                    // echo "<pre>";
+                                    // var_dump($_SESSION['Cart']);
+                                    // echo "</pre>";
+                                    // die();
+                                    
+                                    
+                                    unset($newCart);
+                                    // else if() AL LOGUEARME TENGO UN CARRITO EN SESSION Y NO TENGO UN CARRITO EN DB, DEBO CREAR UN CARRITO EN LA BASE
+                                    //  DE DATOS GUARDAR LOS DATOS DEL CARRITO Y LUEGO CREAR TANTAS FILAS DE PRODUCTSCARTS POR TANTOS PRODUCTOS
+                                    // TENGA. TODO DE UN SAQUE
+                                    }   
+                            } else {
+                                $_SESSION['Cart']->saveCart($user['userId']);
                             }
+                      
+
                             $rta = "0x020";
                             header("location:". FRONT_END_URL."/");
                             // header("location:". BACK_END_URL."/profile?rta=" . $rta);
@@ -277,13 +316,17 @@
         }
 
         function existCart($conect,$userId){
-            $existCart = $conect->prepare("SELECT MAX(cartId) AS cartId, sale FROM carts WHERE userId = :user");
+            $existCart = $conect->prepare("SELECT cartId, sale FROM carts WHERE userId = :user ORDER BY cartId DESC LIMIT 1;");
             $existCart->bindParam(":user", $userId, PDO::PARAM_INT);
             if($existCart->execute()){
-               if (($existCart->fetch(PDO::FETCH_ASSOC))['sale']==1){
-                    return TRUE;
+                $array = Array();
+                foreach($existCart->fetch(PDO::FETCH_ASSOC) as $item){
+                    array_push($array,$item);
                 }
-                return FALSE;
+                if ($array[1]==0){
+                        return $array[0];
+                    }
+                return 0;
 
             }
         }

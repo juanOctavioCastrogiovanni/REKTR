@@ -74,6 +74,19 @@
             return $array;
         }
 
+        public function saveProduct($id){
+                try{ 
+                    $conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
+                    $conect = $conect->conect();
+                }catch(Exception $e){
+                    echo "<p>".$e->getMessage()."</p>";
+                }
+    
+              $sql = sprintf("INSERT INTO productsCarts (productId, cartId, qty, subtotal) VALUES (%d,%d,%d,%g)", $this->productId, $id, $this->qty, $this->subTotal);
+              $stmt = $conect->prepare($sql);
+              $stmt->execute();
+       }
+
         public function showCard(){
            echo "<li class='span2 height290'>
                     <div class='thumbnail'>

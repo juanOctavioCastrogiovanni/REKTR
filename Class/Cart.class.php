@@ -1,9 +1,8 @@
 <?php
-
 	class Cart
 	{
 		private $productList = [];
-		private $idList = [];
+		private $listId = [];
 		private $total = 0;
 		private $products = 0;
 		private $sale = 0;
@@ -12,18 +11,18 @@
 
 		public function addItem($product,$qty){
 			//Este if no funciona, nunca encuentra el producto que ya existe dentro del carrito, por ende agrega el mismo muchas veces.
-			if(!in_array($product->getId(),$this->idList)){
+			if(!in_array($product->getId(),$this->listId)){
 				$product->setQty($qty);
 				$product->setSubTotal($qty);
 				array_push($this->productList,$product);
-				array_push($this->idList,$product->getId());
+				array_push($this->listId,$product->getId());
 			} else {
 				$this->qtyModify($product,$qty);
 			}	
 		}
 		
 		private function qtyModify ($product,$qty){
-			$key = array_search($product->getId(), $this->idList);
+			$key = array_search($product->getId(), $this->listId);
 			if($this->productList[$key]->addQty($qty)<1){
 				unset($this->productList[$key]);
 			}
@@ -64,11 +63,29 @@
 				return $lastId;
 		}
 
-		public function getProducts($userId,$id){
+		public function getProductsDB($con,$userId,$id){
 			// falta hacer una consulta que traiga todos los productos asociados con el carrito que ya estaba creado en DB
-			$sql = sprintf( "SELECT * from productsCarts WHERE userId = %d AND cartsId = %d",$userId,$id);
+			$sql = sprintf( "SELECT products.productId, products.name,products.price, products.image1, carts.cartId, productscarts.qty, productscarts.subtotal, carts.products,carts.total FROM productsCarts INNER JOIN carts INNER JOIN products ON productscarts.cartId=carts.cartId AND products.productId=productscarts.productId AND productscarts.cartId = %d AND carts.userId=%d;",$id,$userId);
 				$getProducts = $con->prepare($sql);
 				return $getProducts;
+		}
+
+		public function saveCart($id){
+			try{ 
+                $conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
+                $conect = $conect->conect();
+            }catch(Exception $e){
+                echo "<p>".$e->getMessage()."</p>";
+            }
+
+			$sql = sprintf("INSERT INTO carts (userId, products,total) VALUES (%d,%d,%g)", $id, $this->products, $this->total);
+			$stmt = $conect->prepare($sql);
+			if($stmt->execute()){
+				$cartId = $conect->lastInsertId();
+				foreach($this->productList as $product){
+					$product->saveProduct($cartId);
+				}
+			}
 		}
 
 	}

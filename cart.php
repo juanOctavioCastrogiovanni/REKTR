@@ -6,6 +6,10 @@
         session_destroy();
         echo "<p>borrado</p><a href='product_details?id=4'>home</a>";
     }
+
+    // CUANDO YA ESTOY LOGUEADO, APARTE DE HACER TODO EL MANEJO DE LOS OBJETOS QUE 
+    // YA ESTA HECHO EXCEPTO EL BORRAR TODO EL CARRITO, DEBO GUARDAR CADA COSA EN LAS REPECTIVAS TABLAS DEL USUARIO.
+
     if(isset($_POST['productId'])&&isset($_POST['qty'])){
         //if dont exist cart create in this moment
         if(!isset($_SESSION['Cart'])){
@@ -38,7 +42,7 @@
             $_SESSION['Cart']->setProducts();
         }
         echo "<pre>";
-        var_dump(get_class_methods($_SESSION['Cart']));
+        var_dump($_SESSION['Cart']);
         echo "</pre>";
         die();
     }
