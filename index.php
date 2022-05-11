@@ -18,7 +18,9 @@ include "./Class/Product.class.php";
 		echo "<p>".$e->getMessage()."</p>";
 	}
 
+	echo "<pre>";
 	var_dump($_SESSION);
+	echo "</pre>";
 
 ?>
 

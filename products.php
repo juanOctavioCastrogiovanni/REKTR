@@ -1,7 +1,7 @@
 <?php
 	include "./components/header.php";
 	include "./Class/Product.class.php";
-	include "./admin/functions.php";
+	include "./functions.php";
 	
 	//verify query of url, if exist...
 	$categ = isset($_GET['category']) ? $_GET['category'] : "";	
