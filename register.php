@@ -1,6 +1,6 @@
 ﻿<?php
 	include "./components/header.php";
-	include "./admin/functions.php";
+	include "./functions.php";
 	
 ?>
 <div id="mainBody">

@@ -1,20 +1,20 @@
 
 <?php
     class Product {
-      private $productId = NULL;
-      private $name = NULL;
-      private $qty = 0;
-      private $subTotal = 0;
-      private $price = 0;
-      private $brand = NULL;
-      private $category = NULL;
-      private $stock = NULL;
-      private $short_description = NULL;
-      private $description = NULL;
-      private $image1 = NULL;
-      private $image2 = NULL;
-      private $image3 = NULL;
-      private $new = 0;
+      public $productId = NULL;
+      public $name = NULL;
+      public $qty = 0;
+      public $subTotal = 0;
+      public $price = 0;
+      public $brand = NULL;
+      public $category = NULL;
+      public $stock = NULL;
+      public $short_description = NULL;
+      public $description = NULL;
+      public $image1 = NULL;
+      public $image2 = NULL;
+      public $image3 = NULL;
+      public $new = 0;
       public $array = ['productId','name','price','brand','category','stock','short_description','description','image1','image2','image3','new'];
 
       public function getPrice(){return $this->price;}
@@ -86,6 +86,20 @@
               $stmt = $conect->prepare($sql);
               $stmt->execute();
        }
+
+
+       public function showProductsCart(){
+          echo "<tr>
+                  <td> <img width='60' src='./themes/images/products/upload/".$this->image1."' alt=''/></td>
+                  <td>".$this->name."<br/>brand : ".$this->brand."</td>
+                  <td>
+                    <div class='input-append'><input class='span1' style='max-width:34px' placeholder='1'  size='16' type='text'><button class='btn' type='button'><i class='icon-minus'></i></button><button class='btn' type='button'><i class='icon-plus'></i></button><button class='btn btn-danger' type='button'><i class='icon-remove icon-white'></i></button>				</div>
+                  </td>
+                  <td>".$this->price."</td>
+
+                  <td>".$this->subotal."</td>
+                </tr>";
+      }
 
         public function showCard(){
            echo "<li class='span2 height290'>

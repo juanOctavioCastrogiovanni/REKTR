@@ -1,5 +1,5 @@
 <?php
-	class Cart
+	class Cart 
 	{
 		private $productList = [];
 		private $listId = [];
@@ -88,6 +88,34 @@
 			}
 		}
 
+		public function showCart(){
+			echo "<table class='table table-bordered'>
+						<thead>
+							<tr>
+							<th>Image</th>
+							<th>Product</th>
+							<th>Quantity/Update</th>
+							<th>Price</th>
+
+							<th>Total</th>
+							</tr>
+						</thead>
+						<tbody>";
+							// showProductsCart
+							// foreach( $this->productList as $product){
+							// 	var_dump($product->getPrice());
+							// }
+							var_dump(($this->getProductList())[0]);
+							die();
+
+						echo "
+							<td colspan='4' style='text-align:right'><strong>TOTAL PRICE =</strong></td>
+							<td class='label label-important' style='display:block'> <strong> $".$this->total." </strong></td>
+							</tr>
+						</tbody>
+			</table>";
+		}
+				
 	}
 	?>
 	<!-- INSERT INTO carts( userId, sale, products, total) VALUES ( ':userId', 1, 0, 0); -->
