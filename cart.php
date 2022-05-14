@@ -4,7 +4,7 @@
     session_start();
     if(isset($_GET['b'])){
         session_destroy();
-        echo "<p>borrado</p><a href='product_details?id=4'>home</a>";
+        header("location:./product_summary");
     }
 
     // CUANDO YA ESTOY LOGUEADO, APARTE DE HACER TODO EL MANEJO DE LOS OBJETOS QUE 
@@ -49,10 +49,7 @@
             $_SESSION['Cart']->setTotal();
             $_SESSION['Cart']->setProducts();
         }
-        echo "<pre>";
-        var_dump($_SESSION['Cart']);
-        echo "</pre>";
-        die();
+        header("location:./product_summary");
     }
 
 ?>

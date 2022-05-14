@@ -58,42 +58,13 @@
 	
 
 	if(isset($_SESSION['Cart'])){
-		var_dump($_SESSION['Cart']->showCart());
+		$_SESSION['Cart']->showCart();
 	}
 
 
 ?>
 	
-	<table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                <th>Image</th>
-                                <th>Product</th>
-                                <th>Quantity/Update</th>
-                                <th>Price</th>
 
-                                <th>Subtotal</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                <td> <img width="60" src="./themes/images/products/upload/a7-front.jpeg" alt=""/></td>
-                                <td>MASSA AST<br/>Color : black, Material : metal</td>
-                                <td>
-                                    <div class="input-append"><input class="span1" style="max-width:34px" placeholder="1"  size="16" type="text"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button><button class="btn btn-danger" type="button"><i class="icon-remove icon-white"></i></button>				</div>
-                                </td>
-                                <td>$120.00</td>
-
-                                <td>$110.00</td>
-                                </tr>
-                                
-                                <!-- total -->
-                                
-                                <td colspan="4" style="text-align:right"><strong>TOTAL PRICE =</strong></td>
-                                <td class="label label-important" style="display:block"> <strong> $228.00 </strong></td>
-                                </tr>
-                                </tbody>
-</table>
 		
 		
             <!-- <table class="table table-bordered">
