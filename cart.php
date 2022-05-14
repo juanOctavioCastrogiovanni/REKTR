@@ -12,6 +12,14 @@
 
     if(isset($_POST['productId'])&&isset($_POST['qty'])){
         //if dont exist cart create in this moment
+        $productArray = array(
+            "productId"=>$_POST['productId'],
+            "name"=>$_POST['name'],
+            "price"=>$_POST['price'],
+            "image1"=>$_POST['image1'],
+            "qty"=>0,
+            "subTotal"=>0
+        );
         if(!isset($_SESSION['Cart'])){
             try{ 
                 $product = new Product($_POST['productId'],$_POST['name'],$_POST['price']);
@@ -21,7 +29,7 @@
             }
             try{
                 $newCart = new Cart();
-                $newCart->addItem($product, $_POST['qty']);
+                $newCart->addItem($product, $_POST['qty'],$productArray);
                 $newCart->setTotal();
                 $newCart->setProducts();
                 $_SESSION['Cart'] = $newCart;     
@@ -37,7 +45,7 @@
             }catch(Exception $e){
                 echo "<p>".$e->getMessage()."</p>";
             }    
-            $_SESSION['Cart']->addItem($product, $_POST['qty']);
+            $_SESSION['Cart']->addItem($product, $_POST['qty'],$productArray);
             $_SESSION['Cart']->setTotal();
             $_SESSION['Cart']->setProducts();
         }

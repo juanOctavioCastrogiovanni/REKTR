@@ -2,19 +2,41 @@
 	class Cart 
 	{
 		private $productList = [];
+		private $productListArray = [];
 		private $listId = [];
 		private $total = 0;
 		private $products = 0;
 		private $sale = 0;
 
 		public function cartDelete(){$this->productList = [];}
+		
+		// public function serializeList(){
+		// 	// var_dump($this->products);
+		// 	// die();
+		// 	$count = 0;
+		// 	foreach( $this->productList as $product){
+		// 		($this->productList)[$count] = json_encode($product);
+		// 		$count++;
+		// 	}
+		// }
 
-		public function addItem($product,$qty){
+		// public function unSerializeList(){
+		// 	$count = 0;
+		// 	foreach( $this->productList as $product){
+		// 		($this->productList)[$count] = json_decode($product);
+		// 		$count++;
+		// 	}
+		// }
+
+		public function addItem($product,$qty,$productArray){
 			//Este if no funciona, nunca encuentra el producto que ya existe dentro del carrito, por ende agrega el mismo muchas veces.
 			if(!in_array($product->getId(),$this->listId)){
 				$product->setQty($qty);
 				$product->setSubTotal($qty);
+				$productArray["qty"] = $product->getQty();
+				$productArray["subTotal"] = $product->getSubTotal();
 				array_push($this->productList,$product);
+				array_push($this->productListArray,$productArray);
 				array_push($this->listId,$product->getId());
 			} else {
 				$this->qtyModify($product,$qty);
@@ -25,7 +47,11 @@
 			$key = array_search($product->getId(), $this->listId);
 			if($this->productList[$key]->addQty($qty)<1){
 				unset($this->productList[$key]);
+				unset($this->productListArray[$key]);
 			}
+
+			$this->productListArray[$key]['qty'] = $this->productList[$key]->getQty();
+			$this->productListArray[$key]['subTotal'] = $this->productList[$key]->getSubTotal();
 		}
 		
 		public function setTotal(){
