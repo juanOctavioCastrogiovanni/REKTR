@@ -52,4 +52,20 @@
         header("location:./product_summary");
     }
 
+
+    if(isset($_GET['option'])&&isset($_GET['id'])){
+        if($_GET['option']=='remove'){
+            $_SESSION['Cart']->removeItem($_GET['id']);
+            $_SESSION['Cart']->setTotal();
+            $_SESSION['Cart']->setProducts();
+            header("location:./product_summary");
+        }
+        if($_GET['option']=='qtymodify'){
+            // crear funcion para modificar la cantidad de ese producto
+            $_SESSION['Cart']->getProductList[0];
+        }
+    }
+
+    
+
 ?>

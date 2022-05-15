@@ -57,7 +57,7 @@
 	// echo "</pre>";
 	
 
-	if(isset($_SESSION['Cart'])){
+	if(isset($_SESSION['Cart'])&&$_SESSION['Cart']->getTotal()>0){
 		$_SESSION['Cart']->showCart();
 	}
 

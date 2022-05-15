@@ -7,8 +7,14 @@
 		private $total = 0;
 		private $products = 0;
 		private $sale = 0;
-
+		
 		public function cartDelete(){$this->productList = [];}
+		public function removeItem($id){
+			$key = array_search($id, $this->listId);
+			unset($this->productList[$key]);
+			unset($this->productListArray[$key]);
+			unset($this->listId[$key]);
+		}
 		
 		// public function serializeList(){
 		// 	// var_dump($this->products);
@@ -76,7 +82,7 @@
 			$this->products = $productsQty;
 		}
 
-		public function removeItem($product){array_push($this->productList,$product);}
+		
 
 		public function createCartDB($con, $id){
 				$sql = sprintf( "INSERT INTO carts( userId, sale, products, total) VALUES ( %d, 0, 0, 0)",$id );
@@ -134,32 +140,30 @@
 							// }
 							
 						foreach($this->getProductListArray() as $product){
-						echo "<tr>
-							<td> <img width='60' src='./themes/images/products/upload/".$product['image1']."' alt=''/></td>
-							<td>".$product['name']."</td>
-							<td>
-							  <div class='input-append'>
-							  	<input class='span1' style='max-width:34px' placeholder='".$product['qty']."'  size='16' type='text'>
-								<button class='btn' type='button'>
-									<i class='icon-minus'></i>
-								</button>
-								<button class='btn' type='button'>
-									<i class='icon-plus'></i>
-								</button>
-								<button class='btn btn-danger' type='button'>
-									<i class='icon-remove icon-white'></i>
-								</button>
-							</div>
-							</td>
-							<td>".$product['price']."</td>
-		  
-							<td>".$product['subTotal']."</td>
-						  </tr>";
+							echo "<tr>
+								<td> <img width='60' src='./themes/images/products/upload/".$product['image1']."' alt=''/></td>
+								<td>".$product['name']."</td>
+								<td>
+								<div class='input-append'>
+									<form method='POST' action='./cart?option=qtymodify&id=".$product['productId']."'>
+										<input class='span1' style='max-width:34px' name='qty' placeholder='".$product['qty']."'  size='16' type='number' min='0'>
+										<button class='btn' type='submit'>
+											<i class='icon-refresh'></i>
+										</button>
+									<a href='./cart?option=remove&id=".$product['productId']."' class='btn btn-danger'>
+										<i class='icon-remove icon-white'></i>
+									</a>
+								</div>
+								</td>
+								<td>".$product['price']."</td>
+			
+								<td>".$product['subTotal']."</td>
+							</tr>";
 						}
 
 						echo "
-							<td colspan='4' style='text-align:right'><a href='./cart.php?b=0'><strong>Cart delete</strong></a></td>
-							<td colspan='4' style='text-align:right'><strong>TOTAL PRICE =</strong></td>
+							<td colspan='2' style='text-align:right'><a href='./cart.php?b=0'><strong>Cart delete</strong></a></td>
+							<td colspan='2' style='text-align:right'><strong>TOTAL PRICE =</strong></td>
 							<td class='label label-important' style='display:block'> <strong> $".$this->total." </strong></td>
 							</tr>
 						</tbody>
