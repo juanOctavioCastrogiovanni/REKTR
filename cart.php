@@ -1,12 +1,9 @@
 <?php 
     include "./Class/Cart.class.php";
     include "./Class/Product.class.php";
+    include "./Class/Conect.class.php";
     session_start();
-    if(isset($_GET['b'])){
-        session_destroy();
-        header("location:./product_summary");
-    }
-
+    
     // CUANDO YA ESTOY LOGUEADO, APARTE DE HACER TODO EL MANEJO DE LOS OBJETOS QUE 
     // YA ESTA HECHO EXCEPTO EL BORRAR TODO EL CARRITO, DEBO GUARDAR CADA COSA EN LAS REPECTIVAS TABLAS DEL USUARIO.
 
@@ -36,7 +33,7 @@
             }catch(Exception $e){
                 echo "<p>".$e->getMessage()."</p>";
             }           
-            //if exist 
+            
             
         } else if(isset($_SESSION['Cart'])){
             try{
@@ -48,6 +45,10 @@
             $_SESSION['Cart']->addItem($product, $_POST['qty'],$productArray);
             $_SESSION['Cart']->setTotal();
             $_SESSION['Cart']->setProducts();
+        }
+
+        if(isset($_SESSION['user'])&&isset($_SESSION['ids'])){
+            $_SESSION['Cart']->updateCart($_SESSION['ids']['cartId']);
         }
         header("location:./product_summary");
     }
@@ -61,9 +62,18 @@
             header("location:./product_summary");
         }
         if($_GET['option']=='qtymodify'){
-            // crear funcion para modificar la cantidad de ese producto
-            $_SESSION['Cart']->getProductList[0];
+            $_SESSION['Cart']->updateItem($_GET['id'],$_POST['qty']);
         }
+
+        if(isset($_SESSION['user'])&&isset($_SESSION['ids'])){
+            $_SESSION['Cart']->updateCart($_SESSION['ids']['cartId']);
+        }
+        header("location:./product_summary");
+    } else if(isset($_GET['option'])&&$_GET['option']=="cartDelete"){
+        $_SESSION['Cart']->cartDelete();
+        $_SESSION['Cart']->setTotal();
+        $_SESSION['Cart']->setProducts();
+        header("location:./product_summary");
     }
 
     

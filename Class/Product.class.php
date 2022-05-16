@@ -87,6 +87,19 @@
               $stmt->execute();
        }
 
+        public function updateProduct(){
+                try{ 
+                    $conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
+                    $conect = $conect->conect();
+                }catch(Exception $e){
+                    echo "<p>".$e->getMessage()."</p>";
+                }
+
+              $sql = sprintf("UPDATE productsCarts SET qty = %d,subtotal = %g WHERE productId = %d AND cartId = %d", $this->qty, $this->subTotal, $this->productId,$_SESSION['ids']['cartId']);
+              $stmt = $conect->prepare($sql);
+              $stmt->execute();
+       }
+
 
        public function showProductsCart(){
           echo "<tr>
@@ -242,7 +255,6 @@
                     <div class='span6'>
                       <h3>{$this->name} </h3>
                       <hr class='soft' />
-                      <a href='./cart.php?b=0'>BORRAR</a>
                       <form class='form-horizontal qtyFrm' method='POST' action='cart.php'>
                       <input type='hidden' name='productId' value='".$this->productId."'>
                       <input type='hidden' name='name' value='".$this->name."'>

@@ -80,6 +80,7 @@
 						<button type="submit" id="submitButton" class="btn btn-primary">Go</button>
 					</form>
 					<ul id="topMenu" class="nav pull-right">
+						<li><a href='<?php echo $point ?>/user/logOut.php?b=0'>BORRAR</a></li>
 						<li class=""><a href="<?php echo $point ?>/products">Products</a></li>
 						<li class=""><a href="<?php echo $point ?>/user/panel">USER</a></li>
 						<li class=""><a href="<?php echo $point ?>/contact">Contact</a></li>

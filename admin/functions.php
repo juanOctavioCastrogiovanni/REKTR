@@ -167,35 +167,40 @@
                                 }
                                 //SI NO HAY NADA EN EL CARRITO SESSION PERO TENGO CARRITO EN LA BASE DE DATOS, CREO UN NUEVO OBJETO CARRITO EN BASE A LA BASE DE DATOS
                             } else if(($cartId = existCart($conect,$user['userId']))!=0 && !isset($_SESSION['Cart'])){
-
+                                
                                 $existCart = new Cart();
                                 $prepareSql = $existCart->getProductsDB($conect,$user['userId'],$cartId);
-                                    if($prepareSql->execute()){
-                                        $cart = Array();
-                                        foreach($prepareSql->fetchAll(PDO::FETCH_ASSOC) as $item){
-                                            array_push($cart,$item);
-                                        }
+                                if($prepareSql->execute()){
+                                    $cart = Array();
+                                    foreach($prepareSql->fetchAll(PDO::FETCH_ASSOC) as $item){
+                                        array_push($cart,$item);
+                                    }
                                     
                                     $newCart = new Cart();
-                                            foreach($cart as $productArray){
+                                    foreach($cart as $productArray){
+                                        $productArrays = array(
+                                            "productId"=>$productArray['productId'],
+                                            "name"=>$productArray['name'],
+                                            "price"=>$productArray['price'],
+                                            "image1"=>$productArray['image1'],
+                                            "qty"=>0,
+                                            "subTotal"=>0
+                                        );
                                                 try{ 
                                                     $product = new Product($productArray['productId'],$productArray['name'],$productArray['price']);
                                                     $product->setImage($productArray['image1']);
                                                 }catch(Exception $e){
                                                     echo "<p>".$e->getMessage()."</p>";
                                                 }
-                                                $newCart->addItem($product, $productArray['qty']);
+                                                $newCart->addItem($product, $productArray['qty'],$productArrays);
                                                 $newCart->setTotal();
                                                 $newCart->setProducts();
-                                            }
+         
+                                        }
                                                 
                                     $_SESSION['Cart'] = $newCart;      
-                                    // echo "<pre>";
-                                    // var_dump($_SESSION['Cart']);
-                                    // echo "</pre>";
-                                    // die();
-                                    
-                                    
+                                    $newCart = $newCart->lastId($conect);
+                                    if($newCart->execute()){$_SESSION['ids'] = $newCart->fetch(PDO::FETCH_ASSOC);}                                    
                                     unset($newCart);
                                     // else if() AL LOGUEARME TENGO UN CARRITO EN SESSION Y NO TENGO UN CARRITO EN DB, DEBO CREAR UN CARRITO EN LA BASE
                                     //  DE DATOS GUARDAR LOS DATOS DEL CARRITO Y LUEGO CREAR TANTAS FILAS DE PRODUCTSCARTS POR TANTOS PRODUCTOS
@@ -203,6 +208,8 @@
                                     }   
                             } else {
                                 $_SESSION['Cart']->saveCart($user['userId']);
+                                $newCart = $_SESSION['Cart']->lastId($conect);
+                                if($newCart->execute()){$_SESSION['ids'] = $newCart->fetch(PDO::FETCH_ASSOC);}
                             }
                       
 
