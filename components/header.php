@@ -22,8 +22,8 @@
 	<link rel="stylesheet/less" type="text/css" href="themes/less/classified.less">
 	<link rel="stylesheet/less" type="text/css" href="themes/less/amelia.less">  MOVE DOWN TO activate
 	-->
-	<!--<link rel="stylesheet/less" type="text/css" href="themes/less/bootshop.less">
-	<script src="themes/js/less.js" type="text/javascript"></script> -->
+	<!--<link rel="stylesheet/less" type="text/css" href="themes/less/bootshop.less">-->
+	<script src="themes/js/pay.js" type="text/javascript"></script> 
 
 	<!-- Bootstrap style -->
 	<link id="callCss" rel="stylesheet" href="<?php echo $point ?>/themes/bootshop/bootstrap.min.css" media="screen" />
@@ -44,6 +44,7 @@
 	<link rel="apple-touch-icon-precomposed" href="<?php echo $point ?>/themes/images/ico/apple-touch-icon-57-precomposed.png">
 	<link href="<?php echo $point ?>/themes/css/styles.css" rel="stylesheet" type="text/css"> 
 	<link href="<?php echo $point ?>/themes/css/table.css" rel="stylesheet" type="text/css"> 
+	<link href="<?php echo $point ?>/themes/css/pay.css" rel="stylesheet" type="text/css"> 
 	<style type="text/css" id="enject"></style>
 </head>
 
@@ -56,7 +57,7 @@
 				if(isset($_SESSION['user'])){
 					 echo "<div class='span6'>Welcome!<strong> ".$_SESSION['user']['firstname']."</strong></div>"; 
 				} else {
-					 echo "<div class='span6'><strong>Copyright ©</strong></div>";
+					 echo "<div class='span6'>Copyright templete © <a href='http://themesseo.com/bootshop-1-1.html'><strong> Bootshop 1.1</strong></a> Thanks Juan Octavio Castrogiovanni</div>";
 				}
 				?>
 				<?php
@@ -69,8 +70,12 @@
 						<a href="<?php echo $point ?>/product_summary"><span class=""></span></a>
 						<a href="<?php echo $point ?>/product_summary"><span class="btn btn-mini btn-primary"><i
 									class="icon-shopping-cart icon-white"></i>[ <?php if(isset($_SESSION['Cart'])){echo $_SESSION['Cart']->getProducts();}else{echo 0;}  ?> ]  Itemes in your cart </span> </a>
-						<a href="<?php echo $point ?>/product_summary"><span class="btn btn-mini btn-danger"><i
-									class="icon- icon-white"></i> Logout </span> </a>
+					<?php
+					if(isset($_SESSION['user'])){
+						echo "<a href='".$point."/user/logOut.php?b=0'><span class='btn btn-mini btn-danger'><i
+						class='icon-user icon-white'></i> Logout </span> </a>";
+					} 
+					?>
 					</div>
 				</div>
 			</div>
@@ -88,7 +93,6 @@
 						<button type="submit" id="submitButton" class="btn btn-primary">Go</button>
 					</form>
 					<ul id="topMenu" class="nav pull-right">
-						<li><a href='<?php echo $point ?>/user/logOut.php?b=0'>BORRAR</a></li>
 						<li class=""><a href="<?php echo $point ?>/products">Products</a></li>
 						<li class=""><a href="<?php echo $point ?>/contact">Contact</a></li>
 						<li class="">

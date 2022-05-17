@@ -13,6 +13,8 @@
                                 <th>Order nº</th>
                                 <th>Date</th>
                                 <th>Total</th>
+                                <th>Pay</th>
+                                <th>Pick up</th>
                                 <th>Order</th>
                             </tr>
                             </thead>
@@ -22,6 +24,8 @@
                                     <td>1</td>
                                     <td>04-29-2022 11:00</td>
                                     <td>$945</td>
+                                    <td>No</td>
+                                    <td>No</td>
                                     <td><a href='".FRONT_END_URL."/user/panel?action=orderDetail&id=1' class='btn btn-danger'>Detail</a></td>
                                 </tr>";
                         ?>    

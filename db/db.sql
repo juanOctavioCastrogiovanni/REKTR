@@ -229,7 +229,9 @@ INSERT INTO `users` (`userId`, `firstname`, `lastname`, `email`, `pass`, `activa
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `sale` tinyint(1) DEFAULT 0,
   `products` int(11),
-  `total` FLOAT(6,2)
+  `total` FLOAT(6,2),
+  `pay` tinyint(1) NOT NULL DEFAULT 0,
+  `pickup` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

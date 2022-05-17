@@ -13,15 +13,29 @@
 }
 .fixed_headers td:nth-child(1),
 .fixed_headers th:nth-child(1) {
-  min-width: 200px;
+  min-width: 50px;
 }
 .fixed_headers td:nth-child(2),
 .fixed_headers th:nth-child(2) {
-  min-width: 200px;
+  min-width: 150px;
 }
 .fixed_headers td:nth-child(3),
 .fixed_headers th:nth-child(3) {
-  width: 350px;
+  width: 150px;
+}
+
+.fixed_headers td:nth-child(4),
+.fixed_headers th:nth-child(4) {
+  width: 150px;
+}
+
+.fixed_headers td:nth-child(5),
+.fixed_headers th:nth-child(5) {
+  width: 150px;
+}
+.fixed_headers td:nth-child(6),
+.fixed_headers th:nth-child(6) {
+  width: 150px;
 }
 .fixed_headers thead {
   background-color: #333;

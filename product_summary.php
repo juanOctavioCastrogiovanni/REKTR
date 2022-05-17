@@ -56,9 +56,27 @@
 	// var_dump(get_class_methods($_SESSION['Cart']));
 	// echo "</pre>";
 	
+	echo "<table class='table table-bordered'>
+						<thead>
+							<tr>
+							<th>Image</th>
+							<th>Product</th>
+							<th>Quantity/Update</th>
+							<th>Price</th>
+
+							<th>Total</th>
+							</tr>
+						</thead>
+					<tbody>";
 
 	if(isset($_SESSION['Cart'])&&$_SESSION['Cart']->getTotal()>0){
 		$_SESSION['Cart']->showCart();
+	} else {
+		echo "
+						<td colspan='5' style=''><div style='background:#e9e9e9; height:100px; color:#949494;font-size:24px; display:flex; justify-content:center; padding-top:80px;'><strong><i>EMPTY CART</i></strong></div></td>
+						
+						</tbody>
+			</table>";
 	}
 
 
@@ -88,7 +106,11 @@
 			
 			
 	<a href="products" class="btn btn-large"><i class="icon-arrow-left"></i> Continue Shopping </a>
-	<a href="login" class="btn btn-large pull-right">Next <i class="icon-arrow-right"></i></a>
+	<?php
+	if(isset($_SESSION['user'])&&isset($_SESSION['Cart'])&&$_SESSION['Cart']->getTotal()>0){
+		echo "<a href='paypage' class='btn-pay pull-right'>Next <i class='icon-arrow-right'></i></a>";
+	}
+	?>
 	
 </div>
 </div></div>

@@ -1,4 +1,4 @@
-<?php
+<?phpcartId
 	class Cart 
 	{
 		private $productList = [];
@@ -136,6 +136,12 @@
 			return $newCart;
 		}
 		
+		public function createCartDB($con, $id){
+			$sql = sprintf( "UPDATE carts SET sale = 1 WHERE cartId = %d",$id);
+			$newCart = $con->prepare($sql);
+			return $newCart;
+		}
+		
 		public function lastId($con){
 				$sql = "SELECT MAX(cartId) AS cartId, userId FROM carts WHERE sale = 0";
 				$lastId = $con->prepare($sql);
@@ -167,18 +173,7 @@
 		}
 
 		public function showCart(){
-			echo "<table class='table table-bordered'>
-						<thead>
-							<tr>
-							<th>Image</th>
-							<th>Product</th>
-							<th>Quantity/Update</th>
-							<th>Price</th>
-
-							<th>Total</th>
-							</tr>
-						</thead>
-						<tbody>";
+			
 						
 						foreach($this->getProductListArray() as $product){
 							echo "<tr>
@@ -210,6 +205,14 @@
 							</tr>
 						</tbody>
 			</table>";
+		}
+
+		public function showReceipt(){
+			foreach($this->getProductListArray() as $product){
+				echo "<tr><td>".$product['qty']." x ".$product['name']."</td><td class='right'>$".$product['subTotal']."</td></tr>";
+			}
+			echo "<tr><td>Total cart</td><td class='right'>$".$this->total."</td></tr>";
+
 		}
 				
 	}
