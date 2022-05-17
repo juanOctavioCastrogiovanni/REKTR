@@ -52,7 +52,13 @@
 	<div id="header">
 		<div class="container">
 			<div id="welcomeLine" class="row">
-				 <div class="span6">Welcome!<strong> User</strong></div> 
+				<?php
+				if(isset($_SESSION['user'])){
+					 echo "<div class='span6'>Welcome!<strong> ".$_SESSION['user']['firstname']."</strong></div>"; 
+				} else {
+					 echo "<div class='span6'><strong>Copyright ©</strong></div>";
+				}
+				?>
 				<?php
 				 	
 				?>
@@ -63,6 +69,8 @@
 						<a href="<?php echo $point ?>/product_summary"><span class=""></span></a>
 						<a href="<?php echo $point ?>/product_summary"><span class="btn btn-mini btn-primary"><i
 									class="icon-shopping-cart icon-white"></i>[ <?php if(isset($_SESSION['Cart'])){echo $_SESSION['Cart']->getProducts();}else{echo 0;}  ?> ]  Itemes in your cart </span> </a>
+						<a href="<?php echo $point ?>/product_summary"><span class="btn btn-mini btn-danger"><i
+									class="icon- icon-white"></i> Logout </span> </a>
 					</div>
 				</div>
 			</div>
@@ -82,11 +90,17 @@
 					<ul id="topMenu" class="nav pull-right">
 						<li><a href='<?php echo $point ?>/user/logOut.php?b=0'>BORRAR</a></li>
 						<li class=""><a href="<?php echo $point ?>/products">Products</a></li>
-						<li class=""><a href="<?php echo $point ?>/user/panel">USER</a></li>
 						<li class=""><a href="<?php echo $point ?>/contact">Contact</a></li>
 						<li class="">
-							<a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span
-									class="btn btn-large btn-warning">Login</span></a>
+							<?php
+							if(!isset($_SESSION['user'])){
+								echo "<a href='#login' role='button' data-toggle='modal' style='padding-right:0'><span
+										class='btn btn-large btn-success'>Login</span></a>";
+							} else {
+								echo "<a href='".$point."/user/panel' role='button' data-toggle='modal' style='padding-right:0'><span
+								class='btn btn-large btn-warning'>".$_SESSION['user']['firstname']."</span></a>";
+							}
+							?>
 							<div id="login" class="modal hide fade in" tabindex="-1" role="dialog"
 								aria-labelledby="login" aria-hidden="false">
 								<div class="modal-header">
