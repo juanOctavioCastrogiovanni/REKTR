@@ -1,6 +1,8 @@
-<table class="table table-bordered">
+<?php
+                    echo "<table class='table table-bordered'>
                             <thead>
                                 <tr>
+                                <th>Order</th>
                                 <th>Image</th>
                                 <th>Product</th>
                                 <th>Quantity</th>
@@ -9,24 +11,51 @@
                                 <th>Total</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                <td> <img width="60" src="../themes/images/products/upload/a7-front.jpeg" alt=""/></td>
-                                <td>MASSA AST<br/>Color : black, Material : metal</td>
-                                <td>1</td>
-                                <td>$120.00</td>
+                            <tbody>";
+                            try{ 
+                                $conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
+                                $conect = $conect->conect();
+                            }catch(Exception $e){
+                                echo "<p>".$e->getMessage()."</p>";
+                            }
 
-                                <td>$110.00</td>
-                                </tr>
+                            $sql = sprintf("SELECT products.image1,products.name,productscarts.qty,products.price,productscarts.subtotal FROM productscarts INNER JOIN products ON products.productId = productscarts.productId WHERE cartId = %d", $_GET['id']);
+                            $stmt = $conect->prepare($sql);
+                            if($stmt->execute()){
+                                foreach($stmt->fetchAll() as $product){
+                                    echo "<tr>
+                                    <td>".$_GET['id']."</td>
+                                    <td> <img width='60' src='../themes/images/products/upload/".$product['image1']."' alt=''/></td>
+                                    <td>".$product['name']."</td>
+                                    <td>".$product['qty']."</td>
+                                    <td>$".$product['price']."</td>
+    
+                                    <td style='width: 94px;'>$".$product['subtotal']."</td>
+                                    </tr>";
+                                }
+                            }
+                            unset($stmt);
+                            $sql = sprintf("SELECT carts.date,total FROM carts WHERE cartId = %d", $_GET['id']);
+                            $stmt = $conect->prepare($sql);
+                            if($stmt->execute()){
+                                foreach($stmt->fetchAll() as $cart){
+                                    echo "
+                                        <tr>
+                                        <td colspan='5' style='text-align:right'><strong>Order date</strong></td>
+                                        <td><strong>".$cart['date']." </strong></td>
+                                        </tr>
+                                        <tr>
+                                        <td colspan='5' style='text-align:right'><strong>TOTAL PRICE =</strong></td>
+                                        <td class='label label-important' style='display:block'> <strong> $".$cart['total']." </strong></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>";
+                                }
+                            
+                            }
+                            unset($stmt);
+                            unset($conect);
+                            
                                 
-                                <!-- total -->
-                                <tr>
-                                <td colspan="4" style="text-align:right"><strong>Order date</strong></td>
-                                <td><strong> 04-29-2022 <br> 11:00hs</strong></td>
-                                </tr>
-                                <tr>
-                                <td colspan="4" style="text-align:right"><strong>TOTAL PRICE =</strong></td>
-                                <td class="label label-important" style="display:block"> <strong> $228.00 </strong></td>
-                                </tr>
-                                </tbody>
-                            </table>
+                            
+?>

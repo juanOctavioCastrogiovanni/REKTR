@@ -45,6 +45,7 @@
 	<link href="<?php echo $point ?>/themes/css/styles.css" rel="stylesheet" type="text/css"> 
 	<link href="<?php echo $point ?>/themes/css/table.css" rel="stylesheet" type="text/css"> 
 	<link href="<?php echo $point ?>/themes/css/pay.css" rel="stylesheet" type="text/css"> 
+	<link href="<?php echo $point ?>/themes/css/bar.css" rel="stylesheet" type="text/css"> 
 	<style type="text/css" id="enject"></style>
 </head>
 

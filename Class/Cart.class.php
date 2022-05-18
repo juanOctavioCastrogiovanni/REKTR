@@ -1,4 +1,4 @@
-<?phpcartId
+<?php
 	class Cart 
 	{
 		private $productList = [];
@@ -136,7 +136,7 @@
 			return $newCart;
 		}
 		
-		public function createCartDB($con, $id){
+		public function sale($con, $id){
 			$sql = sprintf( "UPDATE carts SET sale = 1 WHERE cartId = %d",$id);
 			$newCart = $con->prepare($sql);
 			return $newCart;
@@ -211,7 +211,7 @@
 			foreach($this->getProductListArray() as $product){
 				echo "<tr><td>".$product['qty']." x ".$product['name']."</td><td class='right'>$".$product['subTotal']."</td></tr>";
 			}
-			echo "<tr><td>Total cart</td><td class='right'>$".$this->total."</td></tr>";
+			echo "<tr><td><strong  style='font-size:16px'>Total cart</strong></td><td class='right'><strong  style='font-size:16px'>$".$this->total."</strong></td></tr>";
 
 		}
 				

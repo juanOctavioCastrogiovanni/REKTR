@@ -23,6 +23,9 @@
     }
 }
 
+
+
+
 .rta-0x001,
 .rta-0x002,
 .rta-0x003,
@@ -39,7 +42,9 @@
 .rta-0x023,
 .rta-0x025,
 .rta-0x027,
-.rta-0x026 {
+.rta-0x026,
+.rta-0x029
+ {
 	background: #FF5722;
     border-color: #F00;
     color: #FFF;
@@ -52,7 +57,9 @@
 .rta-0x018,
 .rta-0x020,
 .rta-0x021,
-.rta-0x024 {
+.rta-0x024,
+.rta-0x028
+ {
 	background: rgb(214, 243, 180);
     border-color: #2E7D32;
     color: #2e7d32;

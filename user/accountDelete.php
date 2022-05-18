@@ -7,7 +7,7 @@
                     <div class="well" style="margin-left: 25px !important;">
                        <h5>All data will be deleted and cannot be recovered.
                         Do you wish to continue?</h5><br />
-                        <form action="./admin/user.php?action=recoveryUser" method="POST">
+                        <form action="../admin/user.php?action=deleteUser" method="POST">
                             <div class="control-group">
                                 <label class="control-label" for="inputEmail1">Enter your email to delete your account</label>
                                 <div class="controls">

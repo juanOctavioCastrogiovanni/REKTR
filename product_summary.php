@@ -72,11 +72,8 @@
 	if(isset($_SESSION['Cart'])&&$_SESSION['Cart']->getTotal()>0){
 		$_SESSION['Cart']->showCart();
 	} else {
-		echo "
-						<td colspan='5' style=''><div style='background:#e9e9e9; height:100px; color:#949494;font-size:24px; display:flex; justify-content:center; padding-top:80px;'><strong><i>EMPTY CART</i></strong></div></td>
-						
-						</tbody>
-			</table>";
+		echo "<td colspan='5' style=''><div style='background:#e9e9e9; height:100px; color:#949494;font-size:24px; display:flex; justify-content:center; padding-top:80px;'><strong><i>EMPTY CART</i></strong></div></td>
+	</tbody></table>";
 	}
 
 

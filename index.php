@@ -18,9 +18,9 @@ include "./Class/Product.class.php";
 		echo "<p>".$e->getMessage()."</p>";
 	}
 
-	echo "<pre>";
-	var_dump($_SESSION);
-	echo "</pre>";
+	// echo "<pre>";
+	// var_dump($_SESSION);
+	// echo "</pre>";
 
 ?>
 
@@ -34,6 +34,7 @@ include "./Class/Product.class.php";
 				  <h4>Second Thumbnail label</h4>
 				  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
 				</div>
+				
 		  </div>
 		  </div>
 		  <div class="item">
@@ -134,6 +135,7 @@ include "./Class/Product.class.php";
 			
 			</div>
 		</div>
+		
 		<h4>Latest Products </h4>
 			  <ul class="thumbnails">
 				<?php

@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 if( isset( $_GET["action"] ) ){
         include "../Class/Cart.class.php";
         include("functions.php");
@@ -40,6 +40,13 @@ if( isset( $_GET["action"] ) ){
             case 'recoveryUser':
                 $email = $_POST["email"];
                 recoveryUser( $email );
+            break;
+           
+            case 'deleteUser':
+                $email = $_POST["email"];
+                if($_SESSION['user']['email']==$email){
+                    deleteUser( $_SESSION['ids']['userId'] );
+                }
             break;
     
             case 'savePass':

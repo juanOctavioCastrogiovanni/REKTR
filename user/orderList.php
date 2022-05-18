@@ -10,27 +10,64 @@
                         <table class="fixed_headers">
                             <thead>
                             <tr>
-                                <th>Order nº</th>
+                                <th>Order</th>
                                 <th>Date</th>
                                 <th>Total</th>
-                                <th>Pay</th>
+                                <th>Paid</th>
                                 <th>Pick up</th>
                                 <th>Order</th>
                             </tr>
                             </thead>
                             <tbody>
                         <?php
-                          echo "<tr>
-                                    <td>1</td>
-                                    <td>04-29-2022 11:00</td>
-                                    <td>$945</td>
-                                    <td>No</td>
-                                    <td>No</td>
-                                    <td><a href='".FRONT_END_URL."/user/panel?action=orderDetail&id=1' class='btn btn-danger'>Detail</a></td>
-                                </tr>";
+                            try{ 
+                                $conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
+                                $conect = $conect->conect();
+                            }catch(Exception $e){
+                                echo "<p>".$e->getMessage()."</p>";
+                            }
+
+                            $sql = sprintf("SELECT * FROM carts WHERE userId = %d AND sale = 1", $_SESSION['ids']['userId']);
+                            $stmt = $conect->prepare($sql);
+                            if($stmt->execute()){
+                                if($stmt->rowCount()>0){
+                                    foreach($stmt->fetchAll() as $cart){
+                                        echo "<tr>";
+                                        echo "<td>".$cart['cartId']."</td>";
+                                        echo "<td>".$cart['date']."</td>";
+                                        echo "<td>".$cart['total']."</td>";
+                                        echo "<td>"; 
+                                        if($cart['pay']){
+                                            echo "Yes";
+                                        } else {
+                                            echo "No";
+                                        }
+                                        echo"</td>";
+                                        echo "<td>"; 
+                                        if($cart['pickup']){
+                                            echo "Yes";
+                                        } else {
+                                            echo "No";
+                                        }
+                                        echo"</td>";
+                                        
+                                        echo "<td><a href='".FRONT_END_URL."/user/panel?action=orderDetail&id=".$cart['cartId']."' class='btn btn-danger'>Cart detail</a></td>";
+                                        echo "</tr>";
+                                    } 
+                                } else if($stmt->rowCount()==0){
+                                    echo "<td colspan='6' style=''><div style='background:#e9e9e9; height:100px; color:#949494;font-size:24px; display:flex; justify-content:center; padding-top:80px;'><strong><i>EMPTY</i></strong></div></td>";
+                                    echo "<td colspan='6' style=''><div style='background:#e9e9e9; height:100px; color:#949494;font-size:24px; display:flex; justify-content:center; padding-top:80px;'><strong><i>EMPTY </i></strong></div></td>";
+                                    echo "<td colspan='6' style=''><div style='background:#e9e9e9; height:100px; color:#949494;font-size:24px; display:flex; justify-content:center; padding-top:80px;'><strong><i>EMPTY</i></strong></div></td>";
+                                    echo "<td colspan='6' style=''><div style='background:#e9e9e9; height:100px; color:#949494;font-size:24px; display:flex; justify-content:center; padding-top:80px;'><strong><i>EMPTY</i></strong></div></td>";
+                                    echo "<td colspan='6' style=''><div style='background:#e9e9e9; height:100px; color:#949494;font-size:24px; display:flex; justify-content:center; padding-top:80px;'><strong><i>EMPTY</i></strong></div></td>";
+                                    echo "<td colspan='6' style=''><div style='background:#e9e9e9; height:100px; color:#949494;font-size:24px; display:flex; justify-content:center; padding-top:80px;'><strong><i>EMPTY</i></strong></div></td>";
+                                }
+                            } 
                         ?>    
                           </tbody>
                         </table>
                     </div>
                 </div>
             </div>
+
+                           

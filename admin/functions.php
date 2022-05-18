@@ -24,110 +24,116 @@
 
             switch ($cod) {
                 case '0x001':
-                    $mensaje = "El firstname ingresado no es válido";
+                    $message = "El firstname ingresado no es válido";
                 break;
                 
                 case '0x002':
-                    $mensaje = "El e-mail ingresado no es válido";
+                    $message = "El e-mail ingresado no es válido";
                 break;
     
                 case '0x003':
-                    $mensaje = "El mensaje ingresado no es válido";
+                    $message = "El message ingresado no es válido";
                 break;
     
                 case '0x004':
-                    $mensaje = "Su consulta ha sido enviada... muchas gracias!";
+                    $message = "Su consulta ha sido enviada... muchas gracias!";
                 break;
     
                 case '0x005':
-                    $mensaje = "Ocurrio un error, intente de nuevo";
+                    $message = "Ocurrio un error, intente de nuevo";
                 break;
     
                 case '0x006':
-                    $mensaje = "Se creo un nuevo producto satisfactoriamente";
+                    $message = "Se creo un nuevo producto satisfactoriamente";
                 break;
     
                 case '0x007':
-                    $mensaje = "Error al crear un producto";
+                    $message = "Error al crear un producto";
                 break;
     
                 case '0x008':
-                    $mensaje = "Se actualizo el producto satisfactoriamente";
+                    $message = "Se actualizo el producto satisfactoriamente";
                 break;
     
                 case '0x009':
-                    $mensaje = "Error al actualizar el producto";
+                    $message = "Error al actualizar el producto";
                 break;
     
                 case '0x010':
-                    $mensaje = "Se elimino el producto satisfactoriamente";
+                    $message = "Se elimino el producto satisfactoriamente";
                 break;
     
                 case '0x011':
-                    $mensaje = "Error al eliminar el producto";
+                    $message = "Error al eliminar el producto";
                 break;
     
                 case '0x012':
-                    $mensaje = "Error al subir la imagen.";
+                    $message = "Error al subir la imagen.";
                 break;
     
                 case '0x013':
-                    $mensaje = "User already exists";
+                    $message = "User already exists";
                 break;
     
                 case '0x014':
-                    $mensaje = "Correct registration! Check your email to activate your account.";
+                    $message = "Correct registration! Check your email to activate your account.";
                 break;
     
                 case '0x015':
-                    $mensaje = "Registration failed, please try again";
+                    $message = "Registration failed, please try again";
                 break;
     
                 case '0x016':
                 case '0x017':
-                    $mensaje = "Activation invalid";
+                    $message = "Activation invalid";
                 break;
     
                 case '0x018':
-                    $mensaje = "sussessful acount!";
+                    $message = "sussessful acount!";
                 break;
     
                 case '0x019':
-                    $mensaje = "your certificates are invalid, please check your email or password";
+                    $message = "your certificates are invalid, please check your email or password";
                 break;
     
                 case '0x020':
-                    $mensaje = "Successful login";
+                    $message = "Successful login";
                 break;
     
                 case '0x021':
-                    $mensaje = "Thanks for comming";
+                    $message = "Thanks for comming";
                 break;
     
                 case '0x022':
-                    $mensaje = "An email has been sent to your email address to recover your password. ";
+                    $message = "An email has been sent to your email address to recover your password. ";
                 break;
     
                 case '0x023':
-                    $mensaje = "Email invalid";
+                    $message = "Email invalid";
                 break;
     
                 case '0x024':
-                    $mensaje = "successful key update!";
+                    $message = "successful key update!";
                 break;
     
                 case '0x025':
-                    $mensaje = "Password invalid!";
+                    $message = "Password invalid!";
                 break;
     
                 case '0x026':
-                    $mensaje = "Error, password is not update";
+                    $message = "Error, password is not update";
                 break;
                 case '0x027':
-                    $mensaje = "The password must have at least 8 and must be the same";
+                    $message = "The password must have at least 8 and must be the same";
+                break;
+                case '0x028':
+                    $message = "account deleted";
+                break;
+                case '0x029':
+                    $message = "Error: the account is not deleted";
                 break;
             }
-            return "<p class='rta rta-".$cod."'>".$mensaje."</p>";
+            return "<p class='rta rta-".$cod."'>".$message."</p>";
         }
 
         function login($email, $pass){
@@ -317,6 +323,27 @@
             unset($conect);
             // die();
             header("location: " . FRONT_END_URL . "/register?rta=" . $rta);
+        }
+       
+        function deleteUser($id){
+            try{ 
+                $conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
+                $conect = $conect->conect();
+            }catch(Exception $e){
+                echo "<p>".$e->getMessage()."</p>";
+            }
+            
+            $rta = "0x029";
+            $sql = sprintf("DELETE FROM users WHERE userId = %d", $id);
+            $stmt = $conect->prepare($sql);
+            if($stmt->execute()){
+                $rta = "0x028";
+                session_destroy();
+            }
+    
+            unset($conect);
+            // die();
+            header("location: " . FRONT_END_URL . "/login.php?rta=" .$rta);
         }
 
         function addUser($firstname, $lastname, $email, $pass){

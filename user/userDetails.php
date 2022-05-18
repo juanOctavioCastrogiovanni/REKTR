@@ -17,10 +17,10 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td>1</td>
-                            <td>Tom</td>
-                            <td>Riddle</td>
-                            <td>tomriddle@gmail.com</td>
+                            <td><?php echo $_SESSION['ids']['userId']?></td>
+                            <td><?php echo $_SESSION['user']['firstname']?></td>
+                            <td><?php echo $_SESSION['user']['lastName']?></td>
+                            <td><?php echo $_SESSION['user']['email']?></td>
                         </tr>
                         
                         </tbody>
