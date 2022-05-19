@@ -148,9 +148,9 @@ Nikon D7000 gives you 16.2 megapixels of vividly detailed images, a more sensiti
    possible in DX format. The D7000 is equipped to help you creat", 'D7000_front.webp', 
    'D7000_left.webp', 'D7000_side.webp', 0),
 
-(5, 'Model S', 19.99, 4, 3, 300 , NULL, NULL, 'jahovans.jpg', NULL, NULL, 0),
-(6, 'Model T', 14.99, 5, 3, 249, NULL , NULL, 'smartq.jpg', NULL, NULL, 0),
-(7, '32gb', 9.99, 3, 2, 125,"microSD is a type of removable flash memory card 
+(5, 'Card reader Model S', 19.99, 4, 3, 300 , NULL, NULL, 'jahovans.jpg', NULL, NULL, 0),
+(6, 'Card reader Model T', 14.99, 5, 3, 249, NULL , NULL, 'smartq.jpg', NULL, NULL, 0),
+(7, 'MicroSD 32gb', 9.99, 3, 2, 125,"microSD is a type of removable flash memory card 
 used for storing information. SD is an abbreviation of Secure Digital, and microSD
  cards are sometimes referred to as µSD or uSD. The cards are used in mobile phones 
  and other mobile devices.","It is the smallest memory card that can be bought; at 
@@ -165,7 +165,7 @@ used for storing information. SD is an abbreviation of Secure Digital, and micro
       GPS, and Near Field Communication by attaching a device in place of a memory card.",
        'sandisk-32gb.jpg', NULL, NULL, 0),
 
-(8, '64gb', 19.99, 3, 2, 200,"microSD is a type of removable 
+(8, 'MicroSD 64gb', 19.99, 3, 2, 200,"microSD is a type of removable 
 flash memory card used for storing information. SD is an abbreviation of Secure Digital, 
 and microSD cards are sometimes referred to as µSD or uSD.[1] The cards are used in mobile
  phones and other mobile devices.","It is the smallest memory card that can be bought; at 
@@ -179,7 +179,7 @@ and microSD cards are sometimes referred to as µSD or uSD.[1] The cards are use
     non-memory jobs like Bluetooth, GPS, and Near Field Communication by attaching a device
      in place of a memory card.", 'sandisk-64gb.jpg', NULL, NULL, 1),
 
-(9, '128gb', 99.99, 3, 2, 164,"The SD card debuted in 1999 and is the successor to the 
+(9, 'SD card 128gb', 99.99, 3, 2, 164,"The SD card debuted in 1999 and is the successor to the 
 now-obsolete MultiMediaCard (MMC). ","The SD card debuted in 1999 and is the successor 
 to the now-obsolete MultiMediaCard (MMC). It was one of a number of competing memory card
  formats in use by consumer electronics, such as Sony's defunct Memory Stick and the 

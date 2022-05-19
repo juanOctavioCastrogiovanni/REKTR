@@ -50,6 +50,7 @@
 		echo "<p>".$e->getMessage()."</p>";
 	}
 
+	unset($conect);
 ?>
 <div id="mainBody">
 	<div class="container">

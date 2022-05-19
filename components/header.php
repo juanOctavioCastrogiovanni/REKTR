@@ -89,8 +89,8 @@
 				</a>
 				<div class="navbar-inner">
 					<a class="brand" href="<?php echo $point ?>/index"><img class="logo" src="<?php echo $point ?>/themes/images/logo-250.png" alt="Bootsshop" /></a>
-					<form class="form-inline navbar-search" method="post" action="products">
-						<input id="srchFld" class="srchTxt" type="text" />
+					<form class="form-inline navbar-search" method="GET" action="./search.php">
+						<input class="srchTxt" type="text" name="search" />
 						<button type="submit" id="submitButton" class="btn btn-primary">Go</button>
 					</form>
 					<ul id="topMenu" class="nav pull-right">
