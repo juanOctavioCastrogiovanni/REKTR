@@ -36,7 +36,8 @@
 				<a href="#"><img width="60" height="60" src="<?php echo $point ?>/themes/images/youtube.png" title="youtube" alt="youtube"/></a>
 			 </div> 
 		 </div>
-		<p class="pull-right">&copy; Bootshop</p>
+		
+		<div class='pull-right'><p><a href='http://themesseo.com/bootshop-1-1.html'><strong>Copyright templete © Bootshop 1.1/Bootshop. Thanks.</strong></a></p></div>
 	</div><!-- Container End -->
 	</div>
 	<script src="<?php echo $point ?>/themes/js/jquery.js" type="text/javascript"></script>
@@ -52,4 +53,4 @@
 <!-- <script src="themes/js/priceFilter.js" type="text/javascript" charset="utf-8"></script> -->
 </div>
 </body>
-</html>
+<!-- </html> echo "<div class='span6'>Copyright templete © <a href='http://themesseo.com/bootshop-1-1.html'><strong> Bootshop 1.1</strong></a> Thanks Juan Octavio Castrogiovanni</div>"; -->

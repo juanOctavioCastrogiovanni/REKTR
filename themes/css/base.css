@@ -97,7 +97,7 @@
 /* #sideManu{height:0} */
 #topMenu{height:0}
 .navbar-search {margin-top: 8px;width: 100%;float: none;}
-#topMenu{height: auto;float: none;}
+#topMenu{height: auto;float: none; padding-bottom:20px;}
 #topMenu li{float: none;}
 .navbar .nav > li > a {border-top:1px solid #666; padding:0}
  }
@@ -106,7 +106,7 @@
 #header, #carouselBlk{margin: 0 -20px;}
 /* #sideManu{height:0} */
 #topMenu{height:0}
-#topMenu{height: auto;float: none;}
+#topMenu{height: auto;float: none; padding-bottom:20px;}
 #topMenu li{float: none;}
 .navbar .nav > li > a {border-top:1px solid #666; padding:0}
 }
@@ -120,4 +120,12 @@
 
 .div2{
     float: right; margin-right: 95px; margin-top: 30px;
+}
+
+.logo{margin-top: -8px;}
+
+@media (max-width:768px){
+    .presentation{
+        display:none !important;
+    }
 }

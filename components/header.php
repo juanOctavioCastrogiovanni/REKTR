@@ -12,7 +12,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Bootshop online Shopping cart</title>
+	<title>REKTR online Shopping cart</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="">
@@ -35,13 +35,13 @@
 	<!-- Google-code-prettify -->
 	<link href="<?php echo $point ?>/themes/js/google-code-prettify/prettify.css" rel="stylesheet" />
 	<!-- fav and touch icons -->
-	<link rel="shortcut icon" href="<?php echo $point ?>/themes/images/ico/favicon.ico">
+	<link rel="shortcut icon" href="<?php echo $point ?>/themes/images/ico/ico.png">
 	<link rel="apple-touch-icon-precomposed" sizes="144x144"
-	href="<?php echo $point ?>/themes/images/ico/apple-touch-icon-144-precomposed.png">
+	href="<?php echo $point ?>/themes/images/ico/ico.png">
 	<link rel="apple-touch-icon-precomposed" sizes="114x114"
-	href="<?php echo $point ?>/themes/images/ico/apple-touch-icon-114-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo $point ?>/themes/images/ico/apple-touch-icon-72-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" href="<?php echo $point ?>/themes/images/ico/apple-touch-icon-57-precomposed.png">
+	href="<?php echo $point ?>/themes/images/ico/ico.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo $point ?>/themes/images/ico/ico.png">
+	<link rel="apple-touch-icon-precomposed" href="<?php echo $point ?>/themes/images/ico/ico.png">
 	<link href="<?php echo $point ?>/themes/css/styles.css" rel="stylesheet" type="text/css"> 
 	<link href="<?php echo $point ?>/themes/css/table.css" rel="stylesheet" type="text/css"> 
 	<link href="<?php echo $point ?>/themes/css/pay.css" rel="stylesheet" type="text/css"> 
@@ -57,8 +57,8 @@
 				<?php
 				if(isset($_SESSION['user'])){
 					 echo "<div class='span6'>Welcome!<strong> ".$_SESSION['user']['firstname']."</strong></div>"; 
-				} else {
-					 echo "<div class='span6'>Copyright templete © <a href='http://themesseo.com/bootshop-1-1.html'><strong> Bootshop 1.1</strong></a> Thanks Juan Octavio Castrogiovanni</div>";
+					} else {
+					echo "<div class='span6 presentation'>Welcome to <strong>REKTR</strong> by Juan Octavio Castrogiovanni</div>"; 
 				}
 				?>
 				<?php
@@ -88,7 +88,7 @@
 					<span class="icon-bar"></span>
 				</a>
 				<div class="navbar-inner">
-					<a class="brand" href="<?php echo $point ?>/index"><img src="<?php echo $point ?>/themes/images/logo.png" alt="Bootsshop" /></a>
+					<a class="brand" href="<?php echo $point ?>/index"><img class="logo" src="<?php echo $point ?>/themes/images/logo-250.png" alt="Bootsshop" /></a>
 					<form class="form-inline navbar-search" method="post" action="products">
 						<input id="srchFld" class="srchTxt" type="text" />
 						<button type="submit" id="submitButton" class="btn btn-primary">Go</button>
