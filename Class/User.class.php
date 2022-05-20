@@ -92,18 +92,49 @@
                     $url_activation.= "?u=" . $this->email;
                     $url_activation.= "&k=" . $this->activation;
                     $url_activation.= "&action=activeUser";
+
+					$body = "<!-- 	<div style='background-color: grey; width: 100%; display: flex; justify-content: center;'>
+								<img src='./themes/images/logo-250.png' style='width: 100%; max-width: 250px; width: 100%;' > 
+							</div> --> 
+					<div style='background-color: rgba(0,0,0,.8); width: 100%;'>    
+						<div style=' color: whitesmoke; text-align: center; padding-top: 30px;'>
+							<div style='margin-bottom: -25px;'><h2>Welcome</h2></div>
+							<div style='background-color: rgb(255, 136, 0); height: 0.5px;max-width: 250px; width: 100%; text-align: center; display: inline-block;'></div>
+						</div>    
+						<div style='margin-top: 10px; '>
+							<table style='margin: auto;margin: auto; border-spacing: 5px; max-width: 300px; width: 100%;'>
+								<tbody>
+									<tr>
+										<td style='color: whitesmoke; '><p>Firstname: </p></td>
+										<td style='color: whitesmoke; '><p>{$this->firstname}</p></td>
+									</tr>
+									<tr>
+										<td style='color: whitesmoke; '><p>Lastname: </p></td>
+										<td style='color: whitesmoke; '><p>{$this->lastname}</p></td>
+									</tr>
+									<tr>
+										<td style='color: whitesmoke; '><p>Email: </p></td>
+										<td style='color: whitesmoke; '><p>{$this->email}</p></td>
+									</tr>
+									
+								</tbody>
+							</table>
+						</div>
+						<div style='text-align: center;'>
+							<p style='max-width: 500px; width: 100%; color: whitesmoke; text-align: center; display: inline-block;'>Please activate your account</p>
+						</div>
+						<div style='text-align: center; height: 100px; padding-top: 30px;'>
+							<a href='".$url_activation."' style='border-radius: 30px; background: #f3a333;
+							color: #ffffff; padding: 10px 15px; text-decoration: none;'>Activate your account</a>
+						</div>
+					</div>
+				<div style='background-color:grey; width: 100%; display: flex; justify-content: center;'>
+					<p style='max-width: 500px; width: 100%; color: whitesmoke; text-align: center; display: inline-block;'>
+						HTML and CSS design by Juan Octavio Castrogiovanni
+						 </p>
+				</div>";
     
-                    $body = "<h1>Welcome</h1>";
-                    $body.= "<br>";
-                    $body.= "firstname: " . $this->firstname;
-                    $body.= "<br>";
-                    $body.= "lastname: " . $this->lastname;
-                    $body.= "<br>";
-                    $body.= "user: " . $this->email;
-                    $body.= "<br>";
-                    $body.= "<p>please activate your account </p>";
-                    $body.= "<a style='background-color:blue;color:white;display:block;padding:10px' href='".$url_activation."'>activate your account</a>";
-    
+                       
                     $header = "From: no-reply@" . $_SERVER["SERVER_NAME"] . "\r\n";
                     $header.= "MIME-Version: 1.0" . "\r\n";
                     $header.= "Content-Type: text/html; charset=utf-8" . "\r\n";
@@ -111,17 +142,42 @@
 					
 		}
 		public function recoveryEmail(){
-					$url_recovery = BACK_END_URL . "/";
-                    $url_recovery.= "?page=recovery";
-                    $url_recovery.= "&u=" . $this->email;
-                    $url_recovery.= "&k=" . $this->activation;
-    
-                    $body = "<h1>recovery password</h1>";
-                    $body.= "<br>";
-                    $body.= "user: " . $this->email;
-                    $body.= "<br>";
-                    $body.= "<p>Please click on the link below to reactivate your password.</p>";
-                    $body.= "<a style='background-color:blue;color:white;display:block;padding:10px' href='".$url_recovery."'>RECUPERAR MI CUENTA</a>";
+					$url_activation = BACK_END_URL . "/";
+                    $url_activation.= "?page=recovery";
+                    $url_activation.= "&u=" . $this->email;
+                    $url_activation.= "&k=" . $this->activation;
+
+					$body = "<!-- 	<div style='background-color: grey; width: 100%; display: flex; justify-content: center;'>
+									<img src='./themes/images/logo-250.png' style='width: 100%; max-width: 250px; width: 100%;' > 
+								</div> -->   
+							<div style='background-color:rgba(0,0,0,.8);width:100%;'>
+								<div style=' color: whitesmoke; text-align: center; padding-top: 30px;'>
+									<div style='margin-bottom: -25px;'><h2>Recovery password</h2></div>
+									<div style='background-color: rgb(255, 136, 0); height: 0.5px;max-width: 250px; width: 100%; text-align: center; display: inline-block;'></div>
+								</div>    
+								<div style='margin-top: 10px; '>
+									<table style='margin: auto;margin: auto; border-spacing: 5px; max-width: 300px; width: 100%;'>
+										<tbody>
+											<tr>
+												<td style='color: whitesmoke; '><p>Email: </p></td>
+												<td style='color: whitesmoke; '><p>{$this->email}</p></td>
+											</tr>		
+										</tbody>
+									</table>
+								</div>
+								<div style='text-align: center;'>
+									<p style='max-width: 500px; width: 100%; color: whitesmoke; text-align: center; display: inline-block;'>Please click on the link below to reactivate your password.</p>
+								</div>
+								<div style='text-align: center; height: 100px; padding-top: 30px;'>
+									<a href='".$url_activation."' style='border-radius: 30px; background: #f3a333;
+									color: #ffffff; padding: 10px 15px; text-decoration: none;'>Reactivate your password.</a>
+								</div>
+							</div>
+							<div style='background-color:grey; width: 100%; display: flex; justify-content: center; '>
+								<p style='max-width: 500px; width: 100%; color: whitesmoke; text-align: center; display: inline-block;'>
+									HTML and CSS design by Juan Octavio Castrogiovanni
+								</p>
+							</div>";
     
                     $header = "From: no-reply@" . $_SERVER["SERVER_NAME"] . "\r\n";
                     $header.= "MIME-Version: 1.0" . "\r\n";

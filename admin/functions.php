@@ -282,8 +282,7 @@
     
                 if ($user->execute()) {              
                     $recoveryUser->configActivationCode();
-                    $sql = $recoveryUser->recoveryUser();
-                    $user = $conect->prepare($sql);
+                    $user = $recoveryUser->recoveryUser($conect);
                     // $user = $conect->prepare("UPDATE users SET activation = :activation WHERE email = :email");
                     // $user->bindParam(":email", $email, PDO::PARAM_STR);
                     // $user->bindParam(":activation", $key, PDO::PARAM_STR);

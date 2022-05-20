@@ -130,7 +130,7 @@
 											</div> -->
 											<button type="submit" class="btn btn-success">Sign in</button>
 											<!-- <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button> -->
-											<a href="<?php echo $point ?>forgetpass" class="btn-sm" >Forget password</a>
+											<a href="<?php echo $point ?>/forgetpass" class="btn-sm" >Forget password</a>
 										</form>
 									</div>
 									<div class="div2">
