@@ -159,7 +159,7 @@
 
                         if ($newUser->checkUser($pass)) {
                             //SI NO HAY NADA EN EL CARRITO DB NI TAMPOCO EN SESSION ENTONCES CREO UNO NUEVO Y GUARDO EN SESSION LOS IDS
-                            if(!isset($_SESSION['Cart'])&&!existCart($conect,$user['userId'])){
+                            if(!isset($_SESSION['cartArray'])&&!existCart($conect,$user['userId'])){
                                 $newCart = new Cart();
                                 // $_SESSION['cartId'] = $newCart->createCartDB($conect,$newUser->getId());
                                 $createCart = $newCart->createCartDB($conect,$user['userId']);
@@ -172,7 +172,7 @@
                                     unset($newCart);
                                 }
                                 //SI NO HAY NADA EN EL CARRITO SESSION PERO TENGO CARRITO EN LA BASE DE DATOS, CREO UN NUEVO OBJETO CARRITO EN BASE A LA BASE DE DATOS
-                            } else if(($cartId = existCart($conect,$user['userId']))!=0 && !isset($_SESSION['Cart'])){
+                            } else if(($cartId = existCart($conect,$user['userId']))!=0 && !isset($_SESSION['cartArray'])){
                                 
                                 $existCart = new Cart();
                                 $prepareSql = $existCart->getProductsDB($conect,$user['userId'],$cartId);
@@ -181,30 +181,8 @@
                                     foreach($prepareSql->fetchAll(PDO::FETCH_ASSOC) as $item){
                                         array_push($cart,$item);
                                     }
-                                    
-                                    $newCart = new Cart();
-                                    foreach($cart as $productArray){
-                                        $productArrays = array(
-                                            "productId"=>$productArray['productId'],
-                                            "name"=>$productArray['name'],
-                                            "price"=>$productArray['price'],
-                                            "image1"=>$productArray['image1'],
-                                            "qty"=>0,
-                                            "subTotal"=>0
-                                        );
-                                                try{ 
-                                                    $product = new Product($productArray['productId'],$productArray['name'],$productArray['price']);
-                                                    $product->setImage($productArray['image1']);
-                                                }catch(Exception $e){
-                                                    echo "<p>".$e->getMessage()."</p>";
-                                                }
-                                                $newCart->addItem($product, $productArray['qty'],$productArrays);
-                                                $newCart->setTotal();
-                                                $newCart->setProducts();
-         
-                                        }
-                                                
-                                    $_SESSION['Cart'] = $newCart;      
+                                    $newCart = array_to_cart($cart);                                                 
+                                    $_SESSION['cartArray'] = cart_to_array($newCart);      
                                     $newCart = $newCart->lastId($conect);
                                     if($newCart->execute()){$_SESSION['ids'] = $newCart->fetch(PDO::FETCH_ASSOC);}                                    
                                     unset($newCart);
@@ -213,8 +191,12 @@
                                     // TENGA. TODO DE UN SAQUE
                                     }   
                             } else {
-                                $_SESSION['Cart']->saveCart($user['userId']);
-                                $newCart = $_SESSION['Cart']->lastId($conect);
+                                // echo "<pre>";
+                                // var_dump(get_class_methods($_SESSION['Cart']));
+                                // echo "</pre>";
+                                $newObject = array_to_cart($_SESSION['cartArray']['productsArray']);
+                                $newObject->saveCart($user['userId']);
+                                $newCart = $newObject->lastId($conect);
                                 if($newCart->execute()){$_SESSION['ids'] = $newCart->fetch(PDO::FETCH_ASSOC);}
                             }
                       
@@ -382,5 +364,41 @@
             }
             header("location: " . FRONT_END_URL . "/register?rta=" . $rta);
         }
+
+        function cart_to_array($object){
+            $array = Array();
+            $array['total'] = $object->getTotal();
+            $array['products'] = $object->getProducts();
+            $array['listId'] = $object->getListId(); // $array['sale'] = $object->getSale();
+            $array['productsArray'] = $object->getProductListArray();
+            return $array;             
+        }
+
+        function array_to_cart($productListArray){
+                $newCart = new Cart();
+                foreach($productListArray as $productArray){
+                    $productArrays = array(
+                        "productId"=>$productArray['productId'],
+                        "name"=>$productArray['name'],
+                        "price"=>$productArray['price'],
+                        "image1"=>$productArray['image1'],
+                        "qty"=>0,
+                        "subTotal"=>0
+                    );
+                            try{ 
+                                $product = new Product($productArray['productId'],$productArray['name'],$productArray['price']);
+                                $product->setImage($productArray['image1']);
+                            }catch(Exception $e){
+                                echo "<p>".$e->getMessage()."</p>";
+                            }
+                            $newCart->addItem($product, $productArray['qty'],$productArrays);
+                            $newCart->setTotal();
+                            $newCart->setProducts();
+
+                    }
+                            
+                return $newCart;      
+        }
+        
 
 ?>

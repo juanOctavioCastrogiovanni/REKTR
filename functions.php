@@ -211,5 +211,40 @@ function showMenssage($cod){
     return "<p class='rta rta-".$cod."'>".$message."</p>";
 }
 
+function cart_to_array($object){
+    $array = Array();
+    $array['total'] = $object->getTotal();
+    $array['products'] = $object->getProducts();
+    $array['listId'] = $object->getListId(); // $array['sale'] = $object->getSale();
+    $array['productsArray'] = $object->getProductListArray();
+    return $array;             
+}
+
+function array_to_cart($productListArray){
+        $newCart = new Cart();
+        foreach($productListArray as $productArray){
+            $productArrays = array(
+                "productId"=>$productArray['productId'],
+                "name"=>$productArray['name'],
+                "price"=>$productArray['price'],
+                "image1"=>$productArray['image1'],
+                "qty"=>0,
+                "subTotal"=>0
+            );
+                    try{ 
+                        $product = new Product($productArray['productId'],$productArray['name'],$productArray['price']);
+                        $product->setImage($productArray['image1']);
+                    }catch(Exception $e){
+                        echo "<p>".$e->getMessage()."</p>";
+                    }
+                    $newCart->addItem($product, $productArray['qty'],$productArrays);
+                    $newCart->setTotal();
+                    $newCart->setProducts();
+
+            }
+                    
+        return $newCart;      
+}
+
 
 ?>

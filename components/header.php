@@ -67,10 +67,10 @@
 				<div class="span6">
 					<div class="pull-right">
 						<a href="<?php echo $point ?>/product_summary"><span>Total</span></a>
-						<span class="btn btn-mini">$<?php if(isset($_SESSION['Cart'])){echo $_SESSION['Cart']->getTotal();}else{echo 0;}  ?></span>
+						<span class="btn btn-mini">$<?php if(isset($_SESSION['cartArray'])){echo $_SESSION['cartArray']['total'];}else{echo 0;}  ?></span>
 						<a href="<?php echo $point ?>/product_summary"><span class=""></span></a>
 						<a href="<?php echo $point ?>/product_summary"><span class="btn btn-mini btn-primary"><i
-									class="icon-shopping-cart icon-white"></i>[ <?php if(isset($_SESSION['Cart'])){echo $_SESSION['Cart']->getProducts();}else{echo 0;}  ?> ]  Itemes in your cart </span> </a>
+									class="icon-shopping-cart icon-white"></i>[ <?php if(isset($_SESSION['cartArray'])){echo $_SESSION['cartArray']['products'];}else{echo 0;}  ?> ]  Itemes in your cart </span> </a>
 					<?php
 					if(isset($_SESSION['user'])){
 						echo "<a href='".$point."/user/logOut.php?b=0'><span class='btn btn-mini btn-danger'><i

@@ -1,5 +1,7 @@
 <?php
 	include "./components/header.php";
+	include "./Class/Product.class.php";
+	include "./functions.php";
 	
 	
 ?>
@@ -33,8 +35,9 @@
               <tbody>
                 <?php 
           
-            if(isset($_SESSION['Cart'])&&$_SESSION['Cart']->getTotal()>0){
-              $_SESSION['Cart']->showReceipt();
+            if(isset($_SESSION['cartArray'])&&$_SESSION['cartArray']['total']>0){
+              $newObject = array_to_cart($_SESSION['cartArray']['productsArray']);
+              $newObject->showReceipt();
             } else {
               header("location:./");
             }
@@ -50,7 +53,7 @@
               <div class="barcode"></div>
               <br />
               <?php
-      if(isset($_SESSION['Cart'])&&$_SESSION['Cart']->getTotal()>0){
+      if(isset($_SESSION['cartArray'])&&$_SESSION['cartArray']['total']>0){
               echo "Order ID:".$_SESSION['ids']['cartId'];
       }?>
               <br>

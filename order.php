@@ -1,6 +1,7 @@
 <?php
 	include "./components/header.php";
-	
+  include "./Class/Product.class.php";
+	include "./functions.php";
 
 	
 ?>
@@ -9,7 +10,7 @@
 	<div class="row">
 <?php
 	include "./components/sidebar.php";
-    if(isset($_SESSION['Cart'])&&$_SESSION['Cart']->getTotal()>0&&isset($_SESSION['Cart'])&&isset($_SESSION['ids'])){
+    if(isset($_SESSION['cartArray'])&&$_SESSION['cartArray']['total']>0&&isset($_SESSION['cartArray'])&&isset($_SESSION['ids'])){
         try{ 
             $conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
             $conect = $conect->conect();
@@ -17,11 +18,14 @@
             echo "<p>".$e->getMessage()."</p>";
         }
         $cartId = $_SESSION['ids']['cartId'];
-        $sale = $_SESSION['Cart']->sale($conect, $_SESSION['ids']['cartId']);
-        if($sale->execute()){         
-                $_SESSION['Cart']->cartDelete();
-                $_SESSION['Cart']->setTotal();
-                $_SESSION['Cart']->setProducts(); 
+        $newObject = array_to_cart($_SESSION['cartArray']['productsArray']);
+        $sale = $newObject->sale($conect, $_SESSION['ids']['cartId']);
+        if($sale->execute()){      
+                $newObject->cartMail($_SESSION['user']['email']);
+                $newObject->cartDelete();
+                $newObject->setTotal();
+                $newObject->setProducts(); 
+                $_SESSION['cartArray'] = cart_to_array($newObject);
         }      
     }?>
 
@@ -48,7 +52,7 @@
       <div class="barcode"></div>
       <br/>
       <?php
-      if(isset($_SESSION['Cart'])&&$_SESSION['Cart']->getTotal()>0){
+      if(isset($_SESSION['cartArray'])&&$_SESSION['cartArray']['total']>0){
         echo "Order ID:".$_SESSION['ids']['cartId'];
         }?>
       <br>

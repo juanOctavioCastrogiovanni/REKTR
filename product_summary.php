@@ -1,5 +1,7 @@
 <?php
 	include "./components/header.php";
+	include "./functions.php";
+	include "./Class/Product.class.php";
 	
 	
 ?>
@@ -14,7 +16,7 @@
 				<li><a href='index'>Home</a> <span class='divider'>/</span></li>
 				<li class='active'> SHOPPING CART</li>
 			</ul>
-			<h3>  SHOPPING CART [ <small>"; if(isset($_SESSION['Cart'])){echo $_SESSION['Cart']->getProducts();}else{echo 0;} echo "&nbsp</small>]<a href='products' class='btn btn-large pull-right'><i class='icon-arrow-left'></i> Continue Shopping </a></h3>	
+			<h3>  SHOPPING CART [ <small>"; if(isset($_SESSION['cartArray'])){echo $_SESSION['cartArray']['products'];}else{echo 0;} echo "&nbsp</small>]<a href='products' class='btn btn-large pull-right'><i class='icon-arrow-left'></i> Continue Shopping </a></h3>	
 			<hr class='soft'/>";
 
 	if(!isset($_SESSION['user'])){
@@ -69,8 +71,9 @@
 						</thead>
 					<tbody>";
 
-	if(isset($_SESSION['Cart'])&&$_SESSION['Cart']->getTotal()>0){
-		$_SESSION['Cart']->showCart();
+	if(isset($_SESSION['cartArray'])&&$_SESSION['cartArray']['total']>0){
+		$newObject = array_to_cart($_SESSION['cartArray']['productsArray']);
+		$newObject->showCart();
 	} else {
 		echo "<td colspan='5' style=''><div style='background:#e9e9e9; height:100px; color:#949494;font-size:24px; display:flex; justify-content:center; padding-top:80px;'><strong><i>EMPTY CART</i></strong></div></td>
 	</tbody></table>";
@@ -104,7 +107,7 @@
 			
 	<a href="products" class="btn btn-large"><i class="icon-arrow-left"></i> Continue Shopping </a>
 	<?php
-	if(isset($_SESSION['user'])&&isset($_SESSION['Cart'])&&$_SESSION['Cart']->getTotal()>0){
+	if(isset($_SESSION['user'])&&isset($_SESSION['cartArray'])&&$_SESSION['cartArray']['total']>0){
 		echo "<a href='paypage' class='btn-pay pull-right'>Next <i class='icon-arrow-right'></i></a>";
 	}
 	?>

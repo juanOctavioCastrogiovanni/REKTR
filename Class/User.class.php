@@ -74,7 +74,6 @@
 
 	    public function checkUser($pass){
 			if (password_verify($pass, $this->pass)) {
-				session_start();
 				$_SESSION["user"] = array(
 					"firstname" => $this->firstname,
 					"lastName" => $this->lastname,

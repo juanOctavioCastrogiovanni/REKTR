@@ -7,6 +7,8 @@
 		private $total = 0;
 		private $products = 0;
 		private $sale = 0;
+
+		public function getListId(){return $this->listId;}
 		
 		public function cartDelete(){
 			$this->productList = [];
@@ -212,6 +214,78 @@
 				echo "<tr><td>".$product['qty']." x ".$product['name']."</td><td class='right'>$".$product['subTotal']."</td></tr>";
 			}
 			echo "<tr><td><strong  style='font-size:16px'>Total cart</strong></td><td class='right'><strong  style='font-size:16px'>$".$this->total."</strong></td></tr>";
+
+		}
+
+		public function cartMail($email){
+			$body = "<div style='background-color: rgba(0,0,0,.8); width: 100%;'>
+					<div style='background: grey; width: 100%; display: flex; justify-content: center;'>
+						<img src='./themes/images/logo-250.png' style='width: 100%; max-width: 250px; width: 100%;' >
+					</div>    
+					<div style=' color: whitesmoke; text-align: center; padding-top: 30px;'>
+						<div style='margin-bottom: -25px;'><h2>New order</h2></div>
+						<div style='background-color: rgb(255, 136, 0); height: 0.5px;max-width: 250px; width: 100%; text-align: center; display: inline-block;'></div>
+					</div>    
+					<div style='text-align: center;'>
+						<p style='max-width: 500px; width: 100%; color: whitesmoke; text-align: center; display: inline-block;'>
+						You will find below details of your new order. You must pay at our location and  look for your order. Thanks!
+							</p>
+					</div>
+					<div style='margin-top: 10px;'>
+					<table style='margin: auto;margin: auto; border-spacing: 0px;'>
+						<thead>
+							<tr>
+							<th style='color: whitesmoke; border: 0.2px solid;'>Product id</th>
+							<!--<th style='color: whitesmoke; border: 0.2px solid;'>Image</th>-->
+							<th style='color: whitesmoke; border: 0.2px solid;'>Product</th>
+							<th style='color: whitesmoke; border: 0.2px solid;'>Quantity</th>
+							<th style='color: whitesmoke; border: 0.2px solid;'>Price</th>
+				
+							<th style='color: whitesmoke; border: 0.2px solid;'>Total</th>
+							</tr>
+						</thead>
+						<tbody>";
+
+						foreach($this->productListArray as $product){
+							$body .= "<tr>
+									<td style='color: whitesmoke; border-left: 0.2px solid; border-bottom: 0.2px solid;'>".$product['productId']."</td>
+									<!--<td style='color: whitesmoke; border-left: 0.2px solid; border-bottom: 0.2px solid;'> <img width='60' src='./themes/images/products/".$product['image1']."' alt=''/></td>-->
+									<td style='color: whitesmoke; border-left: 0.2px solid; border-bottom: 0.2px solid;'>".$product['name']."</td>
+									<td style='color: whitesmoke; border-left: 0.2px solid; border-bottom: 0.2px solid;'>".$product['qty']."</td>
+									<td style='color: whitesmoke; border-left: 0.2px solid; border-bottom: 0.2px solid;'>$".$product['price']."</td>
+									<td style='width: 94px; color: whitesmoke; border-right: 0.2px solid;border-left: 0.2px solid;border-bottom: 0.2px solid;'>$".$product['subTotal']."</td>
+								</tr>";
+						}
+						$body .=	"<tr>
+										<td colspan='4' style='text-align:right; color: whitesmoke; border-left: 0.2px solid;'><strong>TOTAL PRICE =</strong></td>
+										<td class='label label-important' style='display:block; color: whitesmoke; border: 0.2px solid;'> <strong> $".$this->total."</strong></td>
+										</tr>
+										<tr>
+										<td colspan='4' style='text-align:right; color: whitesmoke; border: 0.2px solid;'><strong>Order date</strong></td>
+									<td style='color: whitesmoke; border-right: 0.2px solid;border-left: 0.2px solid;'><strong>".date("j/n/Y")." </strong></td>
+									</tr>
+									</tbody>
+						</table>
+						</div>
+				
+				
+					<div style='text-align: center; height: 100px; padding-top: 30px;'>
+						<a href='#' style='    border-radius: 30px;
+						background: #f3a333;
+						color: #ffffff;    padding: 10px 15px; text-decoration: none;'>Butasssssssston</a>
+					</div>
+				</div>
+				<div style='background-color: grey; width: 100%; display: flex; justify-content: center; '>
+					<p style='max-width: 500px; width: 100%; color: whitesmoke; text-align: center; display: inline-block;'>
+						HTML and CSS design by Juan Octavio Castrogiovanni
+						</p>
+				</div>";
+
+				$header = "From: no-reply@" . $_SERVER["SERVER_NAME"] . "\r\n";
+                $header.= "MIME-Version: 1.0" . "\r\n";
+                $header.= "Content-Type: text/html; charset=utf-8" . "\r\n";
+
+				mail( $email, "New order", $body, $header);
 
 		}
 				
