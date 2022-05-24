@@ -84,7 +84,10 @@
     
               $sql = sprintf("INSERT INTO productsCarts (productId, cartId, qty, subtotal) VALUES (%d,%d,%d,%g)", $this->productId, $id, $this->qty, $this->subTotal);
               $stmt = $conect->prepare($sql);
-              $stmt->execute();
+              if($stmt->execute()){
+                var_dump('Producto guardado');
+                //  die();
+              }
        }
 
         public function updateProduct(){
@@ -97,7 +100,10 @@
 
               $sql = sprintf("UPDATE productsCarts SET qty = %d,subtotal = %g WHERE productId = %d AND cartId = %d", $this->qty, $this->subTotal, $this->productId,$_SESSION['ids']['cartId']);
               $stmt = $conect->prepare($sql);
-              $stmt->execute();
+              if($stmt->execute()){
+                var_dump('Producto guardado actualizado');
+                // die();
+              }
        }
 
 

@@ -4,12 +4,10 @@
     include "./Class/Conect.class.php";
     include "./admin/functions.php";
     session_start();
-    
-    // CUANDO YA ESTOY LOGUEADO, APARTE DE HACER TODO EL MANEJO DE LOS OBJETOS QUE 
-    // YA ESTA HECHO EXCEPTO EL BORRAR TODO EL CARRITO, DEBO GUARDAR CADA COSA EN LAS REPECTIVAS TABLAS DEL USUARIO.
 
+    // SI EL AGREGO UN PRODUCTO POR EL FORMULARIO
+    // IF I ADD A PRODUCT THROUGH THE FORM
     if(isset($_POST['productId'])&&isset($_POST['qty'])){
-        //if dont exist cart create in this moment
         $productArray = array(
             "productId"=>$_POST['productId'],
             "name"=>$_POST['name'],
@@ -18,6 +16,8 @@
             "qty"=>0,
             "subTotal"=>0
         );
+        // EN EL CASO DE QUE NO HAYA UNA SESSION DE CARRITO ACTIVA EN ESE MOMENTO
+        //if dont exist cart create in this moment
         if(!isset($_SESSION['cartArray'])){
             try{ 
                 $product = new Product($_POST['productId'],$_POST['name'],$_POST['price']);
@@ -27,16 +27,19 @@
             }
             try{
                 $newCart = new Cart();
-                $newCart->addItem($product, $_POST['qty'],$productArray);
+                $newCart->addItem($product, $_POST['qty'],$productArray,TRUE);
                 $newCart->setTotal();
                 $newCart->setProducts();
-                // $_SESSION['Cart'] = $newCart;     
+                if(isset($_SESSION['user'])&&isset($_SESSION['ids'])){
+                    $newObject->updateCart($_SESSION['ids']['cartId']);
+                } 
                 $_SESSION['cartArray'] = cart_to_array($newCart);     
             }catch(Exception $e){
                 echo "<p>".$e->getMessage()."</p>";
             }           
             
-            
+            // CASO CONTRARIO
+            // opposite case
         } else if(isset($_SESSION['cartArray'])){
             try{
                 $product = new Product($_POST['productId'],$_POST['name'],$_POST['price']);
@@ -44,30 +47,33 @@
             }catch(Exception $e){
                 echo "<p>".$e->getMessage()."</p>";
             }    
+            // EN TODOS LOS CASOS SE RESUELVE IGUAL, SE CONVIERTE EL ARRAY DE SESSION EN OBJETO Y SE TRABAJA CON LOS METODOS YA ESTABLECIDOS EN CADA OBJETO INSTACIADO
+            // In all cases it is solved the same, the session array is converted into an object and works with the methods already established in each instituted object
 
-            $newObject = array_to_cart($_SESSION['cartArray']['productsArray']);
-            $newObject->addItem($product, $_POST['qty'],$productArray);
+            $newObject = array_to_cart($_SESSION['cartArray']['productsArray'],FALSE);          
+            $newObject->addItem($product, $_POST['qty'],$productArray,TRUE);
             $newObject->setTotal();
             $newObject->setProducts();
+            if(isset($_SESSION['user'])&&isset($_SESSION['ids'])){
+                $newObject->updateCart($_SESSION['ids']['cartId']);
+            }
+            // LUEGO CON LA FUNCION cart_to_array VUELVO A CONVERTIR ESE OBJETO EN UN ARRAY PARA PODER GUARDARLO EN SESSION.
+            // then with the cart_to_array function I convert that object back into an array to be able to save it in session.
             $_SESSION['cartArray'] = cart_to_array($newObject);
-
-
-            // $_SESSION['Cart']->addItem($product, $_POST['qty'],$productArray);
-            // $_SESSION['Cart']->setTotal();
-            // $_SESSION['Cart']->setProducts();
+            
         }
 
-        if(isset($_SESSION['user'])&&isset($_SESSION['ids'])){
-            $newObject = array_to_cart($_SESSION['cartArray']['productsArray']);
-            $newObject->updateCart($_SESSION['ids']['cartId']);
-        }
         header("location:./products");
     }
 
 
+    // SI EXISTE UNA QUERY OPCIONES Y ID
+    // if exist option and id querys
     if(isset($_GET['option'])&&isset($_GET['id'])){
         if($_GET['option']=='remove'){
-            $newObject = array_to_cart($_SESSION['cartArray']['productsArray']);
+            // COMO VEREMOS AQUI Y A LO LARGO DE TODOS LOS ARCHIVOS PHP EN SESSION SE CONVIERTE EL ARRAY DEL CARRITO A OBJETO Y VICEVERSA. 
+            // As we will see here and in all the php files of the session, the cart array is converted to an object and vice versa.
+            $newObject = array_to_cart($_SESSION['cartArray']['productsArray'],FALSE);
             $newObject->removeItem($_GET['id']);
             $newObject->setTotal();
             $newObject->setProducts();
@@ -75,19 +81,21 @@
             header("location:./product_summary");
         }
         if($_GET['option']=='qtymodify'){
-            $newObject = array_to_cart($_SESSION['cartArray']['productsArray']);
+            $newObject = array_to_cart($_SESSION['cartArray']['productsArray'],FALSE);
             $newObject->updateItem($_GET['id'],$_POST['qty']);
             $_SESSION['cartArray'] = cart_to_array($newObject);
         }
 
         if(isset($_SESSION['user'])&&isset($_SESSION['ids'])){
-            $newObject = array_to_cart($_SESSION['cartArray']['productsArray']);
+            $newObject = array_to_cart($_SESSION['cartArray']['productsArray'],FALSE);
             $newObject->updateCart($_SESSION['ids']['cartId']);
             $_SESSION['cartArray'] = cart_to_array($newObject);
         }
         header("location:./product_summary");
-    } else if(isset($_GET['option'])&&$_GET['option']=="cartDelete"){
-        $newObject = array_to_cart($_SESSION['cartArray']['productsArray']);
+        // EN EL CASO QUE EL USUARIO DESEE VACIAR EL CARRITO, PUEDO CREAR UNO NUEVO ASI LOS ANTERIORES QUEDAN ALMACENADOS EN LA BASE DE DATOS PARA ESTADISTICAS O ESTUDIOS.
+        // if you click "cartDelete", another cart will be created. The returned cart is saved in the database for statistics.
+        } else if(isset($_GET['option'])&&$_GET['option']=="cartDelete"){
+        $newObject = array_to_cart($_SESSION['cartArray']['productsArray'],FALSE);
         $newObject->cartDelete();
         $newObject->setTotal();
         $newObject->setProducts();

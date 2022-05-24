@@ -36,7 +36,7 @@
                 <?php 
           
             if(isset($_SESSION['cartArray'])&&$_SESSION['cartArray']['total']>0){
-              $newObject = array_to_cart($_SESSION['cartArray']['productsArray']);
+              $newObject = array_to_cart($_SESSION['cartArray']['productsArray'],FALSE);
               $newObject->showReceipt();
             } else {
               header("location:./");

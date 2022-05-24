@@ -20,57 +20,11 @@
     //     header("location: ./user/login");
     // }
     
+    // SE MOSTRARAN DISTINTOS MENSAJES DEPENDIENDO DEL CODIGO DE RESPUESTA DE LA URL
+    // different messages will be displayed depending on the response code of the url
 		function showMenssage($cod){
 
             switch ($cod) {
-                case '0x001':
-                    $message = "El firstname ingresado no es válido";
-                break;
-                
-                case '0x002':
-                    $message = "El e-mail ingresado no es válido";
-                break;
-    
-                case '0x003':
-                    $message = "El message ingresado no es válido";
-                break;
-    
-                case '0x004':
-                    $message = "Su consulta ha sido enviada... muchas gracias!";
-                break;
-    
-                case '0x005':
-                    $message = "Ocurrio un error, intente de nuevo";
-                break;
-    
-                case '0x006':
-                    $message = "Se creo un nuevo producto satisfactoriamente";
-                break;
-    
-                case '0x007':
-                    $message = "Error al crear un producto";
-                break;
-    
-                case '0x008':
-                    $message = "Se actualizo el producto satisfactoriamente";
-                break;
-    
-                case '0x009':
-                    $message = "Error al actualizar el producto";
-                break;
-    
-                case '0x010':
-                    $message = "Se elimino el producto satisfactoriamente";
-                break;
-    
-                case '0x011':
-                    $message = "Error al eliminar el producto";
-                break;
-    
-                case '0x012':
-                    $message = "Error al subir la imagen.";
-                break;
-    
                 case '0x013':
                     $message = "User already exists";
                 break;
@@ -136,8 +90,11 @@
             return "<p class='rta rta-".$cod."'>".$message."</p>";
         }
 
+
         function login($email, $pass){
             $rta = "0x019";         
+            // INSTANCIO UN NUEVO OBJETO CONEXION
+            // new instance for connection object
             try{ 
                 $conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
                 $conect = $conect->conect();
@@ -145,10 +102,14 @@
                 echo "<p>".$e->getMessage()."</p>";
             }
             
+            // EXTRAIGO SOLO DE LA BASE DE DATOS EL USUARIO CON EL MAIL QUE VIENE DEL PARAMETRO Y SU ESTADO DE ACTIVACION DE CUENTA SEA VERDADERO
+            // i extract only from the database the user with the mail that comes from the parameter and his account activation status is true
             $user = $conect->prepare("SELECT * FROM users WHERE email = :email AND state = 1");
             $user->bindParam(":email", $email, PDO::PARAM_STR);
             
             if ( $user->execute() && $user->rowCount() > 0 ) {
+                // SI ESE USUARIO EXISTE, CON FETCH CONVIERTO SUS DATOS EN UN ARRAY ASOCIATIVO
+                // If that user exists, with fetch i convert its data into an associative array
                 $user = $user->fetch(PDO::FETCH_ASSOC);
                 try{ 
                     $newUser = new User($user['email'],$user['pass']);
@@ -159,12 +120,11 @@
 
                         if ($newUser->checkUser($pass)) {
                             //SI NO HAY NADA EN EL CARRITO DB NI TAMPOCO EN SESSION ENTONCES CREO UNO NUEVO Y GUARDO EN SESSION LOS IDS
+                            //If there is nothing in the db cart or in the session i create a new one and save the ids in the session
                             if(!isset($_SESSION['cartArray'])&&!existCart($conect,$user['userId'])){
                                 $newCart = new Cart();
-                                // $_SESSION['cartId'] = $newCart->createCartDB($conect,$newUser->getId());
                                 $createCart = $newCart->createCartDB($conect,$user['userId']);
                                 if($createCart->execute()){
-                                    // $_SESSION['Cart']=$newCart;
                                     $newCart = $newCart->lastId($conect);
                                     if($newCart->execute()){
                                         $_SESSION['ids'] = $newCart->fetch(PDO::FETCH_ASSOC);
@@ -172,6 +132,7 @@
                                     unset($newCart);
                                 }
                                 //SI NO HAY NADA EN EL CARRITO SESSION PERO TENGO CARRITO EN LA BASE DE DATOS, CREO UN NUEVO OBJETO CARRITO EN BASE A LA BASE DE DATOS
+                                // If there is nothing in the session cart but i have a cart in the database, i create a new cart object based on the database
                             } else if(($cartId = existCart($conect,$user['userId']))!=0 && !isset($_SESSION['cartArray'])){
                                 
                                 $existCart = new Cart();
@@ -181,7 +142,7 @@
                                     foreach($prepareSql->fetchAll(PDO::FETCH_ASSOC) as $item){
                                         array_push($cart,$item);
                                     }
-                                    $newCart = array_to_cart($cart);                                                 
+                                    $newCart = array_to_cart($cart,TRUE);                                                 
                                     $_SESSION['cartArray'] = cart_to_array($newCart);      
                                     $newCart = $newCart->lastId($conect);
                                     if($newCart->execute()){$_SESSION['ids'] = $newCart->fetch(PDO::FETCH_ASSOC);}                                    
@@ -189,12 +150,14 @@
                                     // else if() AL LOGUEARME TENGO UN CARRITO EN SESSION Y NO TENGO UN CARRITO EN DB, DEBO CREAR UN CARRITO EN LA BASE
                                     //  DE DATOS GUARDAR LOS DATOS DEL CARRITO Y LUEGO CREAR TANTAS FILAS DE PRODUCTSCARTS POR TANTOS PRODUCTOS
                                     // TENGA. TODO DE UN SAQUE
+
+                                    // When i log in. I have a cart in session and i don't have a cart in db, i have to create a cart in the base
+                                    // from data save the cart data and then create as many rows of productscarts for as many products
+                                    // have. everything in one piece
                                     }   
                             } else {
-                                // echo "<pre>";
-                                // var_dump(get_class_methods($_SESSION['Cart']));
-                                // echo "</pre>";
-                                $newObject = array_to_cart($_SESSION['cartArray']['productsArray']);
+
+                                $newObject = array_to_cart($_SESSION['cartArray']['productsArray'],FALSE);
                                 $newObject->saveCart($user['userId']);
                                 $newCart = $newObject->lastId($conect);
                                 if($newCart->execute()){$_SESSION['ids'] = $newCart->fetch(PDO::FETCH_ASSOC);}
@@ -219,6 +182,8 @@
             
         }
 
+        // SI EXISTE UN EXISTE UN CARRITO DEVUELVE SU ID SINO 0
+        // if existCart return 0 else return cartId
         function existCart($conect,$userId){
             $existCart = $conect->prepare("SELECT cartId, sale FROM carts WHERE userId = :user ORDER BY cartId DESC LIMIT 1;");
             $existCart->bindParam(":user", $userId, PDO::PARAM_INT);
@@ -365,6 +330,10 @@
             header("location: " . FRONT_END_URL . "/register?rta=" . $rta);
         }
 
+        // ESTA FUNCION ES PARA CONVERTIR UN OBJETO EN ARRAY PARA POSTERIORMENTE ALMACENARLO EN UN SESSION
+        // This function is to convert an object into array to later store it in a session
+        
+        
         function cart_to_array($object){
             $array = Array();
             $array['total'] = $object->getTotal();
@@ -374,7 +343,9 @@
             return $array;             
         }
 
-        function array_to_cart($productListArray){
+        // ESTA FUNCION ES PARA CONVERTIR ARRAY A OBJETO, SIEMPRE DEBE PASARSE EL ARRAY DE PRODUCTOS Y LUEGO UN BOOLEANO PARA SABER SI GUARDAR LOS ITEMS EN LA BASE DE DATOS.
+        // This function is to convert array to object, you must always pass the array of products and then a boolean to know whether to save the items in the database.
+        function array_to_cart($productListArray,$flag){
                 $newCart = new Cart();
                 foreach($productListArray as $productArray){
                     $productArrays = array(
@@ -391,7 +362,7 @@
                             }catch(Exception $e){
                                 echo "<p>".$e->getMessage()."</p>";
                             }
-                            $newCart->addItem($product, $productArray['qty'],$productArrays);
+                            $newCart->addItem($product,$productArray['qty'],$productArrays,$flag);
                             $newCart->setTotal();
                             $newCart->setProducts();
 

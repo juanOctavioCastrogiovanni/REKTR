@@ -11,10 +11,10 @@
 		<h4>Contact Details</h4>
 		<p>	18 Fresno,<br/> CA 93727, USA
 			<br/><br/>
-			info@bootsshop.com<br/>
+			info@rektr.com<br/>
 			﻿Tel 123-456-6780<br/>
 			Fax 123-456-5679<br/>
-			web:bootsshop.com
+			web:rektr.com
 		</p>		
 		</div>
 			
@@ -29,25 +29,25 @@
 		</div>
 		<div class="span4">
 		<h4>Email Us</h4>
-		<form class="form-horizontal">
+		<form class="form-horizontal" method="POST" action="contactForm.php">
         <fieldset>
           <div class="control-group">
            
-              <input type="text" placeholder="name" class="input-xlarge"/>
+              <input type="text" placeholder="name" name="name" class="input-xlarge"/>
            
           </div>
 		   <div class="control-group">
            
-              <input type="text" placeholder="email" class="input-xlarge"/>
+              <input type="text" placeholder="email" name="email" class="input-xlarge"/>
            
           </div>
 		   <div class="control-group">
            
-              <input type="text" placeholder="subject" class="input-xlarge"/>
+              <input type="text" placeholder="subject" name="subject" class="input-xlarge"/>
           
           </div>
           <div class="control-group">
-              <textarea rows="3" id="textarea" class="input-xlarge"></textarea>
+              <textarea rows="3" id="textarea" name="body" class="input-xlarge"></textarea>
            
           </div>
 

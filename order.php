@@ -18,7 +18,7 @@
             echo "<p>".$e->getMessage()."</p>";
         }
         $cartId = $_SESSION['ids']['cartId'];
-        $newObject = array_to_cart($_SESSION['cartArray']['productsArray']);
+        $newObject = array_to_cart($_SESSION['cartArray']['productsArray'],FALSE);
         $sale = $newObject->sale($conect, $_SESSION['ids']['cartId']);
         if($sale->execute()){      
                 $newObject->cartMail($_SESSION['user']['email']);

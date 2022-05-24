@@ -62,7 +62,7 @@
 		}
 		
 			
-		public function addItem($product,$qty,$productArray){
+		public function addItem($product,$qty,$productArray,$flag){
 			if(!in_array($product->getId(),$this->listId)){
 				$product->setQty($qty);
 				$product->setSubTotal($qty);
@@ -71,11 +71,11 @@
 				$this->setProductListArray($productArray);
 				array_push($this->productList,$product);
 				array_push($this->listId,$product->getId());
-				if(isset($_SESSION['user'])&&isset($_SESSION['ids'])){
+				if(isset($_SESSION['user'])&&isset($_SESSION['ids'])&&$flag){
 					$product->saveProduct($_SESSION['ids']['cartId']);	
 				}
 			} else {
-				$this->qtyModify($product,$qty);
+				$this->qtyModify($product,$qty,$flag);
 			}	
 		}
 		
@@ -93,7 +93,7 @@
 			
 		}
 		
-		private function qtyModify ($product,$qty){
+		private function qtyModify ($product,$qty,$flag){
 			$key = array_search($product->getId(), $this->listId);
 			if($this->productList[$key]->addQty($qty)<1){
 				unset($this->productList[$key]);
@@ -102,7 +102,7 @@
 			
 			$this->productListArray[$key]['qty'] = $this->productList[$key]->getQty();
 			$this->productListArray[$key]['subTotal'] = $this->productList[$key]->getSubTotal();
-			if(isset($_SESSION['user'])&&isset($_SESSION['ids'])){
+			if(isset($_SESSION['user'])&&isset($_SESSION['ids'])&&$flag){
 				$this->productList[$key]->updateProduct();	
 			}
 		}
@@ -258,21 +258,19 @@
 						}
 						$body .=	"<tr>
 										<td colspan='4' style='text-align:right; color: whitesmoke; border-left: 0.2px solid;'><strong>TOTAL PRICE =</strong></td>
-										<td class='label label-important' style='display:block; color: whitesmoke; border: 0.2px solid;'> <strong> $".$this->total."</strong></td>
+										<td style='color: whitesmoke; border-right: 0.2px solid;border-left: 0.2px solid;'><strong>".date("j/n/Y")." </strong></td>
 										</tr>
 										<tr>
 										<td colspan='4' style='text-align:right; color: whitesmoke; border: 0.2px solid;'><strong>Order date</strong></td>
-									<td style='color: whitesmoke; border-right: 0.2px solid;border-left: 0.2px solid;'><strong>".date("j/n/Y")." </strong></td>
+										<td class='label label-important' style='display:block; color: whitesmoke; border: 0.2px solid;'> <strong> $".$this->total."</strong></td>
 									</tr>
 									</tbody>
 						</table>
 						</div>
 				
 				
-					<div style='text-align: center; height: 100px; padding-top: 30px;'>
-						<a href='#' style='    border-radius: 30px;
-						background: #f3a333;
-						color: #ffffff;    padding: 10px 15px; text-decoration: none;'>Butasssssssston</a>
+					<div style='text-align: center; height: 70px; padding-top: 30px;'>
+						
 					</div>
 				</div>
 				<div style='background-color: grey; width: 100%; display: flex; justify-content: center; '>

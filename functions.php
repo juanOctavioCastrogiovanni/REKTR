@@ -98,54 +98,7 @@ function roundDown($a,$b){
 function showMenssage($cod){
 
     switch ($cod) {
-        case '0x001':
-            $message = "El firstname ingresado no es válido";
-        break;
         
-        case '0x002':
-            $message = "El e-mail ingresado no es válido";
-        break;
-
-        case '0x003':
-            $message = "El message ingresado no es válido";
-        break;
-
-        case '0x004':
-            $message = "Su consulta ha sido enviada... muchas gracias!";
-        break;
-
-        case '0x005':
-            $message = "Ocurrio un error, intente de nuevo";
-        break;
-
-        case '0x006':
-            $message = "Se creo un nuevo producto satisfactoriamente";
-        break;
-
-        case '0x007':
-            $message = "Error al crear un producto";
-        break;
-
-        case '0x008':
-            $message = "Se actualizo el producto satisfactoriamente";
-        break;
-
-        case '0x009':
-            $message = "Error al actualizar el producto";
-        break;
-
-        case '0x010':
-            $message = "Se elimino el producto satisfactoriamente";
-        break;
-
-        case '0x011':
-            $message = "Error al eliminar el producto";
-        break;
-
-        case '0x012':
-            $message = "Error al subir la imagen.";
-        break;
-
         case '0x013':
             $message = "User already exists";
         break;
@@ -220,30 +173,30 @@ function cart_to_array($object){
     return $array;             
 }
 
-function array_to_cart($productListArray){
-        $newCart = new Cart();
-        foreach($productListArray as $productArray){
-            $productArrays = array(
-                "productId"=>$productArray['productId'],
-                "name"=>$productArray['name'],
-                "price"=>$productArray['price'],
-                "image1"=>$productArray['image1'],
-                "qty"=>0,
-                "subTotal"=>0
-            );
-                    try{ 
-                        $product = new Product($productArray['productId'],$productArray['name'],$productArray['price']);
-                        $product->setImage($productArray['image1']);
-                    }catch(Exception $e){
-                        echo "<p>".$e->getMessage()."</p>";
-                    }
-                    $newCart->addItem($product, $productArray['qty'],$productArrays);
-                    $newCart->setTotal();
-                    $newCart->setProducts();
+function array_to_cart($productListArray,$flag){
+    $newCart = new Cart();
+    foreach($productListArray as $productArray){
+        $productArrays = array(
+            "productId"=>$productArray['productId'],
+            "name"=>$productArray['name'],
+            "price"=>$productArray['price'],
+            "image1"=>$productArray['image1'],
+            "qty"=>0,
+            "subTotal"=>0
+        );
+                try{ 
+                    $product = new Product($productArray['productId'],$productArray['name'],$productArray['price']);
+                    $product->setImage($productArray['image1']);
+                }catch(Exception $e){
+                    echo "<p>".$e->getMessage()."</p>";
+                }
+                $newCart->addItem($product,$productArray['qty'],$productArrays,$flag);
+                $newCart->setTotal();
+                $newCart->setProducts();
 
-            }
-                    
-        return $newCart;      
+        }
+                
+    return $newCart;      
 }
 
 
