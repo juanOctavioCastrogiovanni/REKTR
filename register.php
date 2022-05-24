@@ -38,19 +38,19 @@
 		<div class="control-group">
 			<label class="control-label" for="inputFname1">First name <sup>*</sup></label>
 			<div class="controls">
-			  <input type="text" id="inputFname1" placeholder="First Name"  name="firstname" required>
+			  <input type="text" id="inputFname1" pattern="[A-Za-z0-9_-]" placeholder="First Name"  name="firstname" required>
 			</div>
 		 </div>
 		 <div class="control-group">
 			<label class="control-label" for="inputLnam" >Last name <sup>*</sup></label>
 			<div class="controls">
-			  <input type="text" id="inputLnam" placeholder="Last Name" name="lastname" required>
+			  <input type="text" id="inputLnam" pattern="[A-Za-z0-9_-]" placeholder="Last Name" name="lastname" required>
 			</div>
 		 </div>
 		<div class="control-group">
 		<label class="control-label" for="input_email">Email <sup>*</sup></label>
 		<div class="controls">
-		  <input type="text" id="input_email" placeholder="Email" name="email" required>
+		  <input type="text" id="input_email" pattern="[A-Za-z0-9_@-]" placeholder="Email" name="email" required>
 		</div>
 	  </div>	  
 	<div class="control-group">

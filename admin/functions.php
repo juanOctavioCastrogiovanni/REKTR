@@ -370,6 +370,13 @@
                             
                 return $newCart;      
         }
+
+        // FUNCION QUE FILTRA CARACTERES ESPECIALES PARA EVITAR FUTURAS INYECCIONES EN EL SQL
+        
+        function RemoveSpecialChar($str){
+            $res = preg_replace('/[0-9\.\;\" "]+/', '', $str);
+            return $res;
+        }
         
 
 ?>

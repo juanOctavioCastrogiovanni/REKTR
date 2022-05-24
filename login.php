@@ -46,7 +46,7 @@ include "./functions.php";
 			  <div class="control-group">
 				<label class="control-label" for="inputEmail1">Email</label>
 				<div class="controls">
-				  <input class="span3"  type="text" id="inputEmail1" placeholder="Email" name="email">
+				  <input class="span3" pattern="[A-Za-z0-9_-]" type="text" id="inputEmail1" placeholder="Email" name="email">
 				</div>
 			  </div>
 			  <div class="control-group">

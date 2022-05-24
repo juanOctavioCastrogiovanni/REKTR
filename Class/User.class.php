@@ -10,6 +10,8 @@
 		private $activation=NULL;
 		private $state=NULL;
 		private $admin=NULL;
+		private $subject=NULL;
+		private $body=NULL;
 		
 		function __construct( $email = '', $pass = '' )
 		{
@@ -17,8 +19,12 @@
 			$this->pass = $pass;
 		}
 
-		public function setId( $id ){	$this->_id = $id; }
-		public function getId(){ return $this->_id; }
+		public function setSubject( $id ){	$this->subject = $subject; }
+		public function getSubject(){ return $this->subject; }
+		public function setBody( $id ){	$this->body = $body; }
+		public function getBody(){ return $this->body; }
+		public function setId( $id ){	$this->id = $id; }
+		public function getId(){ return $this->id; }
 		public function setFirstName( $name ){	$this->firstname = $name; }
 		public function getFirstName(){ return $this->firstname; }
 		public function setLastName( $lastName ){	$this->lastname = $lastName; }

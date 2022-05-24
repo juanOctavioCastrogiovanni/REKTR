@@ -33,26 +33,21 @@
         <fieldset>
           <div class="control-group">
            
-              <input type="text" placeholder="name" name="name" class="input-xlarge"/>
+              <input type="text" placeholder="name" pattern="[A-Za-z0-9_-]" name="name" class="input-xlarge"/>
            
           </div>
 		   <div class="control-group">
            
-              <input type="text" placeholder="email" name="email" class="input-xlarge"/>
+              <input type="text" placeholder="email"  pattern="[A-Za-z0-9_@-]" name="email" class="input-xlarge"/>
            
           </div>
 		   <div class="control-group">
-           
-              <input type="text" placeholder="subject" name="subject" class="input-xlarge"/>
-          
+              <input type="text" placeholder="subject" name="subject" class="input-xlarge"/>         
           </div>
           <div class="control-group">
               <textarea rows="3" id="textarea" name="body" class="input-xlarge"></textarea>
-           
           </div>
-
             <button class="btn btn-large" type="submit">Send Messages</button>
-
         </fieldset>
       </form>
 		</div>

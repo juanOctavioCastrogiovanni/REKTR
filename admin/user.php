@@ -10,10 +10,11 @@ if( isset( $_GET["action"] ) ){
     
         switch ($action) {
             case 'addUser':
-                $firstname = $_POST["firstname"];
-                $lastname = $_POST["lastname"];
-                $email = $_POST["email"];
-                $pass = $_POST["password"];
+                
+                $firstname = RemoveSpecialChar($_POST["firstname"]);
+                $lastname = RemoveSpecialChar($_POST["lastname"]);
+                $email = RemoveSpecialChar($_POST["email"]);
+                $pass = RemoveSpecialChar($_POST["password"]);
                 if($pass==$_POST["rePassword"]&&strlen($pass)>8){
                     addUser($firstname, $lastname, $email, $pass);
                 } else {
@@ -22,14 +23,14 @@ if( isset( $_GET["action"] ) ){
             break;
     
             case 'activeUser':
-                $email = $_GET["u"];
-                $clave = $_GET["k"];
+                $email = RemoveSpecialChar($_GET["u"]);
+                $clave = RemoveSpecialChar($_GET["k"]);
                 activeUser($email, $clave);
             break;
     
             case 'loginUser':
-                $email = $_POST["email"];
-                $pass = $_POST["password"];
+                $email = RemoveSpecialChar($_POST["email"]);
+                $pass = RemoveSpecialChar($_POST["password"]);
                 login($email, $pass);
             break;
     
@@ -38,21 +39,21 @@ if( isset( $_GET["action"] ) ){
             break;
             
             case 'recoveryUser':
-                $email = $_POST["email"];
+                $email = RemoveSpecialChar($_POST["email"]);
                 recoveryUser( $email );
             break;
            
             case 'deleteUser':
-                $email = $_POST["email"];
+                $email = RemoveSpecialChar($_POST["email"]);
                 if($_SESSION['user']['email']==$email){
                     deleteUser( $_SESSION['ids']['userId'] );
                 }
             break;
     
             case 'savePass':
-                $email = $_POST["email"];
-                $pass = $_POST["pass"];
-                $clave = $_POST["clave"];
+                $email = RemoveSpecialChar($_POST["email"]);
+                $pass = RemoveSpecialChar($_POST["pass"]);
+                $clave = RemoveSpecialChar($_POST["clave"]);
                 guardarClave( $email, $pass, $clave );
             break;
         }

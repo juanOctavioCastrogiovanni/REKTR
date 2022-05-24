@@ -117,7 +117,7 @@
 									<div class="div1">
 										<form class="form-horizontal loginFrm" action="./admin/user.php?action=loginUser" method="POST">
 											<div class="control-group">
-												<input type="text" id="inputEmail" placeholder="Email" name="email">
+												<input type="text" id="inputEmail" pattern="[A-Za-z0-9_-]" placeholder="Email" name="email">
 												<input type="hidden" name="type" value="login">
 											</div>
 											<div class="control-group" style="margin-bottom:10px">
