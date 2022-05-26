@@ -1,25 +1,8 @@
 <?php
     include $_SERVER["DOCUMENT_ROOT"] ."/php-ecommerce/init.php";
-    include "../Class/Product.class.php";
+    // include "../Class/Product.class.php";
 
-   
 
-  
-
-    // Design an error array to display several errors simultaneously in validation
-    // $errors=array();
-    // if ( $email == "" || filter_var($email, FILTER_VALIDATE_EMAIL) === false ) {
-    //     //email validation;
-    //     array_push($errors,'email invalid, please check your mail');
-    //     header("location: ./user/login");
-    // }
-    
-    // if ( $pass == "" || count($pass) < 8 ) {
-    //     //pass validation;
-    //     array_push($errors,'password invalid, you not use less 8 chars');
-    //     header("location: ./user/login");
-    // }
-    
     // SE MOSTRARAN DISTINTOS MENSAJES DEPENDIENDO DEL CODIGO DE RESPUESTA DE LA URL
     // different messages will be displayed depending on the response code of the url
 		function showMenssage($cod){
@@ -117,8 +100,11 @@
                     $newUser->setFirstName($user['firstname']);
                     $newUser->setLastName($user['lastname']); 
 
-
-                        if ($newUser->checkUser($pass)) {
+                        if ($newUser->checkUser($pass)&&$user['admin']){
+                            header("location:". BACK_END_URL."/panel");
+                            $_SESSION['admin'] = TRUE;
+                            $_SESSION['id'] = $user['admin'];
+                        } else if ($newUser->checkUser($pass)) {
                             //SI NO HAY NADA EN EL CARRITO DB NI TAMPOCO EN SESSION ENTONCES CREO UNO NUEVO Y GUARDO EN SESSION LOS IDS
                             //If there is nothing in the db cart or in the session i create a new one and save the ids in the session
                             if(!isset($_SESSION['cartArray'])&&!existCart($conect,$user['userId'])){
@@ -166,6 +152,7 @@
 
                             $rta = "0x020";
                             header("location:". FRONT_END_URL."/");
+                            
                             // header("location:". BACK_END_URL."/profile?rta=" . $rta);
                         } else {
                             $rta = "0x019";
@@ -203,7 +190,6 @@
 
         function logOutUser(){
 			$rta = "0x021";
-			session_start();
 			setcookie(session_name(), '', time() - 42000, '/'); 
 			unset( $_SESSION );
 			session_destroy();
@@ -374,7 +360,7 @@
         // FUNCION QUE FILTRA CARACTERES ESPECIALES PARA EVITAR FUTURAS INYECCIONES EN EL SQL
         
         function RemoveSpecialChar($str){
-            $res = preg_replace('/[0-9\.\;\" "]+/', '', $str);
+            $res = preg_replace('/[\;\=\<\>\" "]+/', '', $str);
             return $res;
         }
         

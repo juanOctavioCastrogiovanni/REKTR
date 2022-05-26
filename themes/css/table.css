@@ -1,5 +1,5 @@
 .fixed_headers {
-  width: 750px;
+  width: 100%;
   table-layout: fixed;
   border-collapse: collapse;
 }

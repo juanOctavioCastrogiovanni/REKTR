@@ -95,10 +95,17 @@ function roundDown($a,$b){
         }
 }
 
+ // SE MOSTRARAN DISTINTOS MENSAJES DEPENDIENDO DEL CODIGO DE RESPUESTA DE LA URL
+    // different messages will be displayed depending on the response code of the url
 function showMenssage($cod){
 
     switch ($cod) {
-        
+        case '0x011':
+            $message = "Send email";
+        break; 
+        case '0x012':
+            $message = "Error, please try again";
+        break; 
         case '0x013':
             $message = "User already exists";
         break;
@@ -197,6 +204,11 @@ function array_to_cart($productListArray,$flag){
         }
                 
     return $newCart;      
+}
+
+function RemoveSpecialChar($str){
+    $res = preg_replace('/[\;\=\<\>\" "]+/', '', $str);
+    return $res;
 }
 
 

@@ -64,15 +64,19 @@
 				<?php
 				 	
 				?>
+
 				<div class="span6">
 					<div class="pull-right">
+					<?php if(!isset($_SESSION['admin'])){?>
 						<a href="<?php echo $point ?>/product_summary"><span>Total</span></a>
 						<span class="btn btn-mini">$<?php if(isset($_SESSION['cartArray'])){echo $_SESSION['cartArray']['total'];}else{echo 0;}  ?></span>
 						<a href="<?php echo $point ?>/product_summary"><span class=""></span></a>
 						<a href="<?php echo $point ?>/product_summary"><span class="btn btn-mini btn-primary"><i
 									class="icon-shopping-cart icon-white"></i>[ <?php if(isset($_SESSION['cartArray'])){echo $_SESSION['cartArray']['products'];}else{echo 0;}  ?> ]  Itemes in your cart </span> </a>
+					
 					<?php
-					if(isset($_SESSION['user'])){
+
+			 		} if(isset($_SESSION['user'])){
 						echo "<a href='".$point."/user/logOut.php?b=0'><span class='btn btn-mini btn-danger'><i
 						class='icon-user icon-white'></i> Logout </span> </a>";
 					} 
@@ -82,6 +86,7 @@
 			</div>
 			<!-- Navbar ================================================== -->
 			<div id="logoArea" class="navbar">
+				<?php if(!isset($_SESSION['admin'])){?>
 				<a id="smallScreen" data-target="#topMenu" data-toggle="collapse" class="btn btn-navbar">
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
@@ -117,7 +122,7 @@
 									<div class="div1">
 										<form class="form-horizontal loginFrm" action="./admin/user.php?action=loginUser" method="POST">
 											<div class="control-group">
-												<input type="text" id="inputEmail" pattern="[A-Za-z0-9_-]" placeholder="Email" name="email">
+												<input type="text" id="inputEmail" pattern="[A-Za-z0-9_-@]" placeholder="Email" name="email">
 												<input type="hidden" name="type" value="login">
 											</div>
 											<div class="control-group" style="margin-bottom:10px">
@@ -143,6 +148,7 @@
 					</ul>
 				</div>
 			</div>
+			<?php  }?>
 		</div>
 	</div>
 	<!-- Header End====================================================================== -->

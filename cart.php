@@ -31,7 +31,7 @@
                 $newCart->setTotal();
                 $newCart->setProducts();
                 if(isset($_SESSION['user'])&&isset($_SESSION['ids'])){
-                    $newObject->updateCart($_SESSION['ids']['cartId']);
+                    $newCart->updateCart($_SESSION['ids']['cartId']);
                 } 
                 $_SESSION['cartArray'] = cart_to_array($newCart);     
             }catch(Exception $e){

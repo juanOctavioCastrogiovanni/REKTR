@@ -1,5 +1,6 @@
 <?php
 	include "./components/header.php";
+	include "./functions.php";
 ?>
 <div id="mainBody">
 <div class="container">
@@ -29,16 +30,19 @@
 		</div>
 		<div class="span4">
 		<h4>Email Us</h4>
+		<?php if (isset( $_GET["rta"]) ) {
+				echo showMenssage( $_GET["rta"] );
+			} ?>
 		<form class="form-horizontal" method="POST" action="contactForm.php">
         <fieldset>
           <div class="control-group">
            
-              <input type="text" placeholder="name" pattern="[A-Za-z0-9_-]" name="name" class="input-xlarge"/>
+              <input type="text" placeholder="name"  name="name" class="input-xlarge"/>
            
           </div>
 		   <div class="control-group">
            
-              <input type="text" placeholder="email"  pattern="[A-Za-z0-9_@-]" name="email" class="input-xlarge"/>
+              <input type="text" placeholder="email"  name="email" class="input-xlarge"/>
            
           </div>
 		   <div class="control-group">

@@ -14,7 +14,7 @@ if( isset( $_GET["action"] ) ){
                 $firstname = RemoveSpecialChar($_POST["firstname"]);
                 $lastname = RemoveSpecialChar($_POST["lastname"]);
                 $email = RemoveSpecialChar($_POST["email"]);
-                $pass = RemoveSpecialChar($_POST["password"]);
+                $pass = $_POST["password"];
                 if($pass==$_POST["rePassword"]&&strlen($pass)>8){
                     addUser($firstname, $lastname, $email, $pass);
                 } else {
@@ -23,8 +23,8 @@ if( isset( $_GET["action"] ) ){
             break;
     
             case 'activeUser':
-                $email = RemoveSpecialChar($_GET["u"]);
-                $clave = RemoveSpecialChar($_GET["k"]);
+                $email = $_GET["u"];
+                $clave = $_GET["k"];
                 activeUser($email, $clave);
             break;
     
@@ -51,9 +51,9 @@ if( isset( $_GET["action"] ) ){
             break;
     
             case 'savePass':
-                $email = RemoveSpecialChar($_POST["email"]);
-                $pass = RemoveSpecialChar($_POST["pass"]);
-                $clave = RemoveSpecialChar($_POST["clave"]);
+                $email = $_POST["email"];
+                $pass = $_POST["pass"];
+                $clave = $_POST["clave"];
                 guardarClave( $email, $pass, $clave );
             break;
         }
