@@ -363,6 +363,39 @@
             $res = preg_replace('/[\;\=\<\>\" "]+/', '', $str);
             return $res;
         }
+
+
+
+        // PENSAR FUNCION STOCK
+        function stock($id){
+            try{ 
+                $conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
+                $conect = $conect->conect();
+                try{
+                    try{
+                        $sql = sprintf("SELECT * FROM carts WHERE cartId=%d", $id);
+                        $stmt = $conect->prepare($sql);
+                        if($stmt->execute()){
+                            $cart = $stmt->fetch(PDO::FETCH_ASSOC);
+                            $newCart = new Cart();
+                        }
+                    }
+                    catch(Exception $e){
+                        echo "<p>".$e->getMessage()."</p>";
+                        }
+                }
+                catch(Exception $e){
+                echo "<p>".$e->getMessage()."</p>";
+                }
+                
+
+            }
+            catch(Exception $e){
+                echo "<p>".$e->getMessage()."</p>";
+            }
+        }
+
+        
         
 
 ?>

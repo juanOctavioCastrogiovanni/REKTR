@@ -52,7 +52,7 @@ include "../components/header.php";
                                         echo "<td>".$cart['total']."</td>";
                                         echo "<td><a href='".FRONT_END_URL."/admin/detail?id=".$cart['cartId']."' class='btn btn-danger'>X</a></td>";
                                         echo "<td><a href='/admin/pay?action=paid&id=".$cart['cartId']."' class='btn btn-success'>Paid</a></td>";
-                                        echo "<td><a href='/admin/pay?action=paid&id=".$cart['cartId']."' class='btn btn-success'>Pick</a></td>";
+                                        echo "<td><a href='/admin/pay?action=pick&id=".$cart['cartId']."' class='btn btn-success'>Pick</a></td>";
                                         echo "<td><a href='' class='btn btn-warning'>></a></td>";
                                         echo "</tr>";
                                     } 
