@@ -101,9 +101,9 @@
                     $newUser->setLastName($user['lastname']); 
 
                         if ($newUser->checkUser($pass)&&$user['admin']){
-                            header("location:". BACK_END_URL."/panel");
                             $_SESSION['admin'] = TRUE;
                             $_SESSION['id'] = $user['admin'];
+                            header("location:". BACK_END_URL."/orderList");
                         } else if ($newUser->checkUser($pass)) {
                             //SI NO HAY NADA EN EL CARRITO DB NI TAMPOCO EN SESSION ENTONCES CREO UNO NUEVO Y GUARDO EN SESSION LOS IDS
                             //If there is nothing in the db cart or in the session i create a new one and save the ids in the session

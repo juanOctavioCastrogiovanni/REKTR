@@ -1,5 +1,13 @@
-
-<div class="container">
+<?php
+$point = 1;
+include "./functions.php";
+include ("../middleware/adminMiddleware.php");
+include "../components/header.php";
+?>
+<div id='mainBody'>
+    <div class='container'>
+        <div class='row'>
+            <div class="container">
                 <h3> ORDEN LIST</h3>
                 <hr class="soft" />
 
@@ -13,11 +21,11 @@
                             <tr>
                                 <th>Order</th>
                                 <th>Date</th>
-                                <th>Total</th>
-                                <th>Paid</th>
+                                <th>Email</th>
                                 <th>User</th>
+                                <th>Paid</th>
                                 <th>Pick up</th>
-                                <th>Order</th>
+                                <th>Total</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -29,7 +37,7 @@
                                 echo "<p>".$e->getMessage()."</p>";
                             }
 
-                            $sql = "SELECT * FROM carts WHERE sale = 1";
+                            $sql = "SELECT cartId,date, total, pay, pickup, firstname, lastname, email FROM carts INNER JOIN users ON users.userId=carts.userId WHERE sale = 1";
                             $stmt = $conect->prepare($sql);
                             if($stmt->execute()){
                                 if($stmt->rowCount()>0){
@@ -37,23 +45,15 @@
                                         echo "<tr>";
                                         echo "<td>".$cart['cartId']."</td>";
                                         echo "<td>".$cart['date']."</td>";
+                                        echo "<td>".$cart['email']."</td>";
+                                        echo "<td>".$cart['firstname']." ".$cart['lastname']."</td>";
+                                        echo "<td>"; echo $cart['pay']?"Yes":"No"; echo"</td>";
+                                        echo "<td>"; echo $cart['pickup']?"Yes":"No"; echo"</td>";
                                         echo "<td>".$cart['total']."</td>";
-                                        echo "<td>"; 
-                                        if($cart['pay']){
-                                            echo "Yes";
-                                        } else {
-                                            echo "No";
-                                        }
-                                        echo"</td>";
-                                        echo "<td>"; 
-                                        if($cart['pickup']){
-                                            echo "Yes";
-                                        } else {
-                                            echo "No";
-                                        }
-                                        echo"</td>";
-                                        
-                                        echo "<td><a href='".FRONT_END_URL."/user/panel?action=orderDetail&id=".$cart['cartId']."' class='btn btn-danger'>Cart detail</a></td>";
+                                        echo "<td><a href='".FRONT_END_URL."/admin/detail?id=".$cart['cartId']."' class='btn btn-danger'>X</a></td>";
+                                        echo "<td><a href='/admin/pay?action=paid&id=".$cart['cartId']."' class='btn btn-success'>Paid</a></td>";
+                                        echo "<td><a href='/admin/pay?action=paid&id=".$cart['cartId']."' class='btn btn-success'>Pick</a></td>";
+                                        echo "<td><a href='' class='btn btn-warning'>></a></td>";
                                         echo "</tr>";
                                     } 
                                 } 
@@ -63,6 +63,11 @@
                         </table>
                     </div>
                 </div>
+            </div>
+
+            </div>
+                </div>
+            </div>
             </div>
 
                            

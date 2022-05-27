@@ -76,7 +76,12 @@
 					
 					<?php
 
-			 		} if(isset($_SESSION['user'])){
+			 		}else if(isset($_SESSION['admin'])){
+						echo "<a href='".$point."/admin/orderList'><span class='btn btn-mini btn-info'><i
+						class='icon-user icon-white'></i> Panel admin </span> </a>";
+					}
+					
+					if(isset($_SESSION['user'])){
 						echo "<a href='".$point."/user/logOut.php?b=0'><span class='btn btn-mini btn-danger'><i
 						class='icon-user icon-white'></i> Logout </span> </a>";
 					} 
