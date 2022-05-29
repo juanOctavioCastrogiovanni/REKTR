@@ -368,7 +368,7 @@
 
         // PENSAR FUNCION STOCK
         function stock($id,$conect){
-                $stmt = $conect->prepare("SELECT products.productId, products.stock 
+                $stmt = $conect->prepare("SELECT products.productId, productscarts.qty, products.stock 
                 FROM productsCarts 
                 INNER JOIN carts 
                 INNER JOIN products ON 
@@ -378,15 +378,27 @@
                 $stmt->bindValue(':id', $id, PDO::PARAM_INT);
                 if($stmt->execute()){
                     foreach($stmt->fetchAll(PDO::FETCH_ASSOC) as $product){
-                        update($product['productId'],$product['stock']);
+                        if(!updateStock($product['productId'],$product['qty'],$product['stock'],$conect)){
+                            return FALSE;
+                        }   
                     }
+                    return TRUE;
+                } 
+                return FALSE;
+        }
+
+        function updateStock($id,$qty,$stock,$conect){
+                $totalStock = $stock - $qty;
+                $stmt = $conect->prepare("UPDATE products SET stock=:stock WHERE productId=:id");
+                $stmt->bindValue(':stock', $totalStock, PDO::PARAM_INT);
+                $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+                if($stmt->execute()){
+                    return TRUE;
                 }
+                return FALSE;
         }
 
-        function update($id,$stock){
-
-        }
-
+   
         
         
 
