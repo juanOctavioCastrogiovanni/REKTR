@@ -367,32 +367,24 @@
 
 
         // PENSAR FUNCION STOCK
-        function stock($id){
-            try{ 
-                $conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
-                $conect = $conect->conect();
-                try{
-                    try{
-                        $sql = sprintf("SELECT * FROM carts WHERE cartId=%d", $id);
-                        $stmt = $conect->prepare($sql);
-                        if($stmt->execute()){
-                            $cart = $stmt->fetch(PDO::FETCH_ASSOC);
-                            $newCart = new Cart();
-                        }
+        function stock($id,$conect){
+                $stmt = $conect->prepare("SELECT products.productId, products.stock 
+                FROM productsCarts 
+                INNER JOIN carts 
+                INNER JOIN products ON 
+                productscarts.cartId=carts.cartId AND 
+                products.productId=productscarts.productId AND 
+                carts.cartId = :id");
+                $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+                if($stmt->execute()){
+                    foreach($stmt->fetchAll(PDO::FETCH_ASSOC) as $product){
+                        update($product['productId'],$product['stock']);
                     }
-                    catch(Exception $e){
-                        echo "<p>".$e->getMessage()."</p>";
-                        }
                 }
-                catch(Exception $e){
-                echo "<p>".$e->getMessage()."</p>";
-                }
-                
+        }
 
-            }
-            catch(Exception $e){
-                echo "<p>".$e->getMessage()."</p>";
-            }
+        function update($id,$stock){
+
         }
 
         
