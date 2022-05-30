@@ -43,8 +43,8 @@
                                                 echo "<p style='color:red;'>Canceled</p>";
                                             }
                                         echo"</td>";
-                                        echo "<td>"; echo !$cart['cancel']? "<a href='".FRONT_END_URL."/user/panel?action=orderDetail&id=".$cart['cartId']."' class='btn btn-danger'>Cart detail</a>":""; echo"</td>";
-                                        echo "<td><a href='".FRONT_END_URL."/user/panel?action=orderDetail&id=".$cart['cartId']."' class='btn btn-danger'>Cart detail</a></td>";
+                                        echo "<td>"; echo !$cart['cancel']? "<a href='./process.php?action=cancel&id=".$cart['cartId']."' class='btn btn-danger'>Cancel order</a>":""; echo"</td>";
+                                        echo "<td><a href='".FRONT_END_URL."/user/panel?action=orderDetail&id=".$cart['cartId']."' class='btn btn-info'>></a></td>";
                                         echo "</tr>";
                                     } 
                                 } else if($stmt->rowCount()==0){

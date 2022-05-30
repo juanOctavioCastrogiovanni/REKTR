@@ -30,10 +30,10 @@
                 if($stmt->execute()){
                     if($stmt->fetch(PDO::FETCH_ASSOC)['pay']==1){
                         stock($id,$conect,'+');                    
-                        $stmt1 = $conect->prepare("UPDATE carts SET cancel=1 WHERE cartId=:id");
-                        $stmt1->bindValue(':id', $_GET['id'], PDO::PARAM_INT);
-                        $stmt1->execute();
                     }
+                    $stmt1 = $conect->prepare("UPDATE carts SET cancel=1 WHERE cartId=:id");
+                    $stmt1->bindValue(':id', $_GET['id'], PDO::PARAM_INT);
+                    $stmt1->execute();
                 }
             break;
         }

@@ -257,11 +257,11 @@
 								</tr>";
 						}
 						$body .=	"<tr>
-										<td colspan='4' style='text-align:right; color: whitesmoke; border-left: 0.2px solid;'><strong>TOTAL PRICE =</strong></td>
+										<td colspan='4' style='text-align:right; color: whitesmoke; border-left: 0.2px solid;'><strong>Order date&nbsp&nbsp</strong></td>
 										<td style='color: whitesmoke; border-right: 0.2px solid;border-left: 0.2px solid;'><strong>".date("j/n/Y")." </strong></td>
 										</tr>
 										<tr>
-										<td colspan='4' style='text-align:right; color: whitesmoke; border: 0.2px solid;'><strong>Order date</strong></td>
+										<td colspan='4' style='text-align:right; color: whitesmoke; border: 0.2px solid;'><strong>TOTAL PRICE&nbsp&nbsp </strong></td>
 										<td class='label label-important' style='display:block; color: whitesmoke; border: 0.2px solid;'> <strong> $".$this->total."</strong></td>
 									</tr>
 									</tbody>
