@@ -378,7 +378,7 @@
                 $stmt->bindValue(':id', $id, PDO::PARAM_INT);
                 if($stmt->execute()){
                     foreach($stmt->fetchAll(PDO::FETCH_ASSOC) as $product){
-                        if(!updateStock($product['productId'],$product['qty'],$product['stock'],$conect)){
+                        if(!updateStock($product['productId'],$product['qty'],$product['stock'],$conect,'-')){
                             return FALSE;
                         }   
                     }
@@ -387,8 +387,12 @@
                 return FALSE;
         }
 
-        function updateStock($id,$qty,$stock,$conect){
-                $totalStock = $stock - $qty;
+        function updateStock($id,$qty,$stock,$conect,$symbol){
+                if($symbol=='-'){
+                    $totalStock = $stock - $qty;
+                } else {
+                    $totalStock = $stock + $qty;                    
+                }
                 $stmt = $conect->prepare("UPDATE products SET stock=:stock WHERE productId=:id");
                 $stmt->bindValue(':stock', $totalStock, PDO::PARAM_INT);
                 $stmt->bindValue(':id', $id, PDO::PARAM_INT);
@@ -396,6 +400,34 @@
                     return TRUE;
                 }
                 return FALSE;
+        }
+
+        function cancel($id,$conect){
+            $stmt = $conect->prepare("SELECT pay WHERE cartId=:id");
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            if($stmt->execute()){
+                if($stmt->fetch(PDO::FETCH_ASSOC)['pay']==1){
+                    
+                    $stmt2 = $conect->prepare("SELECT products.productId, productscarts.qty, products.stock 
+                    FROM productsCarts 
+                    INNER JOIN carts 
+                    INNER JOIN products ON 
+                    productscarts.cartId=carts.cartId AND 
+                    products.productId=productscarts.productId AND 
+                    carts.cartId = :id");
+                    $stmt2->bindValue(':id', $id, PDO::PARAM_INT);
+                    if($stmt2->execute()){
+                        foreach($stmt2->fetchAll(PDO::FETCH_ASSOC) as $product){
+                            if(!updateStock($product['productId'],$product['qty'],$product['stock'],$conect,'+')){
+                                return FALSE;
+                            }   
+                        }
+                        return TRUE;
+                    } 
+                    return FALSE;
+                }
+                return TRUE;
+            }
         }
 
    

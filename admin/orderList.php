@@ -37,7 +37,7 @@ include "../components/header.php";
                                 echo "<p>".$e->getMessage()."</p>";
                             }
 
-                            $sql = "SELECT cartId,date, total, pay, pickup, firstname, lastname, email FROM carts INNER JOIN users ON users.userId=carts.userId WHERE sale = 1";
+                            $sql = "SELECT cartId,date, total, pay, pickup, firstname, lastname, email FROM carts INNER JOIN users ON users.userId=carts.userId WHERE sale = 1 AND cancel = 0";
                             $stmt = $conect->prepare($sql);
                             if($stmt->execute()){
                                 if($stmt->rowCount()>0){

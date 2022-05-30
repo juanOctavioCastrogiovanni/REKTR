@@ -22,7 +22,12 @@
             break;
             // FALTA HACER EL CANCEL, TENER EN CUENTA QUE SI NO SE HA PAGADO NO DEBE HACER NADA REALMENTE, 
             // SOLO OCULTAR LOS BOTONES, SI YA SE PAGO DEBE VOLVER A SUMAR EL STOCK
-            case 'cancel': cancel($_GET['id'],$conect);
+            case 'cancel': 
+            if(cancel($_GET['id'],$conect)){
+                $stmt = $conect->prepare("UPDATE carts SET cancel=1 WHERE cartId=:id");
+                $stmt->bindValue(':id', $_GET['id'], PDO::PARAM_INT);
+                $stmt->execute();
+            }
             break;
         }
             

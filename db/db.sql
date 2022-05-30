@@ -231,6 +231,7 @@ INSERT INTO `users` (`userId`, `firstname`, `lastname`, `email`, `pass`, `activa
   `products` int(11),
   `total` FLOAT(6,2),
   `pay` tinyint(1) NOT NULL DEFAULT 0,
+  `cancel` tinyint(1) NOT NULL DEFAULT 0,
   `pickup` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
