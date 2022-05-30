@@ -14,7 +14,7 @@
                                 <th>Date</th>
                                 <th>Total</th>
                                 <th>State</th>
-                                <th>Pick up</th>
+                                <th>Cancel</th>
                                 <th>Order</th>
                             </tr>
                             </thead>
@@ -36,8 +36,14 @@
                                         echo "<td>".$cart['cartId']."</td>";
                                         echo "<td>".$cart['date']."</td>";
                                         echo "<td>".$cart['total']."</td>";
-                                        echo "<td>";echo  !$cart['cancel']? "<p style='color:darkgreen;'>Process</p>":"<p style='color:red;'>Canceled</p>"; echo"</td>";
-                                        echo "<td>"; echo $cart['pickup']? "Yes":"No"; echo"</td>";
+                                        echo "<td>";  
+                                            if (!$cart['cancel']){
+                                                echo $cart['pickup']&&$cart['pay']?"<p style='color:darkgreen;'>Finished</p>":"<p style='color:#F59E00;'>Process</p>";
+                                            } else {
+                                                echo "<p style='color:red;'>Canceled</p>";
+                                            }
+                                        echo"</td>";
+                                        echo "<td>"; echo !$cart['cancel']? "<a href='".FRONT_END_URL."/user/panel?action=orderDetail&id=".$cart['cartId']."' class='btn btn-danger'>Cart detail</a>":""; echo"</td>";
                                         echo "<td><a href='".FRONT_END_URL."/user/panel?action=orderDetail&id=".$cart['cartId']."' class='btn btn-danger'>Cart detail</a></td>";
                                         echo "</tr>";
                                     } 
