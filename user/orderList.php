@@ -1,7 +1,7 @@
 <div class="span9">
                 <h3> ORDEN LIST</h3>
                 <hr class="soft" />
-
+                
                 <div class="row">
                     <!-- <div class="span9" style="min-height:900px"> -->
                     <div class="well" style="margin-left: 25px !important;">
@@ -43,7 +43,14 @@
                                                 echo "<p style='color:red;'>Canceled</p>";
                                             }
                                         echo"</td>";
-                                        echo "<td>"; echo !$cart['cancel']? "<a href='./process.php?action=cancel&id=".$cart['cartId']."' class='btn btn-danger'>Cancel order</a>":""; echo"</td>";
+                                        echo "<td>"; 
+                                            if(!$cart['pickup']){
+                                                echo !$cart['cancel']? "<a href='./process.php?action=cancel&id=".$cart['cartId']."' class='btn btn-danger'>Cancel order</a>":"<a href='' class='btn btn-danger btn-disabled' aria-disabled='true' disabled >Cancel order</a>"; 
+                                            } else {
+                                                echo "<a href='' class='btn btn-danger btn-disabled' aria-disabled='true' disabled>Cancel order</a>";                                                 
+                                            }
+                                        echo"</td>";
+
                                         echo "<td><a href='".FRONT_END_URL."/user/panel?action=orderDetail&id=".$cart['cartId']."' class='btn btn-info'>></a></td>";
                                         echo "</tr>";
                                     } 
