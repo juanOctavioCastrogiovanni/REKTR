@@ -38,20 +38,18 @@
 			 </div> 
 		 </div>
 		
-		<div class='pull-right'><p><a href='http://themesseo.com/bootshop-1-1.html'><strong>Copyright templete © Bootshop 1.1/Bootshop. Thanks.</strong></a></p></div>
-	</div><!-- Container End -->
+		 <div class='pull-right'><p><a href='http://themesseo.com/bootshop-1-1.html'><strong>Copyright templete © Bootshop 1.1/Bootshop. Thanks.</strong></a></p></div>
+		</div><!-- Container End -->
 	</div>
-	<script src="<?php echo $point ?>/themes/js/jquery.js" type="text/javascript"></script>
-	<script src="<?php echo $point ?>/themes/js/bootstrap.min.js" type="text/javascript"></script>
-	<script src="<?php echo $point ?>/themes/js/google-code-prettify/prettify.js"></script>
-	<script src="<?php echo $point ?>/themes/js/disabled.js"></script>
-	
-	<script src="<?php echo $point ?>/themes/js/bootshop.js"></script>
-    <script src="<?php echo $point ?>/themes/js/jquery.lightbox-0.5.js"></script>
-	
+<script src="<?php echo $point ?>/themes/js/jquery.js" type="text/javascript"></script>
+<script src="<?php echo $point ?>/themes/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="<?php echo $point ?>/themes/js/google-code-prettify/prettify.js"></script>
+<script src="<?php echo $point ?>/themes/js/bootshop.js"></script>
+<script src="<?php echo $point ?>/themes/js/jquery.lightbox-0.5.js"></script>
+
 <div id="secectionBox">
-<link rel="stylesheet" href="<?php echo $point ?>/themes/switch/themeswitch.css" type="text/css" media="screen" />
-<script src="<?php echo $point ?>/themes/switch/theamswitcher.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="<?php echo $point ?>/themes/switch/themeswitch.css" type="text/css" media="screen" />
+	<script src="<?php echo $point ?>/themes/switch/theamswitcher.js" type="text/javascript" charset="utf-8"></script>
 <!-- <script src="themes/js/priceFilter.js" type="text/javascript" charset="utf-8"></script> -->
 </div>
 </body>

@@ -31,33 +31,35 @@ include "../components/header.php";
                             <tbody>
                         <?php
                             try{ 
+                                // HAGO UNA CONSULTA DONDE TRAIGO TODOS LOS CARRITOS VENDIDOS Y NO CANCELADOS PARA ADMINISTRARLOS.
+                                // I make a query where I get all the carts sold and not canceled.
                                 $conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
                                 $conect = $conect->conect();
+                                $sql = "SELECT cartId,date, total, pay, pickup, firstname, lastname, email FROM carts INNER JOIN users ON users.userId=carts.userId WHERE sale = 1 AND cancel = 0";
+                                $stmt = $conect->prepare($sql);
+                                if($stmt->execute()){
+                                    if($stmt->rowCount()>0){
+                                        foreach($stmt->fetchAll() as $cart){
+                                            echo "<tr>";
+                                            echo "<td>".$cart['cartId']."</td>";
+                                            echo "<td>".$cart['date']."</td>";
+                                            echo "<td>".$cart['email']."</td>";
+                                            echo "<td>".$cart['firstname']." ".$cart['lastname']."</td>";
+                                            echo "<td>"; echo $cart['pay']?"Yes":"No"; echo"</td>";
+                                            echo "<td>"; echo $cart['pickup']?"Yes":"No"; echo"</td>";
+                                            echo "<td>".$cart['total']."</td>";
+                                            echo "<td><a href='./pay.php?action=cancel&id=".$cart['cartId']."' class='btn btn-danger'>X</a></td>";
+                                            echo !$cart['pay']? "<td><a href='./pay.php?action=paid&id=".$cart['cartId']."' class='btn btn-success'>Paid</a></td>":"<td><button class='btn btn-success' disabled>Paid</button></td>";
+                                            echo !$cart['pickup']? "<td><a href='./pay.php?action=pick&id=".$cart['cartId']."' class='btn btn-success'>Pick</a></td>":"<td><button class='btn btn-success' disabled>Pick</button></td>";
+                                            echo "<td><a href='".BACK_END_URL."/detail?id=".$cart['cartId']."' class='btn btn-warning'>></a></td>";
+                                            echo "</tr>";
+                                        } 
+                                    } 
+                                } 
                             }catch(Exception $e){
                                 echo "<p>".$e->getMessage()."</p>";
                             }
 
-                            $sql = "SELECT cartId,date, total, pay, pickup, firstname, lastname, email FROM carts INNER JOIN users ON users.userId=carts.userId WHERE sale = 1 AND cancel = 0";
-                            $stmt = $conect->prepare($sql);
-                            if($stmt->execute()){
-                                if($stmt->rowCount()>0){
-                                    foreach($stmt->fetchAll() as $cart){
-                                        echo "<tr>";
-                                        echo "<td>".$cart['cartId']."</td>";
-                                        echo "<td>".$cart['date']."</td>";
-                                        echo "<td>".$cart['email']."</td>";
-                                        echo "<td>".$cart['firstname']." ".$cart['lastname']."</td>";
-                                        echo "<td>"; echo $cart['pay']?"Yes":"No"; echo"</td>";
-                                        echo "<td>"; echo $cart['pickup']?"Yes":"No"; echo"</td>";
-                                        echo "<td>".$cart['total']."</td>";
-                                        echo "<td><a href='./pay.php?action=cancel&id=".$cart['cartId']."' class='btn btn-danger'>X</a></td>";
-                                        echo !$cart['pay']? "<td><a href='./pay.php?action=paid&id=".$cart['cartId']."' class='btn btn-success'>Paid</a></td>":"";
-                                        echo !$cart['pickup']? "<td><a href='./pay.php?action=pick&id=".$cart['cartId']."' class='btn btn-success'>Pick</a></td>":"";
-                                        echo "<td><a href='".BACK_END_URL."/detail?id=".$cart['cartId']."' class='btn btn-warning'>></a></td>";
-                                        echo "</tr>";
-                                    } 
-                                } 
-                            } 
                         ?>    
                           </tbody>
                         </table>

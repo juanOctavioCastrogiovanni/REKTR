@@ -40,6 +40,8 @@
 		public function setAdmin( $admin ){	$this->admin = $admin; }
 		public function getAdmin(){ return $this->admin; }
 		
+		//ENCRIPTA LA CONTRASEÑA
+		//encript the pass
 		public function configActivationCode(){	
 			$string = "abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ0123456789ª!·$%&/()=?¿*^¨ç_:;\|@#~€¬][}{}]";
 			$key = str_shuffle($string);
@@ -91,6 +93,8 @@
 			
 		}
 
+		// ESTAS FUNCIONES SON DE ENVIO DE MAILS PARA LOS USUARIOS.
+		// These functions are used to send emails to users.
 		public function activationMail(){
 					$url_activation = BACK_END_URL . "/";
                     $url_activation.= "user.php";

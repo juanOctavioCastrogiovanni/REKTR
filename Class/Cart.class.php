@@ -9,7 +9,9 @@
 		private $sale = 0;
 
 		public function getListId(){return $this->listId;}
-		
+
+		//ESTA FUNCION NO ELIMINA EL CARRITO, CREA UN NUEVO CARRITO ACTUALIZANDO EL ID CARRITO.
+		//this function does not remove cart, create new cart and cartId update.
 		public function cartDelete(){
 			$this->productList = [];
 			$this->productListArray = [];
@@ -18,17 +20,18 @@
 				try{ 
 					$conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
 					$conect = $conect->conect();
+					$newCart = $this->createCartDB($conect, $_SESSION['ids']['userId']);
+					if($newCart->execute()){
+						$_SESSION['ids']['cartId'] = $_SESSION['ids']['cartId'] + 1;
+					}
 				}catch(Exception $e){
 					echo "<p>".$e->getMessage()."</p>";
-				}
-
-				$newCart = $this->createCartDB($conect, $_SESSION['ids']['userId']);
-				if($newCart->execute()){
-					$_SESSION['ids']['cartId'] = $_SESSION['ids']['cartId'] + 1;
 				}
 			}
 		}
 
+		//ESTA FUNCION REMUEVE UN PRODUCTO DE LAS LISTA DE IDS, DEL ARRAY PRODUCTLISTARRAY Y DE LA LISTA DE OBJETOS DE PRODUCTOS.
+		//this function does remove product.
 		public function removeItem($id){
 			$key = array_search($id, $this->listId);
 			unset($this->productList[$key]);
@@ -38,30 +41,33 @@
 				try{ 
 					$conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
 					$conect = $conect->conect();
+					$sql = sprintf("DELETE FROM productscarts WHERE productId = %d AND cartId = %d", $id, $_SESSION['ids']['cartId']);
+					$stmt = $conect->prepare($sql);
+					$stmt->execute();
 				}catch(Exception $e){
 					echo "<p>".$e->getMessage()."</p>";
 				}
 
-				$sql = sprintf("DELETE FROM productscarts WHERE productId = %d AND cartId = %d", $id, $_SESSION['ids']['cartId']);
-				$stmt = $conect->prepare($sql);
-				$stmt->execute();
 			}
 		}
-		
+		//ESTA FUNCION ACTUALIZA EL LA CANTIDAD DE PRODUCTOS Y EL TOTAL DE UN CARRITO QUE LE PASA POR ID.
+		// update the quantity of products and the total of a cart.
 		public function updateCart($id){
 			try{ 
-                $conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
+				$conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
                 $conect = $conect->conect();
+				$sql = sprintf("UPDATE carts SET products = %d,total = %g WHERE cartId = %d", $this->products, $this->total, $id);
+				$stmt = $conect->prepare($sql);
+				$stmt->execute();
             }catch(Exception $e){
                 echo "<p>".$e->getMessage()."</p>";
             }
 
-			$sql = sprintf("UPDATE carts SET products = %d,total = %g WHERE cartId = %d", $this->products, $this->total, $id);
-			$stmt = $conect->prepare($sql);
-			$stmt->execute();
 		}
 		
-			
+		
+		//FUNCION CLAVE PARA AGREGAR UN NUEVO ITEM AL CARRITO. SI ESE PRODUCTO NO ESTA EN EL CARRITO, LO AGREGA, SI ESTA MODIFICA SU CANTIDAD.
+		// add a new item to the cart, if the product is not there, add it if not modify its quantity.
 		public function addItem($product,$qty,$productArray,$flag){
 			if(!in_array($product->getId(),$this->listId)){
 				$product->setQty($qty);
@@ -78,7 +84,9 @@
 				$this->qtyModify($product,$qty,$flag);
 			}	
 		}
-		
+
+		//ENCUENTRA EL PRODUCTO, SETEA SU CANTIDAD, ESTABLECE EL SUBTOTAL, AL IGUAL QUE EL TOTAL Y LA CANTIDAD DE PRODUCTOS, TAMBIEN MODIFICA LA BASE DE DATOS.
+		// find the product and set the quantity, set the subtotal and set the total. It also modifies the database.
 		public function updateItem($id, $qty){
 			$key = array_search($id, $this->listId);
 			$this->productList[$key]->setQty($qty);
@@ -93,6 +101,9 @@
 			
 		}
 		
+		//LLAMA AL METODO DENTRO DEL OBJETO PRODUCTO PARA SUMAR O RESTAR LAS CANTIDADES DEPENDIENDO DEL VALOR DE LA CANTIDAD, DEBE ENCONTRAR EL OBJETO ANTES DE MODIFICARLO. 
+		// calls the addQty object method to add or remove quantity.
+
 		private function qtyModify ($product,$qty,$flag){
 			$key = array_search($product->getId(), $this->listId);
 			if($this->productList[$key]->addQty($qty)<1){
@@ -160,23 +171,20 @@
 			try{ 
                 $conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
                 $conect = $conect->conect();
+				$sql = sprintf("INSERT INTO carts (userId, products,total) VALUES (%d,%d,%g)", $id, $this->products, $this->total);
+				$stmt = $conect->prepare($sql);
+				if($stmt->execute()){
+					$cartId = $conect->lastInsertId();
+					foreach($this->productList as $product){
+						$product->saveProduct($cartId);
+					}
+				}
             }catch(Exception $e){
                 echo "<p>".$e->getMessage()."</p>";
             }
-
-			$sql = sprintf("INSERT INTO carts (userId, products,total) VALUES (%d,%d,%g)", $id, $this->products, $this->total);
-			$stmt = $conect->prepare($sql);
-			if($stmt->execute()){
-				$cartId = $conect->lastInsertId();
-				foreach($this->productList as $product){
-					$product->saveProduct($cartId);
-				}
-			}
 		}
 
-		public function showCart(){
-			
-						
+		public function showCart(){			
 						foreach($this->getProductListArray() as $product){
 							echo "<tr>
 								<td> <img width='60' src='./themes/images/products/upload/".$product['image1']."' alt=''/></td>

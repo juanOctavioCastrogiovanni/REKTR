@@ -74,34 +74,37 @@
             return $array;
         }
 
+        // GUARDA LA ASOCICIACION EN LA TABLA PIBOT DE PRODUCTO Y CARRITO.
+        // save a new asociation between products and carts. 
         public function saveProduct($id){
                 try{ 
                     $conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
                     $conect = $conect->conect();
+                    $sql = sprintf("INSERT INTO productsCarts (productId, cartId, qty, subtotal) VALUES (%d,%d,%d,%g)", $this->productId, $id, $this->qty, $this->subTotal);
+                    $stmt = $conect->prepare($sql);
+                    $stmt->execute();
                 }catch(Exception $e){
                     echo "<p>".$e->getMessage()."</p>";
                 }
-    
-              $sql = sprintf("INSERT INTO productsCarts (productId, cartId, qty, subtotal) VALUES (%d,%d,%d,%g)", $this->productId, $id, $this->qty, $this->subTotal);
-              $stmt = $conect->prepare($sql);
-              $stmt->execute();
        }
 
+        // PARA HACER LA ACTUALIZACION DEL PRODUCTO, UTILIZA LOS ATRIBUTOS INTERNOS.
+        // uses internal attributes of the object itself to update.     
         public function updateProduct(){
                 try{ 
                     $conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
                     $conect = $conect->conect();
+                    $sql = sprintf("UPDATE productsCarts SET qty = %d,subtotal = %g WHERE productId = %d AND cartId = %d", $this->qty, $this->subTotal, $this->productId,$_SESSION['ids']['cartId']);
+                    $stmt = $conect->prepare($sql);
+                    $stmt->execute();
                 }catch(Exception $e){
                     echo "<p>".$e->getMessage()."</p>";
                 }
-
-              $sql = sprintf("UPDATE productsCarts SET qty = %d,subtotal = %g WHERE productId = %d AND cartId = %d", $this->qty, $this->subTotal, $this->productId,$_SESSION['ids']['cartId']);
-              $stmt = $conect->prepare($sql);
-              $stmt->execute();
               
        }
 
-
+      //  ESTAS FUNCIONES SE UTILIZAN EN LA PAGINA PRINCIPAL PARA MOSTRAR TODOS LOS PRODUCTOS
+      // this functions use to main page for show all products.
        public function showProductsCart(){
           echo "<tr>
                   <td> <img width='60' src='./themes/images/products/upload/".$this->image1."' alt=''/></td>

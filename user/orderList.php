@@ -45,9 +45,9 @@
                                         echo"</td>";
                                         echo "<td>"; 
                                             if(!$cart['pickup']){
-                                                echo !$cart['cancel']? "<a href='./process.php?action=cancel&id=".$cart['cartId']."' class='btn btn-danger'>Cancel order</a>":"<a href='' class='btn btn-danger btn-disabled' aria-disabled='true' disabled >Cancel order</a>"; 
+                                                echo !$cart['cancel']? "<a href='./process.php?action=cancel&id=".$cart['cartId']."' class='btn btn-danger'>Cancel order</a>":"<botton class='btn btn-danger btn-disabled' disabled>Cancel order</botton>"; 
                                             } else {
-                                                echo "<a href='' class='btn btn-danger btn-disabled' aria-disabled='true' disabled>Cancel order</a>";                                                 
+                                                echo "<botton class='btn btn-danger btn-disabled' disabled>Cancel order</botton>";                                                 
                                             }
                                         echo"</td>";
 

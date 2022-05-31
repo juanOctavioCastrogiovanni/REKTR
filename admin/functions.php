@@ -366,7 +366,10 @@
 
 
 
-        // PENSAR FUNCION STOCK
+        // ESTA FUNCION TRAE TODOS LOS PRODUCTOS RELACIONADOS CON UN CARRITO, Y AL RECORRERLO EJECUTA LA FUNCION UPDATESTOCK. 
+        // DEPENDIENDO SI SE PAGO LA ORDEN O SE CANCELO VA A RESTAR O SUMAR EL STOCK  
+        // I get all products related to the cart that comes by id. For each product use updateStock.
+
         function stock($id,$conect,$symbol){
                 $stmt = $conect->prepare("SELECT products.productId, productscarts.qty, products.stock 
                 FROM productsCarts 
@@ -387,10 +390,14 @@
                 return FALSE;
         }
 
+          // ACTUALIZA EL STOCK DE CADA PRODUCTO HACIENDO UNA SIMPLE SUMA O RESTA.
+        // Updates the stock of each product.
+
         function updateStock($id,$qty,$stock,$conect,$symbol){
+            $totalStock = 0;
                 if($symbol=='-'){
                     $totalStock = $stock - $qty;
-                } else {
+                } else if($symbol=='+'){
                     $totalStock = $stock + $qty;                    
                 }
                 $stmt = $conect->prepare("UPDATE products SET stock=:stock WHERE productId=:id");
