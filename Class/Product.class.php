@@ -35,6 +35,18 @@
         $this->new = $new;
         }
 
+        public function convertToArray(){
+          $productArray = array(
+            "productId"=>$this->productId,
+            "name"=>$this->name,
+            "price"=>$this->price,
+            "image1"=>$this->image1,
+            "qty"=>$this->qty,
+            "subTotal"=>$this->subTotal
+        );
+          return $productArray;
+        }
+
         public function addQty($qty){
           $this->qty += $qty;
           if ($this->qty<0){

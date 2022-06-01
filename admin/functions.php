@@ -1,6 +1,5 @@
 <?php
     include $_SERVER["DOCUMENT_ROOT"] ."/php-ecommerce/init.php";
-    include "../Class/Product.class.php";
 
 
     // SE MOSTRARAN DISTINTOS MENSAJES DEPENDIENDO DEL CODIGO DE RESPUESTA DE LA URL
@@ -316,6 +315,102 @@
             header("location: " . FRONT_END_URL . "/register?rta=" . $rta);
         }
 
+        function filterQuery($page,$category,$min,$max,$sort,$limit){
+            if($limit){
+                if($category){    
+                    return preQuery($page,"WHERE categories.categoryId=:category",$min,$max,$sort,"LIMIT 8 OFFSET ". 8*$page);
+                } else {
+                    return preQuery($page," ",$min,$max,$sort, "LIMIT 8 OFFSET ". 8*$page);
+                }
+            } else {
+                if($category){    
+                    return preQuery($page,"WHERE categories.categoryId=:category",$min,$max,$sort," ");
+                    } else {
+                    return preQuery($page," ",$min,$max,$sort," ");
+                }
+            }
+        }
+        
+        
+        function filterUrl($p1,$p2,$p3,$p4){
+            $array = array();
+            if($p1!=""){
+                array_push($array,'category='.$p1);
+            }
+            if($p2!=NULL){
+                array_push($array,'min='.$p2);
+            }
+            if($p3!=NULL){
+                array_push($array,'max='.$p3);
+            }
+            if($p4!=NULL){
+                array_push($array,'sort='.$p4);
+            }
+            return "products?".implode('&',$array);
+        }
+        
+        function roundDown($a,$b){
+            if($a%$b!=0){
+                return ($a/$b)-1;
+            }
+            return ($a/$b);
+        }
+        
+        
+          //this functions prepare all querys for filter. 
+          function preQuery($page,$category,$min,$max,$sort,$limit){
+            //if nobody query url exist. 
+            if($min==NULL&&$max==NULL&&$sort==NULL){
+                return "SELECT productId,products.name,price,brands.name as brand,categories.name as category,stock,short_description,description,image1,image2,image3,new FROM products INNER JOIN brands ON products.brand=brands.brandId INNER JOIN categories ON products.category=categories.categoryId $category $limit";
+            }
+            //if just exist sort param. 
+            if($min==NULL&&$max==NULL){
+                //is sort asc?. 
+                if($sort=="asc"){
+                    return "SELECT productId,products.name,price,brands.name as brand,categories.name as category,stock,short_description,description,image1,image2,image3,new FROM products INNER JOIN brands ON products.brand=brands.brandId INNER JOIN categories ON products.category=categories.categoryId $category ORDER BY price ASC $limit";
+                } else if($sort=="desc"){
+                    return "SELECT productId,products.name,price,brands.name as brand,categories.name as category,stock,short_description,description,image1,image2,image3,new FROM products INNER JOIN brands ON products.brand=brands.brandId INNER JOIN categories ON products.category=categories.categoryId $category ORDER BY price DESC $limit";
+                }
+            }
+            //if just exist min param. 
+            if($max==NULL&&$sort==NULL){
+                return "SELECT productId,products.name,price,brands.name as brand,categories.name as category,stock,short_description,description,image1,image2,image3,new FROM products INNER JOIN brands ON products.brand=brands.brandId INNER JOIN categories ON products.category=categories.categoryId $category AND products.price > $min $limit";
+            }
+            //if just exist max param. 
+            if($min==NULL&&$sort==NULL){
+                return "SELECT productId,products.name,price,brands.name as brand,categories.name as category,stock,short_description,description,image1,image2,image3,new FROM products INNER JOIN brands ON products.brand=brands.brandId INNER JOIN categories ON products.category=categories.categoryId $category AND products.price < $max $limit";
+            }
+            //if exist min and max params. 
+            if($sort==NULL){
+                return "SELECT productId,products.name,price,brands.name as brand,categories.name as category,stock,short_description,description,image1,image2,image3,new FROM products INNER JOIN brands ON products.brand=brands.brandId INNER JOIN categories ON products.category=categories.categoryId $category AND products.price BETWEEN $min AND $max $limit";
+            }
+            //if exist min and sort params. 
+            if($min==NULL){
+                //is sort asc?. 
+                if($sort=="asc"){
+                    return "SELECT productId,products.name,price,brands.name as brand,categories.name as category,stock,short_description,description,image1,image2,image3,new FROM products INNER JOIN brands ON products.brand=brands.brandId INNER JOIN categories ON products.category=categories.categoryId $category AND products.price < $max ORDER BY price ASC $limit";
+                } else if($sort=="desc"){
+                    return "SELECT productId,products.name,price,brands.name as brand,categories.name as category,stock,short_description,description,image1,image2,image3,new FROM products INNER JOIN brands ON products.brand=brands.brandId INNER JOIN categories ON products.category=categories.categoryId $category AND products.price < $max ORDER BY price DESC $limit";
+                }
+            }
+            
+            //if exist min and sort params. 
+            if($max==NULL){
+                if($sort=="asc"){
+                    return "SELECT productId,products.name,price,brands.name as brand,categories.name as category,stock,short_description,description,image1,image2,image3,new FROM products INNER JOIN brands ON products.brand=brands.brandId INNER JOIN categories ON products.category=categories.categoryId $category AND products.price > $min ORDER BY price ASC $limit";
+                } else if($sort=="desc"){
+                    return "SELECT productId,products.name,price,brands.name as brand,categories.name as category,stock,short_description,description,image1,image2,image3,new FROM products INNER JOIN brands ON products.brand=brands.brandId INNER JOIN categories ON products.category=categories.categoryId $category AND products.price > $min ORDER BY price DESC $limit";
+                }
+            }
+        
+            // this is the last way, exist params all
+            if($sort=="asc"){
+                    return "SELECT productId,products.name,price,brands.name as brand,categories.name as category,stock,short_description,description,image1,image2,image3,new FROM products INNER JOIN brands ON products.brand=brands.brandId INNER JOIN categories ON products.category=categories.categoryId $category AND products.price BETWEEN $min AND $max  ORDER BY price ASC $limit";
+                }else if($sort=="desc"){
+                    return "SELECT productId,products.name,price,brands.name as brand,categories.name as category,stock,short_description,description,image1,image2,image3,new FROM products INNER JOIN brands ON products.brand=brands.brandId INNER JOIN categories ON products.category=categories.categoryId $category AND products.price BETWEEN $min AND $max  ORDER BY price DESC $limit";
+                }
+        }
+
         // ESTA FUNCION ES PARA CONVERTIR UN OBJETO EN ARRAY PARA POSTERIORMENTE ALMACENARLO EN UN SESSION
         // This function is to convert an object into array to later store it in a session
         
@@ -324,37 +419,33 @@
             $array = Array();
             $array['total'] = $object->getTotal();
             $array['products'] = $object->getProducts();
-            $array['listId'] = $object->getListId(); // $array['sale'] = $object->getSale();
+            $array['listId'] = $object->getListId(); 
+            // $array['productsArray'] = $object->getProductListArray();
             $array['productsArray'] = $object->getProductListArray();
             return $array;             
         }
 
         // ESTA FUNCION ES PARA CONVERTIR ARRAY A OBJETO, SIEMPRE DEBE PASARSE EL ARRAY DE PRODUCTOS Y LUEGO UN BOOLEANO PARA SABER SI GUARDAR LOS ITEMS EN LA BASE DE DATOS.
         // This function is to convert array to object, you must always pass the array of products and then a boolean to know whether to save the items in the database.
-        function array_to_cart($productListArray,$flag){
-                $newCart = new Cart();
+        function array_to_cart($productListArray,$write){
+            try{
+            $newCart = new Cart();
                 foreach($productListArray as $productArray){
-                    $productArrays = array(
-                        "productId"=>$productArray['productId'],
-                        "name"=>$productArray['name'],
-                        "price"=>$productArray['price'],
-                        "image1"=>$productArray['image1'],
-                        "qty"=>0,
-                        "subTotal"=>0
-                    );
-                            try{ 
-                                $product = new Product($productArray['productId'],$productArray['name'],$productArray['price']);
-                                $product->setImage($productArray['image1']);
-                            }catch(Exception $e){
-                                echo "<p>".$e->getMessage()."</p>";
-                            }
-                            $newCart->addItem($product,$productArray['qty'],$productArrays,$flag);
-                            $newCart->setTotal();
-                            $newCart->setProducts();
-
+                    try{ 
+                        $product = new Product($productArray['productId'],$productArray['name'],$productArray['price']);
+                        $product->setImage($productArray['image1']);
+                    }catch(Exception $e){
+                        echo "<p>".$e->getMessage()."</p>";
                     }
-                            
-                return $newCart;      
+                    $newCart->addItem($product,$productArray['qty'],$write);
+                    $newCart->setTotal();
+                    $newCart->setProducts();
+                }
+            }catch(Exception $e){
+                echo "<p>".$e->getMessage()."</p>";
+            }
+                        
+            return $newCart;      
         }
 
         // FUNCION QUE FILTRA CARACTERES ESPECIALES PARA EVITAR FUTURAS INYECCIONES EN EL SQL

@@ -8,16 +8,9 @@
     // SI EL AGREGO UN PRODUCTO POR EL FORMULARIO
     // IF I ADD A PRODUCT THROUGH THE FORM
     if(isset($_POST['productId'])&&isset($_POST['qty'])){
-        $productArray = array(
-            "productId"=>$_POST['productId'],
-            "name"=>$_POST['name'],
-            "price"=>$_POST['price'],
-            "image1"=>$_POST['image1'],
-            "qty"=>0,
-            "subTotal"=>0
-        );
+
         // EN EL CASO DE QUE NO HAYA UNA SESSION DE CARRITO ACTIVA EN ESE MOMENTO
-        //if dont exist cart create in this moment
+        //if dont exist cart create in this moment.
         if(!isset($_SESSION['cartArray'])){
             try{ 
                 $product = new Product($_POST['productId'],$_POST['name'],$_POST['price']);
@@ -27,9 +20,12 @@
             }
             try{
                 $newCart = new Cart();
-                $newCart->addItem($product, $_POST['qty'],$productArray,TRUE);
+                $newCart->addItem($product, $_POST['qty'],TRUE);
                 $newCart->setTotal();
                 $newCart->setProducts();
+                // SI EXISTE UN USUARIO NECESITO GUARDAR LOS CAMBIOS DEL CARRITO EN LA BASE DE DATOS
+                //if exist a user, I need save all changes to the carts table in the database
+                
                 if(isset($_SESSION['user'])&&isset($_SESSION['ids'])){
                     $newCart->updateCart($_SESSION['ids']['cartId']);
                 } 
@@ -51,7 +47,7 @@
             // In all cases it is solved the same, the session array is converted into an object and works with the methods already established in each instituted object
 
             $newObject = array_to_cart($_SESSION['cartArray']['productsArray'],FALSE);          
-            $newObject->addItem($product, $_POST['qty'],$productArray,TRUE);
+            $newObject->addItem($product, $_POST['qty'],TRUE);
             $newObject->setTotal();
             $newObject->setProducts();
             if(isset($_SESSION['user'])&&isset($_SESSION['ids'])){

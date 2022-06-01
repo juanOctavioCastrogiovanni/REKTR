@@ -1,5 +1,5 @@
 <?php
-    include "./functions.php";
+    include "./admin/functions.php";
     include "../Class/Conect.class.php";
 
     if(isset($_GET['action'])&&isset($_GET['id'])){

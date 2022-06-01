@@ -1,7 +1,7 @@
 <?php
 	include "./components/header.php";
 	include "./Class/Product.class.php";
-	include "./functions.php";
+	include "./admin/functions.php";
 
     $array = array();
     if(isset($_GET['search'])){

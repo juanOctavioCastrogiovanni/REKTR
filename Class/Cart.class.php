@@ -2,7 +2,7 @@
 	class Cart 
 	{
 		private $productList = [];
-		private $productListArray = [];
+		// private $productListArray = [];
 		private $listId = [];
 		private $total = 0;
 		private $products = 0;
@@ -14,7 +14,7 @@
 		//this function does not remove cart, create new cart and cartId update.
 		public function cartDelete(){
 			$this->productList = [];
-			$this->productListArray = [];
+			// $this->productListArray = [];
 			$this->listId = [];
 			if(isset($_SESSION['user'])&&isset($_SESSION['ids'])){
 				try{ 
@@ -35,7 +35,7 @@
 		public function removeItem($id){
 			$key = array_search($id, $this->listId);
 			unset($this->productList[$key]);
-			unset($this->productListArray[$key]);
+			// unset($this->productListArray[$key]);
 			unset($this->listId[$key]);
 			if(isset($_SESSION['user'])&&isset($_SESSION['ids'])){
 				try{ 
@@ -50,38 +50,24 @@
 
 			}
 		}
-		//ESTA FUNCION ACTUALIZA EL LA CANTIDAD DE PRODUCTOS Y EL TOTAL DE UN CARRITO QUE LE PASA POR ID.
-		// update the quantity of products and the total of a cart.
-		public function updateCart($id){
-			try{ 
-				$conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
-                $conect = $conect->conect();
-				$sql = sprintf("UPDATE carts SET products = %d,total = %g WHERE cartId = %d", $this->products, $this->total, $id);
-				$stmt = $conect->prepare($sql);
-				$stmt->execute();
-            }catch(Exception $e){
-                echo "<p>".$e->getMessage()."</p>";
-            }
-
-		}
 		
 		
 		//FUNCION CLAVE PARA AGREGAR UN NUEVO ITEM AL CARRITO. SI ESE PRODUCTO NO ESTA EN EL CARRITO, LO AGREGA, SI ESTA MODIFICA SU CANTIDAD.
 		// add a new item to the cart, if the product is not there, add it if not modify its quantity.
-		public function addItem($product,$qty,$productArray,$flag){
+		public function addItem($product,$qty,$write){
 			if(!in_array($product->getId(),$this->listId)){
 				$product->setQty($qty);
 				$product->setSubTotal($qty);
-				$productArray["qty"] = $product->getQty();
-				$productArray["subTotal"] = $product->getSubTotal();
-				$this->setProductListArray($productArray);
+				// $productArray["qty"] = $product->getQty();
+				// $productArray["subTotal"] = $product->getSubTotal();
+				// $this->setProductListArray($productArray);
 				array_push($this->productList,$product);
 				array_push($this->listId,$product->getId());
-				if(isset($_SESSION['user'])&&isset($_SESSION['ids'])&&$flag){
+				if(isset($_SESSION['user'])&&isset($_SESSION['ids'])&&$write){
 					$product->saveProduct($_SESSION['ids']['cartId']);	
 				}
 			} else {
-				$this->qtyModify($product,$qty,$flag);
+				$this->qtyModify($product,$qty,$write);
 			}	
 		}
 
@@ -93,8 +79,8 @@
 			$this->productList[$key]->setSubTotal();
 			$this->setTotal();
 			$this->setProducts();
-			$this->productListArray[$key]['qty'] = $this->productList[$key]->getQty();
-			$this->productListArray[$key]['subTotal'] = $this->productList[$key]->getSubTotal();
+			// $this->productListArray[$key]['qty'] = $this->productList[$key]->getQty();
+			// $this->productListArray[$key]['subTotal'] = $this->productList[$key]->getSubTotal();
 			if(isset($_SESSION['user'])&&isset($_SESSION['ids'])){
 				$this->productList[$key]->updateProduct();	
 			}
@@ -104,16 +90,16 @@
 		//LLAMA AL METODO DENTRO DEL OBJETO PRODUCTO PARA SUMAR O RESTAR LAS CANTIDADES DEPENDIENDO DEL VALOR DE LA CANTIDAD, DEBE ENCONTRAR EL OBJETO ANTES DE MODIFICARLO. 
 		// calls the addQty object method to add or remove quantity.
 
-		private function qtyModify ($product,$qty,$flag){
+		private function qtyModify ($product,$qty,$write){
 			$key = array_search($product->getId(), $this->listId);
 			if($this->productList[$key]->addQty($qty)<1){
 				unset($this->productList[$key]);
-				unset($this->productListArray[$key]);
+				// unset($this->productListArray[$key]);
 			}
 			
-			$this->productListArray[$key]['qty'] = $this->productList[$key]->getQty();
-			$this->productListArray[$key]['subTotal'] = $this->productList[$key]->getSubTotal();
-			if(isset($_SESSION['user'])&&isset($_SESSION['ids'])&&$flag){
+			// $this->productListArray[$key]['qty'] = $this->productList[$key]->getQty();
+			// $this->productListArray[$key]['subTotal'] = $this->productList[$key]->getSubTotal();
+			if(isset($_SESSION['user'])&&isset($_SESSION['ids'])&&$write){
 				$this->productList[$key]->updateProduct();	
 			}
 		}
@@ -130,8 +116,16 @@
 		public function getProducts(){return $this->products;}
 
 		public function getProductList(){return $this->productList;}
-		public function setProductListArray($product){array_push($this->productListArray,$product);}
-		public function getProductListArray(){return $this->productListArray;}
+		// public function setProductListArray($product){array_push($this->productListArray,$product);}
+		// public function getProductListArray(){return $this->productListArray;}
+		public function getProductListArray(){
+			$array = Array();
+			foreach($this->productList as $productObject){
+				$position = $productObject->convertToArray();
+				array_push($array, $position);
+			}
+			return $array;
+		}
 		
 		public function setProducts(){
 			$productsQty = 0;
@@ -142,6 +136,20 @@
 		}
 
 		
+		//ESTA FUNCION ACTUALIZA EL LA CANTIDAD DE PRODUCTOS Y EL TOTAL DE UN CARRITO QUE LE PASA POR ID.
+		// update the quantity of products and the total of a cart.
+		public function updateCart($id){
+			try{ 
+				$conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
+				$conect = $conect->conect();
+				$sql = sprintf("UPDATE carts SET products = %d,total = %g WHERE cartId = %d", $this->products, $this->total, $id);
+				$stmt = $conect->prepare($sql);
+				$stmt->execute();
+			}catch(Exception $e){
+				echo "<p>".$e->getMessage()."</p>";
+			}
+
+		}
 		
 		public function createCartDB($con, $id){
 			$sql = sprintf( "INSERT INTO carts( userId, sale, products, total) VALUES ( %d, 0, 0, 0)",$id );
@@ -156,13 +164,13 @@
 		}
 		
 		public function lastId($con){
-				$sql = "SELECT MAX(cartId) AS cartId, userId FROM carts WHERE sale = 0";
+			$sql = "SELECT MAX(cartId) AS cartId, userId FROM carts WHERE sale = 0";
 				$lastId = $con->prepare($sql);
 				return $lastId;
-		}
+			}
 
-		public function getProductsDB($con,$userId,$id){
-			$sql = sprintf( "SELECT products.productId, products.name,products.price, products.image1, carts.cartId, productscarts.qty, productscarts.subtotal, carts.products,carts.total FROM productsCarts INNER JOIN carts INNER JOIN products ON productscarts.cartId=carts.cartId AND products.productId=productscarts.productId AND productscarts.cartId = %d AND carts.userId=%d;",$id,$userId);
+			public function getProductsDB($con,$userId,$id){
+				$sql = sprintf( "SELECT products.productId, products.name,products.price, products.image1, carts.cartId, productscarts.qty, productscarts.subtotal, carts.products,carts.total FROM productsCarts INNER JOIN carts INNER JOIN products ON productscarts.cartId=carts.cartId AND products.productId=productscarts.productId AND productscarts.cartId = %d AND carts.userId=%d;",$id,$userId);
 				$getProducts = $con->prepare($sql);
 				return $getProducts;
 		}
@@ -254,7 +262,7 @@
 						</thead>
 						<tbody>";
 
-						foreach($this->productListArray as $product){
+						foreach($this->getProductListArray() as $product){
 							$body .= "<tr>
 									<td style='color: whitesmoke; border-left: 0.2px solid; border-bottom: 0.2px solid;'>".$product['productId']."</td>
 									<!--<td style='color: whitesmoke; border-left: 0.2px solid; border-bottom: 0.2px solid;'> <img width='60' src='./themes/images/products/".$product['image1']."' alt=''/></td>-->

@@ -180,28 +180,23 @@ function cart_to_array($object){
     return $array;             
 }
 
-function array_to_cart($productListArray,$flag){
+function array_to_cart($productListArray,$write){
+    try{
     $newCart = new Cart();
-    foreach($productListArray as $productArray){
-        $productArrays = array(
-            "productId"=>$productArray['productId'],
-            "name"=>$productArray['name'],
-            "price"=>$productArray['price'],
-            "image1"=>$productArray['image1'],
-            "qty"=>0,
-            "subTotal"=>0
-        );
-                try{ 
-                    $product = new Product($productArray['productId'],$productArray['name'],$productArray['price']);
-                    $product->setImage($productArray['image1']);
-                }catch(Exception $e){
-                    echo "<p>".$e->getMessage()."</p>";
-                }
-                $newCart->addItem($product,$productArray['qty'],$productArrays,$flag);
-                $newCart->setTotal();
-                $newCart->setProducts();
-
+        foreach($productListArray as $productArray){
+            try{ 
+                $product = new Product($productArray['productId'],$productArray['name'],$productArray['price']);
+                $product->setImage($productArray['image1']);
+            }catch(Exception $e){
+                echo "<p>".$e->getMessage()."</p>";
+            }
+            $newCart->addItem($product,$productArray['qty'],$write);
+            $newCart->setTotal();
+            $newCart->setProducts();
         }
+    }catch(Exception $e){
+        echo "<p>".$e->getMessage()."</p>";
+    }
                 
     return $newCart;      
 }

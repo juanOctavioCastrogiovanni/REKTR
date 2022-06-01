@@ -1,6 +1,6 @@
 <?php
     include "./Class/User.class.php";
-    include "./functions.php";
+    include "./admin/functions.php";
     include $_SERVER["DOCUMENT_ROOT"] ."/php-ecommerce/init.php";
 
     if(isset($_POST['name'])&&isset($_POST['email'])&&isset($_POST['subject'])&&isset($_POST['body'])){
