@@ -1,6 +1,6 @@
 <?php
     include $_SERVER["DOCUMENT_ROOT"] ."/php-ecommerce/init.php";
-    // include "../Class/Product.class.php";
+    include "../Class/Product.class.php";
 
 
     // SE MOSTRARAN DISTINTOS MENSAJES DEPENDIENDO DEL CODIGO DE RESPUESTA DE LA URL

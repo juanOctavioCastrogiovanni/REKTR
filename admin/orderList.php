@@ -32,7 +32,7 @@ include "../components/header.php";
                         <?php
                             try{ 
                                 // HAGO UNA CONSULTA DONDE TRAIGO TODOS LOS CARRITOS VENDIDOS Y NO CANCELADOS PARA ADMINISTRARLOS.
-                                // I make a query where I get all the carts sold and not canceled.
+                                // New query where I get all the carts sold and not canceled.
                                 $conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
                                 $conect = $conect->conect();
                                 $sql = "SELECT cartId,date, total, pay, pickup, firstname, lastname, email FROM carts INNER JOIN users ON users.userId=carts.userId WHERE sale = 1 AND cancel = 0";
