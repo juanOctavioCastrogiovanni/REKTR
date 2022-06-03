@@ -111,19 +111,19 @@
 					<ul id="topMenu" class="nav pull-right">
 						<li class=""><a href="<?php echo $point ?>/products">Products</a></li>
 						<li class=""><a href="<?php echo $point ?>/contact">Contact</a></li>
-						<li class="">
+						<li class="display-sm-none">
 							<?php
 							if(!isset($_SESSION['user'])){
 								echo "<a href='#login' role='button' data-toggle='modal' style='padding-right:0'><span
-								class='btn btn-large btn-success display-sm-none'>Login</span></a>";
+										class='btn btn-large btn-success'>Login</span></a>";
 							} else {
 								echo "<a href='".$point."/user/panel' role='button' data-toggle='modal' style='padding-right:0'><span
-								class='btn btn-large btn-warning display-sm-none'>".$_SESSION['user']['firstname']."</span></a>";
+								class='btn btn-large btn-warning'>".$_SESSION['user']['firstname']."</span></a>";
 							}
 							?>
 							<div id="login" class="modal hide fade in" tabindex="-1" role="dialog"
 								aria-labelledby="login" aria-hidden="false">
-								<div class="modal-header display-sm-none">
+								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal"
 										aria-hidden="true">×</button>
 									<h3>Login</h3>

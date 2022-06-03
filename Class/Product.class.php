@@ -131,7 +131,7 @@
       }
 
         public function showCard(){
-           echo "<li class='span2 heightCard span-sm-card'>
+           echo "<li class='span2 heightCard span-sm-card1'>
                     <div class='thumbnail'>
                         <a  href='product_details?id={$this->productId}'><img src='themes/images/products/upload/{$this->image1}' width='200px' height='200px' alt=''/></a>
                         <div class='caption'>";
@@ -140,7 +140,7 @@
                         }
                         echo "
                         <h5>{$this->name} {$this->brand}</h5>
-                        <h4 style='text-align:center'><a class='btn' href='product_details'> <i class='icon-zoom-in'></i></a> 
+                        <h4 style='text-align:center'><a class='btn' href='product_details?id={$this->productId}'> <i class='icon-zoom-in'></i></a> 
                         <form method='POST' action='cart.php' style='display: inline;'>
                           <input type='hidden' name='productId' value='".$this->productId."'>
                           <input type='hidden' name='name' value='".$this->name."'>
@@ -173,7 +173,7 @@
         public function showProductList(){
          echo "<div class='row'>	  
               <div class='span2'>
-                <img src='themes/images/products/upload/{$this->image1}' alt=''/>
+                <img  style='width: 72%;margin-left: 16%;' src='themes/images/products/upload/{$this->image1}' alt=''/>
               </div>
               <div class='span4'>
                 <h3>{$this->name}</h3>				
@@ -206,7 +206,7 @@
         }
 
         public function showProduct(){
-         echo "<li class='span2'>
+         echo "<li class='span2 span-sm-card1'>
             <div class='thumbnail'>
               <a href='product_details?id={$this->productId}'><img src='themes/images/products/upload/{$this->image1}' alt=''/></a>
               <div class='caption'>
