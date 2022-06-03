@@ -206,7 +206,7 @@
         }
 
         public function showProduct(){
-         echo "<li class='span2 span-sm-card1'>
+         echo "<li class='span2 span-sm-card1 cart-height'>
             <div class='thumbnail'>
               <a href='product_details?id={$this->productId}'><img src='themes/images/products/upload/{$this->image1}' alt=''/></a>
               <div class='caption'>

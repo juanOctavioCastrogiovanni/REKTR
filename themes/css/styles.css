@@ -90,8 +90,11 @@ x
         float: left !important;
         padding: 12px;
     }
-
+    .cart-height{
+        height: 425px !important;
+    }
     
+   
 }
 
 @media(min-width:768px){
@@ -103,6 +106,16 @@ x
 @media(max-width:452px){
     .heightCard1{
         height: 288px;
+    }
+
+    .span-sm-card1{
+        width: 50% !important;
+        float: left !important;
+        padding: 12px;
+    }
+
+    .cart-height{
+        height: 354px !important;
     }
 }
 
@@ -118,17 +131,24 @@ x
 @media(min-width:769px) and (max-width:980px){
     .span-sm-card1{
         width: 41% !important;
-        float: left !important;
+        float: left !important;  
         padding: 12px;
+    }
+
+    .cart-height{
+        height: 352px !important;
     }
 
     .cart-information{
         margin-left: 21px !important;
-    }
-
-
-    
+    }    
 }
+
+
+
+
+
+
 
 .carousel-control{
     position: absolute;
