@@ -67,7 +67,7 @@ include "./Class/Product.class.php";
 							if($i==0){
 								echo "<div class='item active'>";
 								echo "<ul class='thumbnails'>";
-							} else if($i%4==0){
+							} else if($i%2==0){
 								echo "<div class='item'>
 								<ul class='thumbnails'>";
 							}
@@ -76,7 +76,7 @@ include "./Class/Product.class.php";
 							$element->showCardCarrousel();
 							
 							//every three iteratios and is not the first time
-								if(($i+1)%4==0&&$i!=0){
+								if(($i+1)%2==0&&$i!=0){
 									echo "</ul'>
 									</div>";
 								}

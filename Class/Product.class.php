@@ -131,7 +131,7 @@
       }
 
         public function showCard(){
-           echo "<li class='span2 height290'>
+           echo "<li class='span2 heightCard span-sm-card'>
                     <div class='thumbnail'>
                         <a  href='product_details?id={$this->productId}'><img src='themes/images/products/upload/{$this->image1}' width='200px' height='200px' alt=''/></a>
                         <div class='caption'>";
@@ -156,8 +156,8 @@
         }
 
         public function showCardCarrousel(){
-           echo "<li class='span3'>
-                <div class='thumbnail'>
+           echo "<li class='span6 span-sm-card'>
+                <div class='thumbnail heightCard1'>
                   <a href='product_details?id={$this->productId}'><img src='themes/images/products/upload/{$this->image1}' alt=''></a>
                   <div class='caption'>";
                   if($this->new){
