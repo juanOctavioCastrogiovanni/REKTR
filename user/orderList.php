@@ -9,16 +9,18 @@
                         <!-- orders list -->
                         <table class="fixed_headers">
                             <thead>
-                            <tr>
-                                <th>Order</th>
-                                <th>Date</th>
-                                <th>Total</th>
-                                <th>State</th>
-                                <th>Cancel</th>
-                                <th>Order</th>
-                            </tr>
+                            
                             </thead>
                             <tbody>
+                            <tr class="tableHeader">
+                                <td>Order</td>
+                                <td>Date</td>
+                                <td>Total</td>
+                                <td>State</td>
+                                <td>Cancel</td>
+                                <td>Order</td>
+                            </tr>
+
                         <?php
                             try{ 
                                 $conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);

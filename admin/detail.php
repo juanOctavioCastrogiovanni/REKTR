@@ -1,6 +1,6 @@
 <?php
 $point = 1;
-include "./admin/functions.php";
+include "./functions.php";
 include ("../middleware/adminMiddleware.php");
 include "../components/header.php";
 ?>

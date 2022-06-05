@@ -5,29 +5,32 @@
 <div id="footerSection">
 	<div class="container">
 		<div class="row">
+				<?php if(isset($_SESSION['user'])){?>
 			<div class="span3">
 				<h5>ACCOUNT</h5>
-				<a href="<?php echo $point ?>/login">YOUR ACCOUNT</a>
-				<a href="<?php echo $point ?>/login">PERSONAL INFORMATION</a>
-				<a href="<?php echo $point ?>/login">ADDRESSES</a>
-				<a href="<?php echo $point ?>/login">DISCOUNT</a>
-				<a href="<?php echo $point ?>/login">ORDER HISTORY</a>
+				<a href="<?php echo $point ?>/user/panel"><?php echo strtoupper($_SESSION['user']['firstname'])?></a>
+				<a href="<?php echo $point ?>/user/panel?action=orderList">ORDER LIST</a>
+				<a href="<?php echo $point ?>/user/panel?action=passwordChange">PASSWORD CHANGE</a>
+				<a href="<?php echo $point ?>/user/panel?action=accountDelete">ACCOUNT DELETE</a>
 			</div>
+			<?php 
+				}
+			?>
+
 			<div class="span3">
 				<h5>INFORMATION</h5>
 				<a href="<?php echo $point ?>/contact">CONTACT</a>
+				<?php if(!isset($_SESSION['user'])){?>
+				<a href="<?php echo $point ?>/login">LOGIN</a>
 				<a href="<?php echo $point ?>/register">REGISTRATION</a>
-				<a href="<?php echo $point ?>/legal_notice">LEGAL NOTICE</a>
-				<a href="<?php echo $point ?>/tac">TERMS AND CONDITIONS</a>
-				<a href="<?php echo $point ?>/faq">FAQ</a>
+				<?php }?>
+				<a href="<?php echo $point ?>/products">PRODUCTS</a>
 			</div>
 			<div class="span3">
-				<h5>OUR OFFERS</h5>
-				<a href="#">NEW PRODUCTS</a>
-				<a href="#">TOP SELLERS</a>
-				<a href="<?php echo $point ?>/special_offer">SPECIAL OFFERS</a>
-				<a href="#">MANUFACTURERS</a>
-				<a href="#">SUPPLIERS</a>
+				<h5>CATEGORY</h5>
+				<a href="<?php echo $point ?>/products?category=1">CAMERAS</a>
+				<a href="<?php echo $point ?>/products?category=2">CARDS</a>
+				<a href="<?php echo $point ?>/products?category=3">CARD READER</a>
 			</div>
 			<div id="socialMedia" class="span3 pull-right">
 				<h5>SOCIAL MEDIA </h5>

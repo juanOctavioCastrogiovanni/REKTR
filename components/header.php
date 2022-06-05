@@ -61,7 +61,7 @@
 							class='btn btn-sm btn-success pull-left display-lg-none cart-information'>Login</span></a><div class='span6 presentation'>Welcome to <strong>REKTR</strong> by Juan Octavio Castrogiovanni</div>";
 				} else {
 					echo "<a href='".$point."/user/panel' role='button' data-toggle='modal' style='padding-right:0'><span
-					class='btn btn-large btn-warning pull-left display-lg-none cart-information'>".$_SESSION['user']['firstname']."</span></a><div class='span6'>Welcome!<strong> ".$_SESSION['user']['firstname']."</strong></div>";
+					class='btn btn-sm  btn-warning pull-left display-lg-none cart-information'>".$_SESSION['user']['firstname']."</span ></a><div class='span6 presentation'>Welcome!<strong> ".$_SESSION['user']['firstname']."</strong></div>";
 				}
 				
 				?>
@@ -123,7 +123,7 @@
 							}
 							?>
 							<div id="login" class="modal hide fade in" tabindex="-1" role="dialog"
-								aria-labelledby="login" aria-hidden="false">
+								aria-labelledby="login" aria-hidden="false" >
 								<div class="modal-header display-sm-none">
 									<button type="button" class="close" data-dismiss="modal"
 										aria-hidden="true">×</button>
@@ -131,7 +131,7 @@
 								</div>
 								<div class="modal-body">
 									<div class="div1">
-										<form class="form-horizontal loginFrm" action="./admin/user.php?action=loginUser" method="POST">
+										<form class="form-horizontal loginFrm t-center" action="./admin/user.php?action=loginUser" method="POST">
 											<div class="control-group">
 												<input type="text" id="inputEmail" pattern="[A-Za-z0-9_-@]" placeholder="Email" name="email">
 												<input type="hidden" name="type" value="login">
@@ -149,8 +149,9 @@
 											<a href="<?php echo $point ?>/forgetpass" class="btn-sm" >Forget password</a>
 										</form>
 									</div>
-									<div class="div2">
-										<p>you are not registered?</p>
+									<div><div class="div2"></div></div>
+									<div class="div3">
+										<h5><strong>You are not registered?</strong></h5>
 										<a href="<?php echo $point ?>/register" class="btn-info btn">Register</a>
 									</div>
 								</div>

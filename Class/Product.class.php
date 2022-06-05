@@ -226,12 +226,12 @@
 
         public function showProductDetails(){
             echo  "<div class='row'>
-                    <div id='gallery' class='span3'>
+                    <div id='gallery' class='span3 picture'>
                       <a href='themes/images/products/upload/{$this->image1}' title='{$this->image1}'>
                         <img src='themes/images/products/upload/{$this->image1}' style='width:100%'
                           alt='{$this->image1}' />
                       </a>
-                      <div id='differentview' class='moreOptopm carousel slide'>
+                      <div id='differentview' class='moreOptopm carousel slide picture'>
                         <div class='carousel-inner'>
                           <div class='item active'>
                             <a href='themes/images/products/upload/{$this->image1}'> <img style='width:29%'

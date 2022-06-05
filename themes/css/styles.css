@@ -1,28 +1,3 @@
-x
-
-@media (min-width:544px){
-    .div1{
-        display: inline-block; border-right: 0.5px solid;
-    }
-
-    .div2{
-        float: right; margin-right: 20%; margin-top: 30px;
-    }
-}
-
-@media (max-width:543px){
-    .div1{
-        text-align: center;
-        
-    }
-    
-    .div2{
-        text-align: center;
-    }
-}
-
-
-
 
 .rta-0x001,
 .rta-0x002,
@@ -94,13 +69,38 @@ x
         height: 425px !important;
     }
     
-   
+.picture{
+    width: 65%;
+    margin: auto;
 }
+
+}
+
+
 
 @media(min-width:768px){
     .heightCard{
         height: 290px;
     }
+
+    .modal{
+        left: 60% !important;
+        width: 384px !important;
+    }
+}
+
+@media (max-width:525px){
+    .modal{
+        left: 6% !important;
+        width: 384px !important;
+    }
+}
+
+@media(min-width:526px) and (max-width:767px){
+    .modal{
+        left: 23% !important;
+        width: 384px !important;
+    }   
 }
 
 @media(max-width:452px){
@@ -170,3 +170,54 @@ x
     opacity: .5;
     filter: alpha(opacity=50);
 }
+
+
+/* @media (min-width:584px){
+    .div1{
+        display: inline-block; 
+        border-right: 0.5px solid;
+    }
+
+    .div2{
+    float: right; 
+    margin-right: 95px; 
+    margin-top: 30px;
+    }
+
+    .div3{
+        float: right; 
+        margin-right: 20%; 
+        margin-top: 30px;
+    }
+} */
+
+.t-center, .div3{
+    text-align: center;
+}
+
+.div2{
+    height: 0.5px;
+    background-color: #222;
+    width: 30%;
+    margin: auto;
+}
+
+.tableHeader{
+    background-color:#222;
+    color: white;
+}
+
+#lightbox-image{
+    width: 500px;
+}
+
+#lightbox-container-image-box{
+    width: 91% !important;
+    height: 500px !important;
+}
+
+#lightbox-container-image-data-box{
+    display: none !important;
+}
+
+
