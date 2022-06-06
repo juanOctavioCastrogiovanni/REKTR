@@ -1,5 +1,4 @@
-<?php
-                    echo "<table class='table table-bordered'>
+                    <table class='table table-bordered'>
                             <thead>
                                 <tr>
                                 <th>Order</th>
@@ -11,7 +10,8 @@
                                 <th>Total</th>
                                 </tr>
                             </thead>
-                            <tbody>";
+                            <tbody>
+                        <?php
                             try{ 
                                 $conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
                                 $conect = $conect->conect();
@@ -19,15 +19,17 @@
                                 $stmt = $conect->prepare($sql);
                                 if($stmt->execute()){
                                     foreach($stmt->fetchAll() as $product){
-                                        echo "<tr>
-                                        <td>".$_GET['id']."</td>
-                                        <td> <img width='60' src='../themes/images/products/upload/".$product['image1']."' alt=''/></td>
-                                        <td>".$product['name']."</td>
-                                        <td>".$product['qty']."</td>
-                                        <td>$".$product['price']."</td>
+                        ?>
+                                        <tr>
+                                        <td><?php echo $_GET['id']?></td>
+                                        <td> <img width='60' src='../themes/images/products/upload/<?php echo $product['image1']?>' alt=''/></td>
+                                        <td><?php echo $product['name'] ?></td>
+                                        <td><?php echo $product['qty'] ?></td>
+                                        <td>$ <?php echo $product['price'] ?></td>
         
-                                        <td style='width: 94px;'>$".$product['subtotal']."</td>
-                                        </tr>";
+                                        <td style='width: 94px;'>$ <?php echo $product['subtotal'] ?></td>
+                                        </tr>
+                            <?php
                                     }
                                 }
                                 unset($stmt);
@@ -35,17 +37,19 @@
                                 $stmt = $conect->prepare($sql);
                                 if($stmt->execute()){
                                     foreach($stmt->fetchAll() as $cart){
-                                        echo "
+                              
+                            ?>
                                             <tr>
                                             <td colspan='5' style='text-align:right'><strong>Order date</strong></td>
-                                            <td><strong>".$cart['date']." </strong></td>
+                                            <td><strong><?php echo $cart['date'] ?> </strong></td>
                                             </tr>
                                             <tr>
                                             <td colspan='5' style='text-align:right'><strong>TOTAL PRICE =</strong></td>
-                                            <td class='label label-important' style='display:block'> <strong> $".$cart['total']." </strong></td>
+                                            <td class='label label-important' style='display:block'> <strong> $<?php echo $cart['total'] ?> </strong></td>
                                             </tr>
                                             </tbody>
-                                        </table>";
+                                        </table>
+                            <?php
                                     }
                                 
                                 }
@@ -54,4 +58,4 @@
                             }catch(Exception $e){
                                 echo "<p>".$e->getMessage()."</p>";
                             }                          
-?>
+                            ?>

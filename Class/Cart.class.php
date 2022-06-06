@@ -193,37 +193,35 @@
 		}
 
 		public function showCart(){			
-						foreach($this->getProductListArray() as $product){
-							echo "<tr>
-								<td> <img width='60' src='./themes/images/products/upload/".$product['image1']."' alt=''/></td>
-								<td>".$product['name']."</td>
+						foreach($this->getProductListArray() as $product){ ?>
+							<tr>
+								<td> <img width='60' src='./themes/images/products/upload/<?php echo $product['image1'] ?>' alt=''/></td>
+								<td><?php echo $product['name'] ?></td>
 								<td>
 								<div class='input-append'>
-									<form method='POST' action='./cart?option=qtymodify&id=".$product['productId']."'>
-										<input class='span1' style='max-width:34px' name='qty' placeholder='".$product['qty']."' value='".$product['qty']."'  size='16' type='number' min='0'>
+									<form method='POST' action='./cart?option=qtymodify&id=<?php echo $product['productId'] ?>'>
+										<input class='span1' style='max-width:34px' name='qty' placeholder='<?php echo $product['qty'] ?>' value='<?php echo $product['qty']?>'  size='16' type='number' min='0'>
 										<button class='btn' type='submit'>
 											<i class='icon-refresh'></i>
 										</button>
-										<a href='./cart?option=remove&id=".$product['productId']."' class='btn btn-danger'>
+										<a href='./cart?option=remove&id=<?php echo $product['productId'] ?>' class='btn btn-danger'>
 										<i class='icon-remove icon-white'></i>
 										</a>
 									</form>
 								</div>
 								</td>
-								<td>".$product['price']."</td>
+								<td><?php echo $product['price'] ?></td>
 			
-								<td>".$product['subTotal']."</td>
-							</tr>";
-						}
-
-						echo "
+								<td><?php echo $product['subTotal'] ?></td>
+							</tr>
+						<?php } ?>
 							<td colspan='2' style='text-align:right'><a href='./cart.php?option=cartDelete'><strong>Cart delete</strong></a></td>
 							<td colspan='2' style='text-align:right'><strong>TOTAL PRICE =</strong></td>
-							<td class='label label-important' style='display:block'> <strong> $".$this->total." </strong></td>
+							<td class='label label-important' style='display:block'> <strong> $<?php echo $this->total ?> </strong></td>
 							</tr>
 						</tbody>
-			</table>";
-		}
+			</table>
+		<?php } 
 
 		public function showReceipt(){
 			foreach($this->getProductListArray() as $product){

@@ -33,37 +33,42 @@
                             $stmt = $conect->prepare($sql);
                             if($stmt->execute()){
                                 if($stmt->rowCount()>0){
-                                    foreach($stmt->fetchAll() as $cart){
-                                        echo "<tr>";
-                                        echo "<td>".$cart['cartId']."</td>";
-                                        echo "<td>".$cart['date']."</td>";
-                                        echo "<td>".$cart['total']."</td>";
-                                        echo "<td>";  
+                                    foreach($stmt->fetchAll() as $cart){ ?>
+                                        <tr>
+                                        <td><?php echo $cart['cartId']; ?></td>
+                                        <td><?php echo $cart['date']; ?></td>
+                                        <td><?php echo $cart['total']; ?></td>
+                                        <td>  
+                                        <?php
                                             if (!$cart['cancel']){
                                                 echo $cart['pickup']&&$cart['pay']?"<p style='color:darkgreen;'>Finished</p>":"<p style='color:#F59E00;'>Process</p>";
                                             } else {
                                                 echo "<p style='color:red;'>Canceled</p>";
                                             }
-                                        echo"</td>";
-                                        echo "<td>"; 
+                                        ?>
+                                        </td>
+                                        <td>
+                                        <?php
                                             if(!$cart['pickup']){
                                                 echo !$cart['cancel']? "<a href='./process.php?action=cancel&id=".$cart['cartId']."' class='btn btn-danger'>Cancel order</a>":"<botton class='btn btn-danger btn-disabled' disabled>Cancel order</botton>"; 
                                             } else {
                                                 echo "<botton class='btn btn-danger btn-disabled' disabled>Cancel order</botton>";                                                 
                                             }
-                                        echo"</td>";
+                                        ?>
+                                        </td>
 
-                                        echo "<td><a href='".FRONT_END_URL."/user/panel?action=orderDetail&id=".$cart['cartId']."' class='btn btn-info'>></a></td>";
-                                        echo "</tr>";
-                                    } 
+                                        <td><a href='<?php echo FRONT_END_URL?>/user/panel?action=orderDetail&id=<?php echo $cart["cartId"] ?>' class='btn btn-info'>></a></td>
+                                        </tr>
+                                   <?php } 
                                 } else if($stmt->rowCount()==0){
-                                    echo "<td colspan='6' style=''><div style='background:#e9e9e9; height:100px; color:#949494;font-size:24px; display:flex; justify-content:center; padding-top:80px;'><strong><i>EMPTY</i></strong></div></td>";
-                                    echo "<td colspan='6' style=''><div style='background:#e9e9e9; height:100px; color:#949494;font-size:24px; display:flex; justify-content:center; padding-top:80px;'><strong><i>EMPTY </i></strong></div></td>";
-                                    echo "<td colspan='6' style=''><div style='background:#e9e9e9; height:100px; color:#949494;font-size:24px; display:flex; justify-content:center; padding-top:80px;'><strong><i>EMPTY</i></strong></div></td>";
-                                    echo "<td colspan='6' style=''><div style='background:#e9e9e9; height:100px; color:#949494;font-size:24px; display:flex; justify-content:center; padding-top:80px;'><strong><i>EMPTY</i></strong></div></td>";
-                                    echo "<td colspan='6' style=''><div style='background:#e9e9e9; height:100px; color:#949494;font-size:24px; display:flex; justify-content:center; padding-top:80px;'><strong><i>EMPTY</i></strong></div></td>";
-                                    echo "<td colspan='6' style=''><div style='background:#e9e9e9; height:100px; color:#949494;font-size:24px; display:flex; justify-content:center; padding-top:80px;'><strong><i>EMPTY</i></strong></div></td>";
-                                }
+                                    ?>
+                                    <td colspan='6' style=''><div style='background:#e9e9e9; height:100px; color:#949494;font-size:24px; display:flex; justify-content:center; padding-top:80px;'><strong><i>EMPTY</i></strong></div></td>
+                                    <td colspan='6' style=''><div style='background:#e9e9e9; height:100px; color:#949494;font-size:24px; display:flex; justify-content:center; padding-top:80px;'><strong><i>EMPTY </i></strong></div></td>
+                                    <td colspan='6' style=''><div style='background:#e9e9e9; height:100px; color:#949494;font-size:24px; display:flex; justify-content:center; padding-top:80px;'><strong><i>EMPTY</i></strong></div></td>
+                                    <td colspan='6' style=''><div style='background:#e9e9e9; height:100px; color:#949494;font-size:24px; display:flex; justify-content:center; padding-top:80px;'><strong><i>EMPTY</i></strong></div></td>
+                                    <td colspan='6' style=''><div style='background:#e9e9e9; height:100px; color:#949494;font-size:24px; display:flex; justify-content:center; padding-top:80px;'><strong><i>EMPTY</i></strong></div></td>
+                                    <td colspan='6' style=''><div style='background:#e9e9e9; height:100px; color:#949494;font-size:24px; display:flex; justify-content:center; padding-top:80px;'><strong><i>EMPTY</i></strong></div></td>
+                               <?php } 
                             } 
                         ?>    
                           </tbody>

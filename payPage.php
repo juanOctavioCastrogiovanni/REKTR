@@ -13,9 +13,6 @@
   date_default_timezone_set('UTC');
 
 ?>
-
-
-
       <div class="container1">
         <div class="tab"></div>
         <div class="paid1 receipt-cort">
@@ -41,7 +38,6 @@
             } else {
               header("location:./");
             }
-
         ?>
                 <tr>
                   <td colspan="2" class="center"><a href="./order" class="btn-pay" style="margin-top:20px;"

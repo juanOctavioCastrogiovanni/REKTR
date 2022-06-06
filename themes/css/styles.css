@@ -87,12 +87,23 @@
         left: 60% !important;
         width: 384px !important;
     }
+
+    .thumbnails {
+        margin-left: 0px !important;
+    }
 }
 
 @media (max-width:525px){
     .modal{
         left: 6% !important;
         width: 384px !important;
+    }
+
+    .margin-15{
+        margin-top:15px;
+    }
+    .marginPlus15{
+        margin-bottom:77px;
     }
 }
 
@@ -126,7 +137,19 @@
         float: left !important;
         padding: 12px;
     }
+
+    .margin16{
+        margin-top: 16px;
+    }
 }
+
+@media(min-width:980px){
+    .show-card{
+        width: 27%;
+    }
+} 
+
+
 
 @media(min-width:769px) and (max-width:980px){
     .span-sm-card1{
@@ -143,11 +166,6 @@
         margin-left: 21px !important;
     }    
 }
-
-
-
-
-
 
 
 .carousel-control{

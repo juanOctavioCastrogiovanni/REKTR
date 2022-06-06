@@ -6,7 +6,7 @@ include "../components/header.php";
 ?>
 <div id='mainBody'>
     <div class='container'>
-        <div class='row'>
+        <div class='row' style="overflow:auto;">
         <?php
                     echo "<table class='table table-bordered'>
                             <thead>

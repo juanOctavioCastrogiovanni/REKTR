@@ -26,12 +26,8 @@
         }
         }catch(Exception $e){
             echo "<p>".$e->getMessage()."</p>";
-        }
-        
+        }     
     }
-	
-	
-
 
 ?>
 <div id="mainBody">

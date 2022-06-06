@@ -27,27 +27,24 @@
 
     
     
-    <?php if(isset($isProducts)){
-       echo "
-                <form action='' method='GET' style='margin-top:30px;'>
+    <?php if(isset($isProducts)){ ?>
+        <form action='' method='GET' style='margin-top:30px;'>
                 <input style='width:30%;' class='form-control form-control-sm' type='text' aria-label='.form-control-sm example' name='min' placeholder='price min'>
                 <input style='width:30%;' class='form-control form-control-sm' type='text' aria-label='.form-control-sm example' name='max' placeholder='price max'>";
-                    if($categ!=''){
+        <?php if($categ!=''){
                         echo "<input type='hidden' name='category' value='$categ'>";
                     }
                     if($sort!=NULL){
                         echo "<input type='hidden' name='sort' value='$sort'>";
-                    }
-               echo "<br><button type='submit' class='btn btn-dark'>Price filter</button>
-                </form>";
-
-        echo "
+                    } ?>
+                  <br><button type='submit' class='btn btn-dark'>Price filter</button>
+                </form>
         <form action='' method='GET' style='margin-top:30px;'>
             <select class='form-select' style='width: 70%;' aria-label='Default select example' name='sort'>
                 <option value='asc' $asc>Price min</option>
                 <option value='desc' $desc>Price max</option>
-            </select>";
-            if($categ!=''){
+            </select>
+        <?php if($categ!=''){
                 echo "<input type='hidden' name='category' value='$categ'>";
             }
             if($min!=NULL){
@@ -55,11 +52,9 @@
             }
             if($max!=NULL){
                 echo "<input type='hidden' name='category' value='$categ'>";
-            }
-
-          echo "<br><button type='submit' class='btn btn-dark'>Sort</button>
-        </form>";
-
+            } ?>           
+            <br><button type='submit' class='btn btn-dark'>Sort</button>
+        </form> <?php
       if($categ!=''||$max!=NULL||$min!=NULL||$sort!=NULL){  
         if($min==NULL||$max==NULL){
             if($min!=NULL){
@@ -76,41 +71,14 @@
             echo "<div class='alert alert-dark' role='alert'>
                 Min: $min and Max:$max
             </div>";
-        }
+        } ?>  
 
 
-
-        echo "<form action='' method='GET' style='margin-top:30px;'>
+      <form action='' method='GET' style='margin-top:30px;'>
                 <br><button type='submit' class='btn btn-danger'>delete filter</button>
-            </form>";
-      }
-    }
-    ?>
-
-<!-- 
-  <div class="row" style="margin-top:30px">
-    <div class="col-sm-12">
-      <div id="slider-range"></div>
-    </div>
-  </div>
-  <div class="row slider-labels">
-    <div class="col-xs-6 caption">
-      <strong>Min:</strong> <span id="slider-range-value1"></span>
-    </div>
-    <div class="col-xs-6 text-right caption">
-      <strong>Max:</strong> <span id="slider-range-value2"></span>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12">
-      <form>
-        <input type="hidden" name="min" value="">
-        <input type="hidden" name="max" value="">
-      </form>
-    </div>
-  </div> -->
-
-
+            </form>
+    <?php }
+    } ?>
 
 </div>
 

@@ -4,7 +4,7 @@
     
     <div class="row">
         <!-- <div class="span9" style="min-height:900px"> -->
-            <div class="well" style="margin-left: 25px !important;">
+            <div class="well" style="margin-left: 25px !important; overflow:auto;">
                 <!-- <h5></h5><br /> -->
                 <!-- orders list -->
                 <?php include "./detail.php"?>
