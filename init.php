@@ -1,5 +1,5 @@
 <?php
-	define("DIR_RAIZ", "/php-ecommerce");
+	define("DIR_RAIZ", "/REKTR");
 
 	define("FRONT_END_PATH", $_SERVER["DOCUMENT_ROOT"] . DIR_RAIZ);
 	define("FRONT_END_URL", $_SERVER["REQUEST_SCHEME"] . "://" . $_SERVER["SERVER_NAME"] . DIR_RAIZ);

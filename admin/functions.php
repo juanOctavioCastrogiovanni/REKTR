@@ -1,5 +1,5 @@
 <?php
-    include $_SERVER["DOCUMENT_ROOT"] ."/php-ecommerce/init.php";
+    include $_SERVER["DOCUMENT_ROOT"] ."/REKTR/init.php";
 
 
     // SE MOSTRARAN DISTINTOS MENSAJES DEPENDIENDO DEL CODIGO DE RESPUESTA DE LA URL
@@ -7,6 +7,12 @@
 		function showMenssage($cod){
 
             switch ($cod) {
+                case '0x011':
+                    $message = "Password changed successfully";
+                break;
+                case '0x012':
+                    $message = "Error, try again later";
+                break;
                 case '0x013':
                     $message = "User already exists";
                 break;
@@ -71,7 +77,41 @@
             }
             return "<p class='rta rta-".$cod."'>".$message."</p>";
         }
-
+        /*
+        function savePass($email,$pass){
+            try{ 
+                $conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
+                $conect = $conect->conect();
+                try{ 
+                    $recoveryUser = new User($email,$pass);
+                    $user = $recoveryUser-> recoveryUser($conect);
+                    //return $user->execute()?TRUE:FALSE;
+                    $p = $user->execute()?TRUE:FALSE;
+                    var_dump($p);
+                    die();
+                }catch(Exception $e){
+                    return FALSE;
+                }
+            }catch(Exception $e){
+                return FALSE;
+            }
+        }
+        */
+        
+        function savePass($key, $pass){
+            try{ 
+                $conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
+                $conect = $conect->conect();
+                $pass = password_hash($pass, PASSWORD_DEFAULT);
+                $user = $conect->prepare("UPDATE users SET pass = :pass WHERE activation = :activation");
+                $user->bindParam(":activation", $key, PDO::PARAM_STR);
+                $user->bindParam(":pass", $pass, PDO::PARAM_STR);
+                return ($user->execute()&&$user->rowCount()>0)?TRUE:FALSE;
+            }catch(Exception $e){
+                return FALSE;
+            }
+        }
+        
 
         function login($email, $pass){
             $rta = "0x019";         
@@ -119,7 +159,6 @@
                                 //SI NO HAY NADA EN EL CARRITO SESSION PERO TENGO CARRITO EN LA BASE DE DATOS, CREO UN NUEVO OBJETO CARRITO EN BASE A LA BASE DE DATOS
                                 // If there is nothing in the session cart but i have a cart in the database, i create a new cart object based on the database
                             } else if(($cartId = existCart($conect,$user['userId']))!=0 && !isset($_SESSION['cartArray'])){
-                                
                                 $existCart = new Cart();
                                 $prepareSql = $existCart->getProductsDB($conect,$user['userId'],$cartId);
                                 if($prepareSql->execute()){
@@ -199,61 +238,52 @@
             try{ 
                 $conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
                 $conect = $conect->conect();
-            }catch(Exception $e){
-                echo "<p>".$e->getMessage()."</p>";
-            }
-            $rta = "0x023";
-            try{ 
-                $recoveryUser = new User();
-                $recoveryUser->setEmail($email);
-                $sql = $recoveryUser->selectUser();
-                $user = $conect->prepare($sql);
-            }catch(Exception $e){
-                echo "<p>".$e->getMessage()."</p>";
-            }
-    
-                if ($user->execute()) {              
-                    $recoveryUser->configActivationCode();
-                    $user = $recoveryUser->recoveryUser($conect);
-                    // $user = $conect->prepare("UPDATE users SET activation = :activation WHERE email = :email");
-                    // $user->bindParam(":email", $email, PDO::PARAM_STR);
-                    // $user->bindParam(":activation", $key, PDO::PARAM_STR);
-        
-                    if ( $user->execute() ) {
-                        $recoveryUser->recoveryEmail();
-                        $rta = "0x022";
+                try{ 
+                    $recoveryUser = new User();
+                    $recoveryUser->setEmail($email);
+                    $sql = $recoveryUser->selectUser();
+                    $user = $conect->prepare($sql);
+                     if ($user->execute()&&$recoveryUser->sqlCode($conect)){              
+                            $recoveryUser->recoveryEmail();
+                            $rta = "0x022";
                     }
                     unset($conect);
                     header("location:  " . FRONT_END_URL . "/login?rta=" . $rta);
-                    
+                    $rta = "0x023";
+                }catch(Exception $e){
+                    echo "<p>".$e->getMessage()."</p>";
                 }
+            }catch(Exception $e){
+                echo "<p>".$e->getMessage()."</p>";
+            }
+           
         }
 
         function activeUser($email, $key){
             try{ 
                 $conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
                 $conect = $conect->conect();
-            }catch(Exception $e){
-                echo "<p>".$e->getMessage()."</p>";
-            }
-            
-            $rta = "0x016";
-            try{ 
-                $activeUser = new User();
-                $activeUser->setEmail($email);
-                $activeUser->setActivation($key);                
-                $user = $activeUser->activeUser($conect);
-                if ( $user->execute() ) {
-                        $rta = "0x018";
+                $rta = "0x016";
+                try{ 
+                    $activeUser = new User();
+                    $activeUser->setEmail($email);
+                    $activeUser->setActivation($key);                
+                    $user = $activeUser->activeUser($conect);
+                    if ( $user->execute() ) {
+                            $rta = "0x018";
+                    }
+                    unset($conect);
+                    // die();
+                    header("location: " . FRONT_END_URL . "/register?rta=" . $rta);
+                }catch(Exception $e){
+                        echo "<p>".$e->getMessage()."</p>";
                 }
              }catch(Exception $e){
                  echo "<p>".$e->getMessage()."</p>";
              }
         
     
-            unset($conect);
-            // die();
-            header("location: " . FRONT_END_URL . "/register?rta=" . $rta);
+            
         }
        
         function deleteUser($id){
@@ -281,38 +311,39 @@
             try{ 
                 $conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
                 $conect = $conect->conect();
-            }catch(Exception $e){
+                $rta = "0x014";
+                try{ 
+                    $newUser = new User();
+                    $newUser->setEmail($email);
+                    $sql = $newUser->selectUser();
+                    $user = $conect->prepare($sql);
+                    
+                        $user->execute();
+                
+                        if ($user->rowCount()==0) {
+                          $newUser->setFirstName($firstname);
+                          $newUser->setLastName($lastname);
+                          $newUser->setPass($pass);
+                          $newUser->configActivationCode();
+                          $newUser->setState(0);
+                          $newUser->setAdmin(0);
+                          $user = $newUser->createUser($conect);
+                          if ($user->execute()){
+                               $newUser->activationMail();
+                             } else {
+                                $rta = "0x015";
+                             }
+                        } else {
+                            $rta = "0x013";
+                        }
+                        header("location: " . FRONT_END_URL . "/register?rta=" . $rta);
+                 }catch(Exception $e){
+                     echo "<p>".$e->getMessage()."</p>";
+                 }
+           }catch(Exception $e){
                 echo "<p>".$e->getMessage()."</p>";
             }
-            $rta = "0x014";
-            try{ 
-                $newUser = new User();
-                $newUser->setEmail($email);
-                $sql = $newUser->selectUser();
-                $user = $conect->prepare($sql);
-             }catch(Exception $e){
-                 echo "<p>".$e->getMessage()."</p>";
-             }
-           
-            $user->execute();
-    
-            if ($user->rowCount()==0) {
-              $newUser->setFirstName($firstname);
-              $newUser->setLastName($lastname);
-              $newUser->setPass($pass);
-              $newUser->configActivationCode();
-              $newUser->setState(0);
-              $newUser->setAdmin(0);
-              $user = $newUser->createUser($conect);
-              if ($user->execute()){
-                   $newUser->activationMail();
-                 } else {
-                    $rta = "0x015";
-                 }
-            } else {
-                $rta = "0x013";
-            }
-            header("location: " . FRONT_END_URL . "/register?rta=" . $rta);
+            
         }
 
         function filterQuery($page,$category,$min,$max,$sort,$limit){
@@ -462,12 +493,12 @@
         // I get all products related to the cart that comes by id. For each product use updateStock.
 
         function stock($id,$conect,$symbol){
-                $stmt = $conect->prepare("SELECT products.productId, productscarts.qty, products.stock 
+                $stmt = $conect->prepare("SELECT products.productId, productsCarts.qty, products.stock 
                 FROM productsCarts 
                 INNER JOIN carts 
                 INNER JOIN products ON 
-                productscarts.cartId=carts.cartId AND 
-                products.productId=productscarts.productId AND 
+                productsCarts.cartId=carts.cartId AND 
+                products.productId=productsCarts.productId AND 
                 carts.cartId = :id");
                 $stmt->bindValue(':id', $id, PDO::PARAM_INT);
                 if($stmt->execute()){

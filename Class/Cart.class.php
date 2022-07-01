@@ -1,4 +1,5 @@
 <?php
+    
 	class Cart 
 	{
 		private $productList = [];
@@ -41,7 +42,7 @@
 				try{ 
 					$conect = new Conect(['host'=>'localhost','user'=>'root','password'=>'','db'=>'tecnology']);
 					$conect = $conect->conect();
-					$sql = sprintf("DELETE FROM productscarts WHERE productId = %d AND cartId = %d", $id, $_SESSION['ids']['cartId']);
+					$sql = sprintf("DELETE FROM productsCarts WHERE productId = %d AND cartId = %d", $id, $_SESSION['ids']['cartId']);
 					$stmt = $conect->prepare($sql);
 					$stmt->execute();
 				}catch(Exception $e){
@@ -170,7 +171,7 @@
 			}
 
 			public function getProductsDB($con,$userId,$id){
-				$sql = sprintf( "SELECT products.productId, products.name,products.price, products.image1, carts.cartId, productscarts.qty, productscarts.subtotal, carts.products,carts.total FROM productsCarts INNER JOIN carts INNER JOIN products ON productscarts.cartId=carts.cartId AND products.productId=productscarts.productId AND productscarts.cartId = %d AND carts.userId=%d;",$id,$userId);
+				$sql = sprintf( "SELECT products.productId, products.name,products.price, products.image1, carts.cartId, productsCarts.qty, productsCarts.subtotal, carts.products,carts.total FROM productsCarts INNER JOIN carts INNER JOIN products ON productsCarts.cartId=carts.cartId AND products.productId=productsCarts.productId AND productsCarts.cartId = %d AND carts.userId=%d;",$id,$userId);
 				$getProducts = $con->prepare($sql);
 				return $getProducts;
 		}
@@ -234,7 +235,7 @@
 		public function cartMail($email){
 			$body = "<div style='background-color: rgba(0,0,0,.8); width: 100%;'>
 					<div style='background: grey; width: 100%; display: flex; justify-content: center;'>
-						<img src='./themes/images/logo-250.png' style='width: 100%; max-width: 250px; width: 100%;' >
+						<img src='http://juanoctaviocastrogiovanni.com.ar/rektr/themes/images/logo-250.png' style='width: 100%; max-width: 250px; width: 100%;' >
 					</div>    
 					<div style=' color: whitesmoke; text-align: center; padding-top: 30px;'>
 						<div style='margin-bottom: -25px;'><h2>New order</h2></div>
@@ -249,11 +250,11 @@
 					<table style='margin: auto;margin: auto; border-spacing: 0px;'>
 						<thead>
 							<tr>
-							<th style='color: whitesmoke; border: 0.2px solid;'>Product id</th>
-							<!--<th style='color: whitesmoke; border: 0.2px solid;'>Image</th>-->
-							<th style='color: whitesmoke; border: 0.2px solid;'>Product</th>
-							<th style='color: whitesmoke; border: 0.2px solid;'>Quantity</th>
-							<th style='color: whitesmoke; border: 0.2px solid;'>Price</th>
+							<th style='color: whitesmoke; border: 0.2px solid;'>&nbsp;Product id&nbsp;</th>
+							<th style='color: whitesmoke; border: 0.2px solid;'>&nbsp;Image&nbsp;</th>
+							<th style='color: whitesmoke; border: 0.2px solid;'>&nbsp;Product&nbsp;</th>
+							<th style='color: whitesmoke; border: 0.2px solid;'>&nbsp;Quantity&nbsp;</th>
+							<th style='color: whitesmoke; border: 0.2px solid;'>&nbsp;Price&nbsp;</th>
 				
 							<th style='color: whitesmoke; border: 0.2px solid;'>Total</th>
 							</tr>
@@ -262,20 +263,20 @@
 
 						foreach($this->getProductListArray() as $product){
 							$body .= "<tr>
-									<td style='color: whitesmoke; border-left: 0.2px solid; border-bottom: 0.2px solid;'>".$product['productId']."</td>
-									<!--<td style='color: whitesmoke; border-left: 0.2px solid; border-bottom: 0.2px solid;'> <img width='60' src='./themes/images/products/".$product['image1']."' alt=''/></td>-->
-									<td style='color: whitesmoke; border-left: 0.2px solid; border-bottom: 0.2px solid;'>".$product['name']."</td>
-									<td style='color: whitesmoke; border-left: 0.2px solid; border-bottom: 0.2px solid;'>".$product['qty']."</td>
-									<td style='color: whitesmoke; border-left: 0.2px solid; border-bottom: 0.2px solid;'>$".$product['price']."</td>
-									<td style='width: 94px; color: whitesmoke; border-right: 0.2px solid;border-left: 0.2px solid;border-bottom: 0.2px solid;'>$".$product['subTotal']."</td>
+									<td style='color: whitesmoke; border-left: 0.2px solid; border-bottom: 0.2px solid;'>&nbsp;".$product['productId']."&nbsp;</td>
+									<td style='color: whitesmoke; border-left: 0.2px solid; border-bottom: 0.2px solid;'> <img width='60' src='http://juanoctaviocastrogiovanni.com.ar/ecommerce-php/themes/images/products/upload/".$product['image1']."' alt=''/></td>
+									<td style='color: whitesmoke; border-left: 0.2px solid; border-bottom: 0.2px solid;'>&nbsp;".$product['name']."&nbsp;</td>
+									<td style='color: whitesmoke; border-left: 0.2px solid; border-bottom: 0.2px solid;'>&nbsp;".$product['qty']."&nbsp;</td>
+									<td style='color: whitesmoke; border-left: 0.2px solid; border-bottom: 0.2px solid;'>&nbsp;$".$product['price']."&nbsp;</td>
+									<td style='width: 94px; color: whitesmoke; border-right: 0.2px solid;border-left: 0.2px solid;border-bottom: 0.2px solid;'>&nbsp;$".$product['subTotal']."&nbsp;</td>
 								</tr>";
 						}
 						$body .=	"<tr>
-										<td colspan='4' style='text-align:right; color: whitesmoke; border-left: 0.2px solid;'><strong>Order date&nbsp&nbsp</strong></td>
+										<td colspan='5' style='text-align:right; color: whitesmoke; border-left: 0.2px solid;'><strong>Order date &nbsp;&nbsp;</strong></td>
 										<td style='color: whitesmoke; border-right: 0.2px solid;border-left: 0.2px solid;'><strong>".date("j/n/Y")." </strong></td>
 										</tr>
 										<tr>
-										<td colspan='4' style='text-align:right; color: whitesmoke; border: 0.2px solid;'><strong>TOTAL PRICE&nbsp&nbsp </strong></td>
+										<td colspan='5' style='text-align:right; color: whitesmoke; border: 0.2px solid;'><strong>TOTAL PRICE &nbsp;&nbsp;</strong></td>
 										<td class='label label-important' style='display:block; color: whitesmoke; border: 0.2px solid;'> <strong> $".$this->total."</strong></td>
 									</tr>
 									</tbody>

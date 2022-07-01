@@ -51,11 +51,15 @@ if( isset( $_GET["action"] ) ){
                 }
             break;
     
-            case 'savePass':
-                $email = $_POST["email"];
-                $pass = $_POST["pass"];
-                $clave = $_POST["clave"];
-                guardarClave( $email, $pass, $clave );
+            case 'recoveryPass':
+            	$key = $_POST['k'];
+            	$pass = $_POST['pass'];
+            	$rePass = $_POST['rePass'];
+            	if($pass!=$rePass||strlen($pass)<=8){
+            	    header("location: ../recoveryPass?u=$email&k=$key&rta=0x027");
+            	} 
+            	header(savePass($key,$pass)?"location: ../recoveryPass?rta=0x011":"location: ../recoveryPass?rta=0x012");
+                
             break;
         }
     }

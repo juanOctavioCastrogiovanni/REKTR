@@ -62,8 +62,17 @@
 
 		public function User(){
 			$sql = sprintf( "SELECT * FROM users WHERE userId = '%d'", $this->id );
-
 			return $sql;
+		}
+		
+		public function sqlCode($conect){
+			$user = $conect->prepare("SELECT activation FROM users WHERE email = :email");
+            $user->bindParam(":email", $this->email, PDO::PARAM_STR);
+            if($user->execute()){
+                $this->activation = $user->fetch()[0];
+                return TRUE;
+            } 
+            return FALSE;
 		}
 
 		public function recoveryUser($conect){
@@ -102,9 +111,9 @@
                     $url_activation.= "&k=" . $this->activation;
                     $url_activation.= "&action=activeUser";
 
-					$body = "<!-- 	<div style='background-color: grey; width: 100%; display: flex; justify-content: center;'>
-								<img src='./themes/images/logo-250.png' style='width: 100%; max-width: 250px; width: 100%;' > 
-							</div> --> 
+					$body = "<div style='background: grey; width: 100%; display: flex; justify-content: center;'>
+						<img src='http://juanoctaviocastrogiovanni.com.ar/rektr/themes/images/logo-250.png' style='width: 100%; max-width: 250px; width: 100%;' >
+					</div>   
 					<div style='background-color: rgba(0,0,0,.8); width: 100%;'>    
 						<div style=' color: whitesmoke; text-align: center; padding-top: 30px;'>
 							<div style='margin-bottom: -25px;'><h2>Welcome</h2></div>
@@ -153,8 +162,8 @@
 		public function contactForm(){
 		$body= "<div style='background-color: rgba(0,0,0,.8); width: 100%;'>
 				<div style='background: grey; width: 100%; display: flex; justify-content: center;'>
-					<img src='./themes/images/logo-250.png' style='width: 100%; max-width: 250px; width: 100%;' >
-				</div>    
+						<img src='http://juanoctaviocastrogiovanni.com.ar/rektr/themes/images/logo-250.png' style='width: 100%; max-width: 250px; width: 100%;' >
+					</div>   
 				<div style=' color: whitesmoke; text-align: center; padding-top: 30px;'>
 					<div style='margin-bottom: -25px;'><h2>New contact email</h2></div>
 					<div style='background-color: rgb(255, 136, 0); height: 0.5px;max-width: 250px; width: 100%; text-align: center; display: inline-block;'></div>
@@ -202,14 +211,13 @@
 		}
 
 		public function recoveryEmail(){
-					$url_activation = BACK_END_URL . "/";
-                    $url_activation.= "?page=recovery";
-                    $url_activation.= "&u=" . $this->email;
+					$url_activation = FRONT_END_URL . "/recoveryPass";
+                    $url_activation.= "?u=" . $this->email;
                     $url_activation.= "&k=" . $this->activation;
 
-					$body = "<!-- 	<div style='background-color: grey; width: 100%; display: flex; justify-content: center;'>
-									<img src='./themes/images/logo-250.png' style='width: 100%; max-width: 250px; width: 100%;' > 
-								</div> -->   
+					$body = "<div style='background: grey; width: 100%; display: flex; justify-content: center;'>
+					        	<img src='http://juanoctaviocastrogiovanni.com.ar/rektr/themes/images/logo-250.png' style='width: 100%; max-width: 250px; width: 100%;' >
+					        </div>    
 							<div style='background-color:rgba(0,0,0,.8);width:100%;'>
 								<div style=' color: whitesmoke; text-align: center; padding-top: 30px;'>
 									<div style='margin-bottom: -25px;'><h2>Recovery password</h2></div>
